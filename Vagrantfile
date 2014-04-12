@@ -9,8 +9,9 @@ sudo apt-get -y update
 sudo apt-get -q -y install libxslt-dev libxml2-dev imagemagick libmagickwand-dev nodejs
 echo ">>>>> Installing postgresql..."
 export DEBIAN_FRONTEND=noninteractive 
-sudo apt-get install postgresql postgresql-contrib
-sudo apt-get install postgresql-client
+sudo apt-get -q -y install postgresql-9.1
+sudo apt-get -q -y install libpq-dev
+sudo su postgres -c psql <<< "CREATE ROLE vagrant SUPERUSER LOGIN;"
 
 echo ">>>>> Installing RVM..."
 sudo apt-get -q -y install git-core curl
