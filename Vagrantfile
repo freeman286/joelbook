@@ -13,6 +13,9 @@ sudo apt-get -q -y install postgresql-9.1
 sudo apt-get -q -y install libpq-dev
 sudo su postgres -c psql <<< "CREATE ROLE vagrant SUPERUSER LOGIN;"
 
+echo ">>>>> Installing redis..."
+sudo apt-get install redis-server
+
 echo ">>>>> Installing RVM..."
 sudo apt-get -q -y install git-core curl
 curl -L https://get.rvm.io | bash -s stable
