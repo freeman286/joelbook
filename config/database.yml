@@ -15,7 +15,7 @@
 development:
   adapter: postgresql
   database: rails_realtime_development
-  encoding: utf8
+  encoding: latin1
   template: template0
   collate: en_US.UTF8 
   ctype: en_US.UTF8
@@ -43,7 +43,7 @@ development:
 test:
   adapter: postgresql
   database: rails_realtime_test
-  encoding: utf8
+  encoding: latin1
   template: template0
   collate: en_US.UTF8 
   ctype: en_US.UTF8
@@ -53,7 +53,7 @@ test:
 production:
   adapter: postgresql
   database: rails_realtime_test
-  encoding: utf8
+  encoding: latin1
   template: template0
   collate: en_US.UTF8 
   ctype: en_US.UTF8
