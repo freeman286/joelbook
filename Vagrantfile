@@ -49,6 +49,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "hashicorp/precise32"
   config.vm.network :forwarded_port, guest: 3306, host: 4000 # MySQL
   config.vm.network :forwarded_port, guest: 3000, host: 3000 # Rails
+  config.vm.network :forwarded_port, guest: 5001, host: 5001 # NodeJS
   config.vm.provider "virtualbox" do |v|
     v.memory = 4096
 	  v.cpus = 4
