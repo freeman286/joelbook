@@ -24,10 +24,24 @@ echo ">>>>> Installing RUBY..."
 source /usr/local/rvm/scripts/rvm
 rvm requirements
 rvm install ruby-1.9.3
+
+echo ">>>>> Bundling..."
 cd /vagrant
 bundle
+
+echo ">>>>> Creating database..."
 rake db:create
 rake db:migrate
+
+echo ">>>>> Installing NPM things..."
+cd realtime
+sudo apt-get install npm
+npm config set registry http://registry.npmjs.org/
+npm install socket.io
+npm install redis
+cd ..
+
+
 echo  ">>>>> Finished!"
 SCRIPT
 
@@ -37,7 +51,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 3000, host: 3000 # Rails
   config.vm.provider "virtualbox" do |v|
     v.memory = 4096
-	v.cpus = 4
+	  v.cpus = 4
   end
   config.vm.provision :shell, inline: $bootstrap, :privileged => false
 end
