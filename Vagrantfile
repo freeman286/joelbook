@@ -35,7 +35,7 @@ rake db:migrate
 
 echo ">>>>> Installing NPM things..."
 cd realtime
-sudo apt-get install npm
+sudo apt-get -q -y install npm
 npm config set registry http://registry.npmjs.org/
 npm install socket.io
 npm install redis
