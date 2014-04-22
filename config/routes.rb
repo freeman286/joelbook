@@ -1,5 +1,5 @@
 RailsRealtime::Application.routes.draw do
-  resources :books
+  resources :posts
 
 
   # The priority is based upon order of creation:
