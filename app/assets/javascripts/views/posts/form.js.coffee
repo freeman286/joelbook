@@ -28,7 +28,7 @@ app.views.posts.Form = Backbone.View.extend
 
   clear : () ->
     @model = new app.models.Post()
-    this.$el.find('input[type=text],input[type=number]').val('')
+    this.$el.find('input[type=text],input[type=text]').val('')
 
   serialize : ->
     @model.toJSON()
