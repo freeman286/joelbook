@@ -1,0 +1,21 @@
+<h1>Listing Posts</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% posts.each(function(post){ %>
+    <tr>
+      <td><%= post.get('name') %></td>
+      <td><%= post.get('user_name') %></td>
+      <td><a href="posts/<%= post.id %>">Show</a></td>
+      <td><a href="posts/<%= post.id %>/edit">Edit</a></td>
+      <td><a href="#" data-method="delete" data-id="<%= post.id %>">Destroy</a></td>
+    </tr>
+  <% }); %>
+</table>
+<a href="/posts/new">New Post</a>
