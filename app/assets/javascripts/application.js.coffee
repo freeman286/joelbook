@@ -1,4 +1,5 @@
 #= require jquery
 #= require jquery_ujs
-#= require ym_core
+#= require underscore
+#= require backbone
 #= require_tree .

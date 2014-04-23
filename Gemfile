@@ -12,7 +12,8 @@ gem 'pg'
 gem 'redis'
 gem 'devise', '~> 3.0.3'
 gem 'haml'
-gem "ym_core", "~> 1.1.2"
+gem "rails-backbone"
+gem 'underscore-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
