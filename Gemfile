@@ -1,6 +1,9 @@
+source "https://yoomee:wLjuGMTu30AvxVyIrq3datc73LVUkvo@gems.yoomee.com"
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+source 'https://rubygems.org'
+
+gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -9,6 +12,7 @@ gem 'pg'
 gem 'redis'
 gem 'devise', '~> 3.0.3'
 gem 'haml'
+gem "ym_core", "~> 1.1.2"
 
 # Gems used only for assets and not required
 # in production environments by default.
