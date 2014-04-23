@@ -11,7 +11,7 @@ app.views.posts.Form = Backbone.View.extend
     'click input[type=submit]' : 'save'
 
   initialize : ->
-    @model = new app.models.Post()
+    @model = new app.models.Posts()
 
   save : (evt) ->
     evt.preventDefault()
@@ -34,8 +34,8 @@ app.views.posts.Form = Backbone.View.extend
     @model.toJSON()
 
   formValues : ->
-      title : this.$el.find('input[name=title]').val()
-      num_pages : this.$el.find('input[name=num_pages]').val()
+      name : this.$el.find('input[name=name]').val()
+      user_name : this.$el.find('input[name=user_name]').val()
 
   render : ->
     @$el.html @template(@serialize())

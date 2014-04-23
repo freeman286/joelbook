@@ -2,4 +2,8 @@
 #= require jquery_ujs
 #= require underscore
 #= require backbone
+#= require config
+#= require realtime
 #= require_tree .
+#= require app
+#= require bootstrap
