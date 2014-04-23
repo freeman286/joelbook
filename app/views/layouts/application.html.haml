@@ -8,7 +8,7 @@
   %body
     .container
       - flash.each do |type, message|
-        .alert.alert-block
+        .alert.alert-block{ :class => flash_class(type)}
           %button.close{"data-dismiss" => "alert"} x
           %div
             = message
