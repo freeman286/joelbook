@@ -1,5 +1,8 @@
 class Post < ActiveRecord::Base
-  attr_accessible :num_pages, :title
+  belongs_to :user
+
+  attr_accessible :user_id, :name, :img_url, :youtube_url
+
   after_create {|post| post.message 'create' }
   after_update {|post| post.message 'update' }
   after_destroy {|post| post.message 'destroy' }
@@ -12,4 +15,6 @@ class Post < ActiveRecord::Base
 
     $redis.publish 'rt-change', msg.to_json
   end
+
+  validates :user_id, presence: true
 end
