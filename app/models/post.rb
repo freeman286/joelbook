@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   belongs_to :user
 
-  attr_accessible :user_id, :name, :img_url, :youtube_url
+  attr_accessible :user_id, :user_name, :name, :img_url, :youtube_url
 
   after_create {|post| post.message 'create' }
   after_update {|post| post.message 'update' }
@@ -17,6 +17,8 @@ class Post < ActiveRecord::Base
   end
 
   validates :user_id, presence: true
+
+  validates :user_name, presence: true
 
   validates :name, presence: true
 
