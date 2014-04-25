@@ -5,8 +5,7 @@
   <input type="text" name="name" value="<%= name %>">
 </div>
 <div class="field">
-  <label for="num_pages">User</label>
-  <input type="text" name="user_name" value="<%= user_name %>">
+  <input type="hidden" name="user_name" value="<%= window.user.name %>">
 </div>
 <div class="actions">
   <input type="submit" value="Save">
