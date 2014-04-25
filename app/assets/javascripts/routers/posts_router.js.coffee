@@ -6,8 +6,8 @@ app.routers.Posts = Backbone.Router.extend
 
     @formView = new app.views.posts.Form()
 
-    $('body').append @indexView.render()
-    $('body').append @formView.render()
+    $('.container').append @indexView.render()
+    $('.container').append @formView.render()
 
   routes :
     "posts/" : "index"
