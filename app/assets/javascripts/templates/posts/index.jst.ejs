@@ -14,7 +14,7 @@
       <td><%= post.get('user_name') %></td>
 	  <% if (post.get('user_name') == window.user.name){ %> 
       	<td><a href="posts/<%= post.id %>/edit#modal" data-toggle="modal" data-static="true" id="show_modal">Edit</a></td>
-      	<td><a href="#" data-method="delete" data-id="<%= post.id %>" data-static="true">Destroy</a></td>
+      	<td><a href="/posts/<%= post.id %>" data-method="delete" data-id="<%= post.id %>" data-static="true">Destroy</a></td>
 	  <% } %>
     </tr>
   <% }); %>

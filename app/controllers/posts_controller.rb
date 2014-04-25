@@ -1,24 +1,16 @@
 class PostsController < ApplicationController
   
   def index
-    @posts = Post.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @posts }
-    end
+    select_posts
   end
 
   def show
-    @post = Post.find(params[:id])
-
-    respond_to do |format|
-      format.html { @posts = post.all }# show.html.erb
-      format.json { render json: @post }
-    end
+    select_posts
+    render action: "index"
   end
 
   def new
+    select_posts
     @post = Post.new
 
     respond_to do |format|
@@ -32,11 +24,12 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    @posts = Post.all 
+    select_posts
     render :action => 'index'
   end
 
   def create
+    select_posts
     @post = Post.new(params[:post])
 
     respond_to do |format|
@@ -51,6 +44,7 @@ class PostsController < ApplicationController
   end
 
   def update
+    select_posts
     @post = Post.find(params[:id])
 
     respond_to do |format|
@@ -65,12 +59,25 @@ class PostsController < ApplicationController
   end
   
   def destroy
+    select_posts
     @post = Post.find(params[:id])
     @post.destroy
     
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { render json: @post }
+    end
+
+    rescue ActiveRecord::RecordNotFound    
+  end
+  
+  private
+  
+  def select_posts
+    @posts = Post.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @posts }
     end
   end
 end
