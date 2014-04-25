@@ -1,4 +1,4 @@
-app.routers.Post = Backbone.Router.extend
+app.routers.Posts = Backbone.Router.extend
   initialize : ->
     @posts = new app.collections.Posts window.posts
     @indexView = new app.views.posts.Index
