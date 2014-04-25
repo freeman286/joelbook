@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
   
   validates_presence_of :name
   validates_uniqueness_of :name
+  
+  def auth
+    Digest::MD5.hexdigest(self.name + self.encrypted_password)
+  end
 end

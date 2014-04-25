@@ -1,6 +1,7 @@
 RailsRealtime::Application.routes.draw do
 
   devise_for :users
+  match "/auth" => "users#auth"
 
   root :to => "posts#index"
 
