@@ -12,9 +12,8 @@
     <tr>
       <td><%= post.get('name') %></td>
       <td><%= post.get('user_name') %></td>
-      <td><a href="posts/<%= post.id %>">Show</a></td>
 	  <% if (post.get('user_name') == window.user.name){ %> 
-      	<td><a href="posts/<%= post.id %>/edit">Edit</a></td>
+      	<td><a href="posts/<%= post.id %>/edit" data-static="true">Edit</a></td>
       	<td><a href="#" data-method="delete" data-id="<%= post.id %>">Destroy</a></td>
 	  <% } %>
     </tr>

@@ -11,7 +11,7 @@ $.ajaxSetup
   headers : 
     'X-CSRF-Token' : $('meta[name=csrf-token]').attr('content')
 
-$(document).on 'click', 'a:not([data-bypass])', (evt) ->
+$(document).on 'click', 'a[data-static]', (evt) ->
   href = $(@).attr 'href'
   protocol = @protocol + '//'
 

@@ -16,16 +16,25 @@ app.routers.Posts = Backbone.Router.extend
     "posts/:id/edit" : "edit"
 
   index : () ->
-    $('.action-view').show()
-    @indexView.$el.show()
+    if window.posts is undefined
+      $('.action-view').hide()
+    else
+      $('.action-view').show()
+      @indexView.$el.show()
 
   edit : (id) ->
-    $('.action-view').show()
-    @formView.model = @posts.get id
-    @formView.render()
-    @formView.$el.show()      
+    if window.posts is undefined
+      $('.action-view').hide()
+    else
+      $('.action-view').show()
+      @formView.model = @posts.get id
+      @formView.render()
+      @formView.$el.show()      
 
   new : () ->
-    $('.action-view').show()
-    @formView.clear()
-    @formView.$el.show()     
+    if window.posts is undefined
+      $('.action-view').hide()
+    else
+      $('.action-view').show()
+      @formView.clear()
+      @formView.$el.show()     

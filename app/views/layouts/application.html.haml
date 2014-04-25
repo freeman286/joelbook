@@ -6,7 +6,28 @@
     = javascript_include_tag "http://localhost:5001/socket.io/socket.io.js"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  %body
+  %body         
+    .navbar.navbar-default{role: "navigation"}
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          =link_to("Joelbook", root_path, :class => "navbar-brand")
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav.navbar-right
+            -if !current_user
+              %li
+                =link_to("Sign in", user_session_path)
+              %li
+                =link_to("Sign up", new_user_registration_path)
+            -else
+              %li
+                =link_to(current_user.name, edit_user_registration_path)
+              %li  
+                =link_to("Sign out", destroy_user_session_path) 
     .container
       - flash.each do |type, message|
         .alert.alert-block{ :class => flash_class(type)}

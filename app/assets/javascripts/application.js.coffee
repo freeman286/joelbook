@@ -13,4 +13,6 @@
 #= require_tree ./routers
 #= require app
 
-
+$(document).ready ->
+  if window.posts is undefined
+    $('.action-view').hide()
