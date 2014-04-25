@@ -1,12 +1,25 @@
+<div class="modal fade" id="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" aria-hidden="true" data-dismiss="modal">
+          x
+        </button>
+        <p>New Post</p>
+      </div>
+      <div class="modal-body">
+        <div class="field">
+          <label for="title">Name</label>
+          <input type="text" name="name" value="<%= name %>">
+        </div>
+        <div class="field">
+          <input type="hidden" name="user_name" value="<%= window.user.name %>">
+        </div>
+        <div class="actions">
+          <input type="submit" value="Save" data-dismiss="modal">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-
-<div class="field">
-  <label for="title">Name</label>
-  <input type="text" name="name" value="<%= name %>">
-</div>
-<div class="field">
-  <input type="hidden" name="user_name" value="<%= window.user.name %>">
-</div>
-<div class="actions">
-  <input type="submit" value="Save">
-</div>
