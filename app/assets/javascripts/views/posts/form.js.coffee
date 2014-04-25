@@ -1,9 +1,5 @@
 app.views.posts ?= {}
 
-window.Foo =
-	bar: (bob) ->
-		console.log bob
-
 app.views.posts.Form = Backbone.View.extend
   id : 'form-view'
   className : 'action-view'
@@ -35,3 +31,4 @@ app.views.posts.Form = Backbone.View.extend
   	          app.navigate '/posts/', true
   	        error :(error) =>
   	          console.log error
+          
