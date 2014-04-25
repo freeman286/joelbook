@@ -3,6 +3,7 @@
 #= require underscore
 #= require bootstrap
 #= require backbone
+#= require auth
 #= require config
 #= require realtime
 #= require_tree ./models
