@@ -9,13 +9,13 @@ app.views.posts.Form = Backbone.View.extend
     @model = new app.models.Posts()
   clear : () ->
     @model = new app.models.Post()
-    this.$el.find('input[type=text],input[type=text]').val('')
+    this.$el.find('input[type=text]').val('')
   serialize : ->
     @model.toJSON()
 
   formValues : ->
       name : this.$el.find('input[name=name]').val()
-      user_name : this.$el.find('input[name=user_name]').val()
+      user_name : window.user.name
   render : ->
     @$el.html @template(@serialize())
     @$el
