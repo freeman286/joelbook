@@ -14,9 +14,11 @@
 #= require app
 
 $(document).ready ->
-  if window.posts is undefined
-    $('.action-view').hide()
+  $(".action-view").css "display", "none"  if window.posts is undefined
   
-  $('#show_modal').click ->
-    $('#modal').modal "show"
+  $("#show_modal").click ->
+    $("#modal").modal "show"
     return
+  
+  
+  

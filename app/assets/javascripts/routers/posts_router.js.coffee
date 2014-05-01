@@ -6,8 +6,8 @@ app.routers.Posts = Backbone.Router.extend
 
     @formView = new app.views.posts.Form()
 
-    $('.container').append @indexView.render()
-    $('.container').append @formView.render()
+    $('.backbone').append @indexView.render()
+    $('.backbone').append @formView.render()
 
   routes :
     "posts/" : "index"
@@ -16,25 +16,16 @@ app.routers.Posts = Backbone.Router.extend
     "posts/:id/edit" : "edit"
 
   index : () ->
-    if window.posts is undefined
-      $('.action-view').hide()
-    else
-      $('.action-view').show()
-      @indexView.$el.show()
+    $('.action-view').show()
+    @indexView.$el.show()
 
   edit : (id) ->
-    if window.posts is undefined
-      $('.action-view').hide()
-    else
-      $('.action-view').show()
-      @formView.model = @posts.get id
-      @formView.render()
-      @formView.$el.show()      
+    $('.action-view').show()
+    @formView.model = @posts.get id
+    @formView.render()
+    @formView.$el.show()      
 
   new : () ->
-    if window.posts is undefined
-      $('.action-view').hide()
-    else
-      $('.action-view').show()
-      @formView.clear()
-      @formView.$el.show()     
+    $('.action-view').show()
+    @formView.clear()
+    @formView.$el.show()     
