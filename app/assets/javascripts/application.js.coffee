@@ -1,7 +1,7 @@
 #= require jquery
 #= require jquery_ujs
-#= require underscore
 #= require bootstrap
+#= require underscore
 #= require backbone
 #= require auth
 #= require config
@@ -16,9 +16,6 @@
 $(document).ready ->
   $(".action-view").css "display", "none"  if window.posts is undefined
   
-  $("#show_modal").click ->
-    $("#modal").modal "show"
-    return
   
   
   
