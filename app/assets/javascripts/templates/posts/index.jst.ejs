@@ -10,6 +10,7 @@
   </tr>
   <% posts.each(function(post){ %>
     <tr>
+      <td><img src="<%= post.get('user_img_url') %>"></td>
       <td><%= post.get('name') %></td>
       <td><%= post.get('user_name') %></td>
 	  <% if (post.get('user_name') == window.user.name){ %> 

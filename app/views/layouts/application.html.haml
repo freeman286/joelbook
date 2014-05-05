@@ -40,7 +40,7 @@
 	  
     -if current_user
       :javascript
-        window.user = #{current_user.as_json(:only => :name, :methods => [:encrypted_password, :auth]).to_json};
+        window.user = #{current_user.as_json(:only => :name, :methods => [:encrypted_password, :auth, :avatar_url]).to_json};
         if (window.posts != undefined) {
           $( ".container" ).append( "<div class='backbone'></div>" );
         }

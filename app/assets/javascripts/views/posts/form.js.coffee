@@ -16,6 +16,8 @@ app.views.posts.Form = Backbone.View.extend
   formValues : ->
       name : this.$el.find('input[name=name]').val()
       user_name : window.user.name
+      user_img_url: window.user.avatar_url
+      
   render : ->
     @$el.html @template(@serialize())
     @$el

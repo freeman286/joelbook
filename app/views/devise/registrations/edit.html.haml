@@ -14,12 +14,12 @@
     %br/
     = f.text_field :name
   %div  
-    = f.file_field :avatar
     - if f.object.avatar? && f.object.avatar.save
       .control-group
         %label.control-label Current avatar
         .controls
           = image_tag f.object.avatar.url(:small)
+    = f.file_field :avatar      
   %div
     = f.label :password
     %i (leave blank if you don't want to change it)

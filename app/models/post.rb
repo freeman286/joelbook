@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   belongs_to :user
 
-  attr_accessible :user_id, :user_name, :name, :img_url, :youtube_url
+  attr_accessible :user_name, :name, :img_url, :youtube_url, :user_img_url
 
   after_create {|post| post.message 'create' }
   after_update {|post| post.message 'update' }

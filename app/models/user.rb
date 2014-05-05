@@ -41,5 +41,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  
+  def avatar_url
+    self.avatar? ? self.avatar.url(:thumb) : nil
+  end
 end
