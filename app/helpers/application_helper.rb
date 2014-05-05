@@ -9,4 +9,8 @@ module ApplicationHelper
 			""
 		end
 	end
+  
+  def avatar_url(user)
+		avatar_url = user.avatar? ? user.avatar.url(:thumb) : nil
+  end
 end
