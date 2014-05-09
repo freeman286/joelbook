@@ -1,11 +1,19 @@
 class PostsController < ApplicationController
-  
+
   def index
     select_posts
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @posts }
+    end
   end
 
   def show
     select_posts
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @posts }
+    end
     render action: "index"
   end
 
@@ -15,7 +23,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html {
-            @posts = Post.all 
+            @posts = Post.all
             render :action => 'index'
       }
       format.json { render json: @post }
@@ -57,27 +65,23 @@ class PostsController < ApplicationController
       end
     end
   end
-  
+
   def destroy
     select_posts
     @post = Post.find(params[:id])
     @post.destroy
-    
+
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { render json: @post }
     end
 
-    rescue ActiveRecord::RecordNotFound    
+    rescue ActiveRecord::RecordNotFound
   end
-  
+
   private
-  
+
   def select_posts
     @posts = Post.all
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @posts }
-    end
   end
 end
