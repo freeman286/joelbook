@@ -16,8 +16,6 @@ class Post < ActiveRecord::Base
     $redis.publish 'rt-change', msg.to_json
   end
 
-  validates :user_id, presence: true
-
   validates :user_name, presence: true
 
   validates :name, presence: true
