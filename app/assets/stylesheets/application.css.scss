@@ -10,3 +10,10 @@
  *= require_self
  *= require_tree .
  */
+
+.rounded_corners {
+  border-radius: 30px;
+  -moz-border-radius: 30px;
+  -khtml-border-radius: 30px;
+  -webkit-border-radius: 30px;
+}
