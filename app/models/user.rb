@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
 
   has_many :posts
   
-  dragonfly_accessor :avatar  
+  dragonfly_accessor :avatar
+  validates_property :format, of: :avatar, in: ['jpeg', 'png', 'gif']  
     
   validates_presence_of :name
   validates_uniqueness_of :name
