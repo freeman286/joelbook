@@ -3,8 +3,6 @@ RailsRealtime::Application.routes.draw do
   root :to => "posts#index"
   
   devise_for :users
-  match "/auth" => "users#auth"
-
 
   resources :posts
 
