@@ -11,12 +11,8 @@ class User < ActiveRecord::Base
 
   has_many :posts
   
-  has_attached_file :avatar, styles: {
-    large: "800x800#", medium: "300x200#", small: "260x180#", thumb: "80x80#"
-  }
-  
-  validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png"]
-  
+  dragonfly_accessor :avatar  
+    
   validates_presence_of :name
   validates_uniqueness_of :name
   
@@ -24,8 +20,8 @@ class User < ActiveRecord::Base
     Digest::MD5.hexdigest(self.name + self.encrypted_password)
   end
   
-  def avatar_url
-    self.avatar? ? self.avatar.url(:thumb) : nil
+  def avatar_url  
+    self.avatar.nil? ? nil : self.avatar.thumb('80x80#').url
   end
   
   def self.current

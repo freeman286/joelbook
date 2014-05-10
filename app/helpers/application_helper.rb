@@ -11,6 +11,6 @@ module ApplicationHelper
 	end
   
   def avatar_url(user)
-		user.avatar? ? user.avatar.url(:thumb) : nil
+    user.avatar.nil? ? nil : user.avatar.thumb('80x80#').url
   end
 end
