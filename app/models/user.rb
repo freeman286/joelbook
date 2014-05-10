@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  after_save :update_posts
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable  
@@ -16,6 +18,8 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
   
+  
+  
   def auth
     Digest::MD5.hexdigest(self.name + self.encrypted_password)
   end
@@ -30,5 +34,12 @@ class User < ActiveRecord::Base
   
   def self.current=(user)
     Thread.current[:user] = user
+  end
+  
+  def update_posts
+    Post.where(:user_name => self.name).each do |post|
+      post.user_img_url = self.avatar_url
+      post.save
+    end
   end
 end
