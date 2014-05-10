@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   after_save :update_posts
-  
-  # Include default devise modules. Others available are:
+    # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable  
   devise :database_authenticatable, :registerable,
@@ -26,7 +25,7 @@ class User < ActiveRecord::Base
   end
   
   def avatar_url  
-    self.avatar.nil? ? nil : self.avatar.thumb('80x80#').url
+    self.avatar.nil? ? self.gravatar_url : self.avatar.thumb('80x80#').url
   end
   
   def self.current
@@ -42,5 +41,14 @@ class User < ActiveRecord::Base
       post.user_img_url = self.avatar_url
       post.save
     end
+  end
+  
+  
+  def gravatar_url
+    stripped_email = email.strip
+    downcase_email = stripped_email.downcase
+    hash = Digest::MD5.hexdigest(downcase_email)
+
+    "http://gravatar.com/avatar/#{hash}"
   end
 end

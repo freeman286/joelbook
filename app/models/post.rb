@@ -12,8 +12,11 @@ class Post < ActiveRecord::Base
             action: action,
             id: self.id,
             obj: self,
-            user_name: User.current.name
            }
+           
+    if User.current
+      msg[:user_name] = User.current.name
+    end     
                             
     $redis.publish 'rt-change', msg.to_json
   end
