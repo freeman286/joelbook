@@ -11,8 +11,10 @@ class Post < ActiveRecord::Base
     msg = { resource: 'posts',
             action: action,
             id: self.id,
-            obj: self }
-
+            obj: self,
+            user_name: User.current.name
+           }
+                            
     $redis.publish 'rt-change', msg.to_json
   end
 

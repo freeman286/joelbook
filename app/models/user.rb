@@ -27,4 +27,12 @@ class User < ActiveRecord::Base
   def avatar_url
     self.avatar? ? self.avatar.url(:thumb) : nil
   end
+  
+  def self.current
+    Thread.current[:user]
+  end
+  
+  def self.current=(user)
+    Thread.current[:user] = user
+  end
 end
