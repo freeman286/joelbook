@@ -3,6 +3,7 @@ RailsRealtime::Application.routes.draw do
   root :to => "posts#index"
   
   devise_for :users, :controllers => {:registrations => "registrations"}
+  resources :users
   match "/users/crop" => "registrations#crop"
 
   resources :posts
