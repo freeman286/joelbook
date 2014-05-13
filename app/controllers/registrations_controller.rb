@@ -32,7 +32,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
   
   def crop
-    @user = User.find_by_name(params[:user][:name])
+    @user = current_user
   end
   
   private

@@ -2,9 +2,13 @@ RailsRealtime::Application.routes.draw do
   
   root :to => "posts#index"
   
+    
   devise_for :users, :controllers => {:registrations => "registrations"}
+  devise_scope :user do
+    get "/registrations/crop" => "registrations#crop", as: 'crop_user_registration'
+  end
   resources :users
-  match "/users/crop" => "registrations#crop"
+
 
   resources :posts
   
