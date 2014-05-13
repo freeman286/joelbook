@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :current_password, :remember_me, :name, :avatar
+  attr_accessible :email, :password, :password_confirmation, :current_password, :remember_me, :name, :avatar, :avatar_cropping, :avatar_width, :avatar_height
   # attr_accessible :title, :body
 
   has_many :posts
@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   end
   
   def avatar_url  
-    self.avatar.nil? ? self.gravatar_url : self.avatar.thumb('80x80#').url
+    self.avatar.nil? ? self.gravatar_url : self.avatar.thumb(self.avatar_cropping).thumb("80x80").url
   end
   
   def self.current
@@ -50,5 +50,11 @@ class User < ActiveRecord::Base
     hash = Digest::MD5.hexdigest(downcase_email)
 
     "http://gravatar.com/avatar/#{hash}"
+  end
+  
+  def crop_hash
+    self.avatar_cropping
+    md = self.avatar_cropping.match('(\d+):(\d+):(\d+)x(\d+)')
+    { :x => md[1], :y => md[2],  :width  => md[3], :height => md[4] }
   end
 end
