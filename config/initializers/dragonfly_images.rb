@@ -1,4 +1,4 @@
-require 'dragonfly/rails/images'
+#require 'dragonfly/rails/images'
 
 # app = Dragonfly[:images]
 # 
