@@ -16,6 +16,9 @@
 $(document).ready ->
   $(".action-view").css "display", "none"  if window.posts is undefined
   
+  $("#user_avatar").change ->
+      $('#crop_link').hide()
+      return
   
   
   

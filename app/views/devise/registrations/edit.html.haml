@@ -19,7 +19,7 @@
         %label.control-label Current avatar
         .controls
           = image_tag avatar_url(current_user)
-      =link_to('Crop avatar', crop_user_registration_path)    
+      =link_to('Crop avatar', crop_user_registration_path, :id => 'crop_link')    
     = f.file_field :avatar      
   %div
     = f.label :password
