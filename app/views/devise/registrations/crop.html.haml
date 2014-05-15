@@ -4,22 +4,22 @@
   %script{language: "Javascript"}
     function showPreview(coords)
     {
-    var aspect_ratio = #{@user.avatar_width} / #{@user.avatar_height};
-    var scale = #{1.0 * @user.avatar_width / 400};
+    var aspect_ratio = #{@user.avatar.width} / #{@user.avatar.height};
+    var scale = #{1.0 * @user.avatar.width / 400};
     var crop_str = Math.round(coords.w * scale) + 'x' + Math.round(coords.h * scale) +
     '+' + Math.round(coords.x * scale) + '+' + Math.round(coords.y * scale);
     $('#avatar_cropping').val(crop_str);
-    
+
     var rx = 80 / coords.w ;
     var ry = 80 / coords.h;
     $('#preview').css({
     width: Math.round(rx * 400) + 'px',
-    height: Math.round(ry * #{400 * @user.avatar_height / @user.avatar_width}) + 'px',
+    height: Math.round(ry * #{400 * @user.avatar.height / @user.avatar.width}) + 'px',
     marginLeft: '-' + Math.round(rx * coords.x) + 'px',
     marginTop: '-' + Math.round(ry * coords.y) + 'px'
     });
     }
-    
+
     $(function() {
     $('#cropbox').Jcrop({
     onSelect: showPreview,
@@ -37,6 +37,6 @@
 %div{style: "width:80px;height:80px;overflow:hidden"}
   = image_tag @user.avatar.thumb("400x").url, :id => 'preview'
 = form_for @user do |f|
-  = f.text_field :avatar_cropping, :id => 'avatar_cropping'
+  = f.hidden_field :avatar_cropping, :id => 'avatar_cropping'
   %br/
   = f.submit "Crop!"

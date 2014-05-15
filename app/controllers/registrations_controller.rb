@@ -35,6 +35,7 @@ class RegistrationsController < Devise::RegistrationsController
       end
     else
       @user = User.find(current_user.id)
+      @user.avatar = Pathname.new(params[:user][:avatar].open.path) 
       if @user.update_attributes(account_update_params)
         flash[:notice] = 'Avatar successfully uploaded.'
         render :action => 'crop'
