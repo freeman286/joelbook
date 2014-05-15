@@ -19,10 +19,23 @@ class RegistrationsController < Devise::RegistrationsController
 
   def update
     if params[:user][:avatar].blank?
-      super
+      account_update_params = params[:user]
+      if account_update_params[:password].blank?
+        account_update_params.delete("password")
+        account_update_params.delete("password_confirmation")
+      end
+
+      @user = User.find(current_user.id)
+      if @user.update_attributes(account_update_params)
+        set_flash_message :notice, :updated
+        sign_in @user, :bypass => true
+        redirect_to after_update_path_for(@user)
+      else
+        render "edit"
+      end
     else
-      @user = resource
-      if update_resource(@user, params[:user])
+      @user = User.find(current_user.id)
+      if @user.update_attributes(account_update_params)
         flash[:notice] = 'Avatar successfully uploaded.'
         render :action => 'crop'
       else
