@@ -58,4 +58,16 @@ class User < ActiveRecord::Base
     md = self.avatar_cropping.match('(\d+):(\d+):(\d+)x(\d+)')
     { :x => md[1], :y => md[2],  :width  => md[3], :height => md[4] }
   end
+  
+  def crop_array
+    if self.avatar_cropping.nil?
+      [ 0, 0, 240, 240 ]
+    else
+      cropping = self.avatar_cropping.split(/[^\d]/)
+      array = cropping[2..3]
+      array << (cropping[0].to_i + cropping[2].to_i).to_s
+      array << (cropping[1].to_i + cropping[3].to_i).to_s
+      array
+    end
+  end
 end

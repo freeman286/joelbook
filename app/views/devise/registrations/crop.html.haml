@@ -24,7 +24,7 @@
     $('#cropbox').Jcrop({
     onSelect: showPreview,
     onChange: showPreview,
-    setSelect:   [ 0, 0, 240, 240 ],
+    setSelect: #{@user.crop_array.to_s.html_safe},
     aspectRatio: 80/80
     });
     });
