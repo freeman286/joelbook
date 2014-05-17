@@ -23,15 +23,14 @@ app.views.posts.Form = Backbone.View.extend
     @$el
   save : (evt) ->
   		evt.preventDefault()
-    if (hex_md5(window.user.name + window.user.encrypted_password) is window.user.auth)
-  	    @isNew = @model.isNew()
-  	    @model.save @formValues(),
-  	        success : () =>
-  	          if @isNew
-  	            app.collections.posts.add @model
-                
-  	          @clear()
-  	          app.navigate '/posts/', true
-  	        error :(error) =>
-  	          console.log error
+    @isNew = @model.isNew()
+    @model.save @formValues(),
+        success : () =>
+          if @isNew
+            app.collections.Posts.add @model
+            
+          @clear()
+          app.navigate '/posts/', true
+        error :(error) =>
+          console.log error
           
