@@ -8,7 +8,7 @@ app.views.posts.Form = Backbone.View.extend
   initialize : ->
     @model = new app.models.Posts()
   clear : () ->
-    @model = new app.models.Post()
+    @model = new app.models.Posts()
     this.$el.find('input[type=text]').val('')
   serialize : ->
     @model.toJSON()
@@ -29,6 +29,7 @@ app.views.posts.Form = Backbone.View.extend
   	        success : () =>
   	          if @isNew
   	            app.collections.posts.add @model
+                
   	          @clear()
   	          app.navigate '/posts/', true
   	        error :(error) =>
