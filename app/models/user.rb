@@ -64,9 +64,11 @@ class User < ActiveRecord::Base
       [ 0, 0, 240, 240 ]
     else
       cropping = self.avatar_cropping.split(/[^\d]/)
-      array = cropping[2..3]
-      array << (cropping[0].to_i + cropping[2].to_i).to_s
-      array << (cropping[1].to_i + cropping[3].to_i).to_s
+      array = []
+      array << (cropping[2].to_i + cropping[0].to_i / 2).to_s
+      array << (cropping[3].to_i + cropping[0].to_i / 2).to_s
+      array << (cropping[2].to_i - cropping[0].to_i / 2).to_s
+      array << (cropping[3].to_i - cropping[0].to_i / 2).to_s
       array
     end
   end
