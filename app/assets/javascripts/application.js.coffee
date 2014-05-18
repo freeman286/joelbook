@@ -17,7 +17,9 @@ $(document).ready ->
   $(".action-view").css "display", "none"  if window.posts is undefined
   
   $("#user_avatar").change ->
-      $('#crop_link').hide()
+      $("#crop_link").hide()
+      $("#avatar_img").hide()
+      $(".file_upload").html("<span class='uploaded'>" + $("#user_avatar").val().split('\\').pop(); + "</span")
       return
   
   

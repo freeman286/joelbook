@@ -18,9 +18,10 @@
       .control-group
         %label.control-label Current avatar
         .controls
-          = image_tag avatar_url(current_user)
+          = image_tag avatar_url(current_user), :id => "avatar_img"
       =link_to('Crop avatar', crop_user_registration_path, :id => 'crop_link')    
-    = f.file_field :avatar      
+    .file_upload
+      = f.file_field :avatar      
   %div
     = f.label :password
     %i (leave blank if you don't want to change it)
