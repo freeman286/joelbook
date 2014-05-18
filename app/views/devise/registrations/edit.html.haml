@@ -21,7 +21,8 @@
           = image_tag avatar_url(current_user), :id => "avatar_img"
       =link_to('Crop avatar', crop_user_registration_path, :id => 'crop_link')    
     .file_upload
-      = f.file_field :avatar      
+      
+    = f.file_field :avatar      
   %div
     = f.label :password
     %i (leave blank if you don't want to change it)
