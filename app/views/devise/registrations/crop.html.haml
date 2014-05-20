@@ -28,11 +28,8 @@
     });
     });
 %p
-  %b Name:
-  = @user.name
-%p
-  %b Avatar:
-  = image_tag @user.avatar.thumb("400x").url, :id => 'cropbox'
+  Click and drag to crop your avatar
+= image_tag @user.avatar.thumb("400x").url, :id => 'cropbox'
 %div{style: "width:80px;height:80px;overflow:hidden"}
   = image_tag @user.avatar.thumb("400x").url, :id => 'preview'
 = form_for @user do |f|
