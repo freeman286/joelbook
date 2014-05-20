@@ -20,7 +20,8 @@
       = f.label :password_confirmation
       %br/
       = f.password_field :password_confirmation
-    %div= f.submit "Sign up"
+      = f.hidden_field :page, :value => "sign up"
+    %div= f.submit "Sign up", :page => "sign up"
   
 .col-md-6
   %h2 Sign in
@@ -39,6 +40,7 @@
       %div
         = f.check_box :remember_me
         = f.label :remember_me
+        = f.hidden_field :page, :value => "sign up"
     %div= f.submit "Sign in"  
 .col-md-12
   = render "devise/shared/links"
