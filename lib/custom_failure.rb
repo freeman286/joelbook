@@ -10,7 +10,6 @@ class CustomFailure < Devise::FailureApp
     else
       store_location!
       flash[:alert] = i18n_message unless flash[:notice]
-      puts "page=#{params[:user][:page]}"
       if params[:user][:page] == "sign up"
         redirect_to new_user_registration_path
       else
