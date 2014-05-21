@@ -1,2 +1,2 @@
-$('.dropdown-menu').html('<%= escape_javascript(render "users/dropdown", :@user => User.new(:name => "Joel"))%>');
+$('.dropdown-menu').html('<%= escape_javascript(render "users/dropdown", :@users => @users)%>');
 $('.dropdown-menu').show();

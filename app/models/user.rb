@@ -57,4 +57,13 @@ class User < ActiveRecord::Base
     md = self.avatar_cropping.match('(\d+):(\d+):(\d+)x(\d+)')
     { :x => md[1], :y => md[2],  :width  => md[3], :height => md[4] }
   end
+  
+  def self.search(words)
+    users = Set.new
+
+    words.split(" ").each do |keyword|
+      users << where(['name LIKE ?', "%#{keyword}%"])
+    end
+    users.first
+  end  
 end
