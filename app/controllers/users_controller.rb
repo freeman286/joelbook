@@ -8,4 +8,10 @@ class UsersController < ApplicationController
       redirect_to root_path alert: 'Avatar was failed to crop.'
     end
   end
+  
+  def search
+    respond_to do |format|
+      format.js
+    end
+  end
 end

@@ -10,14 +10,19 @@
   %body         
     .navbar.navbar-default{role: "navigation"}
       .container-fluid
-        .navbar-header
-          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
-            %span.sr-only Toggle navigation
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          =link_to("Joelbook", root_path, :class => "navbar-brand")
-        .navbar-collapse.collapse
+        %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        
+        =link_to("Joelbook", root_path, :class => "navbar-brand")
+        
+        .navbar-collapse.collapse  
+          =form_for @user, remote: true, :url => search_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
+            .form-group
+              = f.text_field :name, placeholder: "Search for user"
+              = f.submit "Search", class: "button btn btn-default"
           %ul.nav.navbar-nav.navbar-right
             -if !current_user
               %li
