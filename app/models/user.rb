@@ -63,6 +63,7 @@ class User < ActiveRecord::Base
 
     words.split(" ").each do |keyword|
       users << where(['name LIKE ?', "%#{keyword}%"])
+      users << where(['email LIKE ?', "%#{keyword}%"])
     end
     users.first
   end  
