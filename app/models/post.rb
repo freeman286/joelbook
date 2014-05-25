@@ -12,13 +12,11 @@ class Post < ActiveRecord::Base
             action: action,
             id: self.id,
             obj: self,
-           }
-           
-    if User.current
-      msg[:user_name] = User.current.name
-    end     
-                            
-    $redis.publish 'rt-change', msg.to_json
+           }   
+    
+    if User.current.name == self.user_name
+      $redis.publish 'rt-change', msg.to_json
+    end
   end
 
   validates :user_name, presence: true
