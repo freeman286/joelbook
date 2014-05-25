@@ -1,6 +1,9 @@
 -if @users.present?
   -@users.each do |user|
     %li
-      =link_to user.name, user
+      .search-item
+        =image_tag search_avatar_url(user), class: "rounded_corners"
+        =link_to user.name, user
 -else
-  No results
+  .search-item
+    No results

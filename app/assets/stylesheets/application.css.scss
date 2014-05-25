@@ -12,8 +12,14 @@
  */
 
 .rounded_corners {
-  border-radius: 30px;
-  -moz-border-radius: 30px;
-  -khtml-border-radius: 30px;
-  -webkit-border-radius: 30px;
+  border-radius: 10%;
+  -moz-border-radius: 10%;
+  -khtml-border-radius: 10%;
+  -webkit-border-radius: 10%;
+}
+
+.search-item {
+  padding-left: 10%;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
