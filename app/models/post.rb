@@ -14,7 +14,7 @@ class Post < ActiveRecord::Base
             obj: self,
            }   
     
-    if User.current.name == self.user_name
+    if User.current && User.current.name == self.user_name
       $redis.publish 'rt-change', msg.to_json
     end
   end
