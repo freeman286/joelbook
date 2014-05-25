@@ -9,6 +9,14 @@ RailsRealtime::Application.routes.draw do
     get "/registrations/crop" => "registrations#crop", as: 'crop_user_registration'
   end
   resources :users
+  
+  resources :user_friendships do
+    member do
+      put :accept
+      put :decline
+      put :block
+    end
+  end
 
 
   resources :posts
