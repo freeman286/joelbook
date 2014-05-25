@@ -83,7 +83,7 @@ class UserFriendshipsController < ApplicationController
   def destroy
     @user_friendship = current_user.user_friendships.find(params[:id])
     if !@user_friendship.block
-      if @user_friendship.destroy
+      if @user_friendship.destroy && @user_friendship.delete_mutual_friendship!
         flash[:notice] = "User unblocked"
       else
         flash[:alert] = "User is still blocked"
