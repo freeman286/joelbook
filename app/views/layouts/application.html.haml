@@ -22,11 +22,10 @@
           =form_for (@user || User.new), remote: true, :url => search_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
             .form-group
               .dropdown
-                = f.text_field :name, placeholder: "Search for user"
+                = f.text_field :name, placeholder: "Search for user", autocomplete: "off"
                 %ul.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
 
                     
-                = f.submit "Search", class: "button btn btn-default"  
           %ul.nav.navbar-nav.navbar-right
             -if !current_user
               %li
