@@ -3,6 +3,7 @@ app.models.Posts = Backbone.Model.extend
   defaults :
     name : ''
     user_name : ''
+    user_id : 0
     user_img_url : ''
     img_url : ''
     youtube_url : ''
