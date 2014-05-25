@@ -2,7 +2,7 @@
   -@users.each do |user|
     %li
       .search-item
-        =image_tag search_avatar_url(user), class: "rounded_corners"
+        =image_tag avatar_url(user, "40"), class: "rounded_corners"
         =link_to user.name, user
 -else
   .search-item

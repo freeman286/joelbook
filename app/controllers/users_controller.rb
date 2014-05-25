@@ -16,4 +16,8 @@ class UsersController < ApplicationController
       format.html
     end
   end
+  
+  def show
+    @user = User.find(params[:id])
+  end
 end
