@@ -23,6 +23,5 @@ $(document).ready ->
       return
   
   $("#user_name").bind 'keyup', (e) ->
-    console.log("hello")
     $("#user_name").trigger "submit"
   
