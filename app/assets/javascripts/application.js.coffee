@@ -15,6 +15,7 @@
 
 $(document).ready ->
   $(".action-view").css "display", "none"  if window.posts is undefined
+  $("#user_name").val('')
   
   $("#user_avatar").change ->
       $("#crop_link").hide()
@@ -25,3 +26,9 @@ $(document).ready ->
   $("#user_name").bind 'keyup', (e) ->
     $("#user_name").trigger "submit"
   
+  $("#user_name").focusout ->
+    $("#user_name").val('')
+    setTimeout (->
+      $(".dropdown-menu").delay(800).hide()
+      return
+    ), 200
