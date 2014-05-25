@@ -1,3 +1,15 @@
 .col-md-3
-  %h3=@user.name
   =image_tag avatar_url(@user, "200"), class: "rounded_corners"
+  %h3=@user.name
+  
+  %i.fa.fa-envelope-o
+  =link_to(@user.email, "mailto:#{@user.email}")
+  
+  %br
+  
+  %i.fa.fa-comment-o
+  =link_to("send a message", "###")
+  
+.col-md-9
+  %h3
+    Recent Activity
