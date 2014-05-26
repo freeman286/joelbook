@@ -18,7 +18,7 @@ class UserFriendshipsController < ApplicationController
   
   def decline
     @user_friendship = current_user.user_friendships.find(params[:id])
-    if @user_friendship.update_attribute(:state, 'declined') && @user_friendship.decline_mutual_friendship!
+    if @user_friendship.update_attribute(:state, 'ignored') && @user_friendship.decline_mutual_friendship!
       flash[:notice] = "You have declined #{@user_friendship.friend.name}"
     else
       flash[:alert] = "That friendship was not declined"

@@ -50,4 +50,8 @@ class UserFriendship < ActiveRecord::Base
   def declined?
     self.state == 'declined'
   end
+  
+  def ignored?
+    self.state == 'ignored'
+  end
 end

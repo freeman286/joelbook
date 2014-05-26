@@ -8,19 +8,21 @@
         %em
           Friendship is #{friendship.state}
       %br/
-      - if friendship.requested?
-        = form_for friendship, url: accept_user_friendship_path(friendship), method: :put do |form|
-          = submit_tag "Accept Friendship", class: 'btn'
-      - if friendship.blocked?
-        = form_for friendship, url: user_friendship_path(friendship), method: :delete do |form|
-          = submit_tag "Unblock User", class: 'btn'
-      - else
-        - if friendship.requested?
-          = form_for friendship, url: decline_user_friendship(friendship), method: :delete do |form|
-            = submit_tag "Decline Friendship", class: 'btn'
-        - else
+      - if !friendship.declined?
+        - if friendship.requested? || friendship.ignored?
+          = form_for friendship, url: accept_user_friendship_path(friendship), method: :put do |form|
+            = submit_tag "Accept Friendship", class: 'btn'
+        - if friendship.blocked?
           = form_for friendship, url: user_friendship_path(friendship), method: :delete do |form|
-            = submit_tag "Delete Friendship", class: 'btn'
-      - if friendship.requested?
-        = form_for friendship, url: block_user_friendship_path(friendship), method: :put do |form|
-          = submit_tag "Block Friendship", class: 'btn btn-danger'
+            = submit_tag "Unblock User", class: 'btn'
+        - else
+          - if friendship.requested?
+            = form_for friendship, url: decline_user_friendship_path(friendship), method: :put do |form|
+              = submit_tag "Decline Friendship", class: 'btn'
+          - else
+            -if friendship.ignored?
+              = form_for friendship, url: user_friendship_path(friendship), method: :delete do |form|
+                = submit_tag "Delete Friendship", class: 'btn'
+        - if friendship.requested?
+          = form_for friendship, url: block_user_friendship_path(friendship), method: :put do |form|
+            = submit_tag "Block Friendship", class: 'btn btn-danger'
