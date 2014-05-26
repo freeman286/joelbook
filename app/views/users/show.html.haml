@@ -1,6 +1,11 @@
 .col-md-3
   =image_tag avatar_url(@user, "200"), class: "rounded_corners"
-  %h3=@user.name
+  -if current_user
+    %h3{id: 'user', data: { user_id: current_user.id.to_param }}
+      =@user.name
+  -else
+    %h3{id: 'user'}
+      =@user.name
   
   %i.fa.fa-envelope-o
   =link_to(@user.email, "mailto:#{@user.email}")
@@ -13,16 +18,23 @@
   - if signed_in?
     #friend-status
       - if current_user.friends.include?(@user) || current_user.pending_friends.include?(@user)
-        = link_to "Edit Friendship", edit_user_friendship_path(UserFriendship.where(friend_id: @user).first), class: 'btn'
+        = link_to "Unfriend User", user_friendship_path(friend_id: @user), class: 'btn btn-danger', id: 'unfriend-user', data: { friend_id: @user.to_param }
       - else
-        = link_to "Add Friend", new_user_friendship_path(friend_id: @user), class: 'btn', id: 'add-friendship', data: { friend_id: @user.to_param }
+        = link_to "Add Friend", new_user_friendship_path(friend_id: @user), class: 'btn btn-success', id: 'add-friendship', data: { friend_id: @user.to_param }
     #block-status
-      - if !(current_user.friends.include?(@user) || current_user.pending_friends.include?(@user))
-        - if current_user.blocked_friends.include?(@user)
-          = link_to "Unblock User", unblock_user_friendship_path(friend_id: @user), class: 'btn', id: 'unblock-user', data: { friend_id: @user.id.to_param }
-        - else
-          = link_to "Block User", block_user_friendship_path(friend_id: @user), class: 'btn btn-danger', id: 'block-user', data: { friend_id: @user.id.to_param }
+      - if current_user.blocked_friends.include?(@user)
+        = link_to "Unblock User", unblock_user_friendship_path(friend_id: @user), class: 'btn', id: 'unblock-user', data: { friend_id: @user.id.to_param }
+      - else
+        = link_to "Block User", block_user_friendship_path(friend_id: @user), class: 'btn btn-danger', id: 'block-user', data: { friend_id: @user.id.to_param }
   
 .col-md-9
   %h3
     Recent Activity
+    
+-if UserFriendship.where(:friend_id => @user.id).first
+  :javascript
+    window.friendId = #{UserFriendship.where(:friend_id => @user.id).first.id};
+  
+- if current_user.friends.include?(@user) || current_user.pending_friends.include?(@user)
+  :javascript
+    $("#block-user").hide();

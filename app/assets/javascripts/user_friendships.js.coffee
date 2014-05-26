@@ -8,7 +8,7 @@ $(document).ready ->
       window.userFriendships = data
       return
 
-  $("#add-friendship").click (event) ->
+  $(document.body).on 'click', "#add-friendship", (event) ->
     event.preventDefault()
     addFriendshipBtn = $(this)
     BlockBtn = $("#block-user")
@@ -19,9 +19,28 @@ $(document).ready ->
       dataType: "json"
       type: "POST"
       success: (e) ->
+        window.friendId = e.id
         addFriendshipBtn.hide()
         BlockBtn.hide()
-        $("#friend-status").html "<a href='#' class='btn btn-success'>Friendship Requested</a>"
+        $("#friend-status").html "<a href='/user_friendships/" + addFriendshipBtn.data("friendId") + "' class='btn btn-danger' data-friend-id='" + addFriendshipBtn.data("friendId") + "' id='unfriend-user'>Unfriend User</a>"
+        return
+
+    return
+    
+  $(document.body).on 'click', "#unfriend-user", (event) ->
+    event.preventDefault()
+    addFriendshipBtn = $(this)
+    BlockBtn = $("#block-user")
+    $.ajax
+      url: Routes.user_friendship_path(
+        id: window.friendId
+      )
+      dataType: "json"
+      type: "DELETE"
+      success: (e) ->
+        addFriendshipBtn.hide()
+        BlockBtn.show()
+        $("#friend-status").html "<a href='/user_friendships/new?friend_id=" + addFriendshipBtn.data("friendId") + "' class='btn btn-success' data-friend-id='" + addFriendshipBtn.data("friendId") + "' id='add-friendship'>Add Friend</a>"
         return
 
     return
