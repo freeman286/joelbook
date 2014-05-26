@@ -11,7 +11,9 @@
 #= require_tree ./templates
 #= require_tree ./views
 #= require_tree ./routers
-#= require app
+#= require_tree .
+#= require js-routes
+
 
 $(document).ready ->
   $(".action-view").css "display", "none"  if window.posts is undefined

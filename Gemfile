@@ -15,6 +15,7 @@ gem 'haml'
 gem "rails-backbone"
 gem 'underscore-rails'
 gem 'dragonfly', '~> 1.0.4'
+gem 'js-routes'
 
 # Gems used only for assets and not required
 # in production environments by default.
