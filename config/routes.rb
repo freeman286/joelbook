@@ -15,6 +15,7 @@ RailsRealtime::Application.routes.draw do
       put :accept
       put :decline
       put :block
+      put :unblock
     end
   end
 

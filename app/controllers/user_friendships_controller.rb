@@ -28,14 +28,34 @@ class UserFriendshipsController < ApplicationController
   end
   
   def block
-    @user_friendship = current_user.user_friendships.find(params[:id])
-    friendship = UserFriendship.create!(user: current_user, friend: @user_friendship.friend, state: 'pending')
-    friendship.update_attribute(:state, 'blocked')
-    redirect_to user_friendships_path
-    if @user_friendship.destroy
-      flash[:notice] = "You have blocked #{@user_friendship.friend.name}"
-    else
-      flash[:alert] = "That friendship could not be blocked"
+    if current_user.user_friendships.where(:friend_id => params[:id]).present?
+      @user_friendship = current_user.user_friendships.where(:friend_id => params[:id])
+      @user_friendship.delete_mutual_friendship!
+      friendship = UserFriendship.create!(user: current_user, friend: @user_friendship.friend, state: 'pending')
+      friendship.update_attribute(:state, 'blocked')
+      redirect_to user_friendships_path
+      if @user_friendship.destroy
+        flash[:notice] = "You have blocked #{@user_friendship.friend.name}"
+      else
+        flash[:alert] = "That friendship could not be blocked"
+      end
+    end
+    @user_friendship = UserFriendship.create!(user: current_user, friend: User.find(params[:id]), state: 'pending')
+    @user_friendship.update_attribute(:state, 'blocked')
+    @user_friendship.delete_mutual_friendship!
+    respond_to do |format|
+      format.json { render json: @user_friendship.to_json }
+    end
+  end
+  
+  def unblock
+    @user_friendship = UserFriendship.where(user_id: current_user.id, friend_id: User.find(params[:id]).id, state: 'blocked').first
+    respond_to do |format|
+      if @user_friendship.destroy
+        format.json { render json: @user_friendship.to_json }
+      else
+        format.json { render json: @user_friendship.to_json, status: :precondition_failed }
+      end
     end
   end
   
@@ -58,9 +78,9 @@ class UserFriendshipsController < ApplicationController
     respond_to do |format|
       if @user_friendship.new_record?
         format.html do
-        flash[:alert] = "There was a problem creating that friend request"
-        redirect_to user_path(@friend)
-      end
+          flash[:alert] = "There was a problem creating that friend request"
+          redirect_to user_path(@friend)
+        end
         format.json { render json: @user_friendship.to_json, status: :precondition_failed }
       else
         format.html do
