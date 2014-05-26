@@ -18,7 +18,7 @@ class UserFriendshipsController < ApplicationController
   
   def decline
     @user_friendship = current_user.user_friendships.find(params[:id])
-    if @user_friendship.update_attribute(:state, 'declined') && @user_friendship.declined_mutual_friendship!
+    if @user_friendship.update_attribute(:state, 'declined') && @user_friendship.decline_mutual_friendship!
       flash[:notice] = "You have declined #{@user_friendship.friend.name}"
     else
       flash[:alert] = "That friendship was not declined"
@@ -40,7 +40,7 @@ class UserFriendshipsController < ApplicationController
   
   def new
     if params[:friend_id]
-      @friend = User.where(profile_name: params[:friend_id]).first
+      @friend = User.find(params[:friend_id])
       raise ActiveRecord::RecordNotFound if @friend.nil?
       @user_friendship = current_user.user_friendships.new(friend: @friend)
     else
@@ -52,19 +52,19 @@ class UserFriendshipsController < ApplicationController
 
   def create
     if params[:user_friendship] && params[:user_friendship].has_key?(:friend_id)
-    @friend = User.where(profile_name: params[:user_friendship][:friend_id]).first
+    @friend = User.find(params[:user_friendship][:friend_id])
     @user_friendship = UserFriendship.request(current_user, @friend)
     respond_to do |format|
       if @user_friendship.new_record?
         format.html do
         flash[:alert] = "There was a problem creating that friend request"
-        redirect_to profile_path(@friend)
+        redirect_to user_path(@friend)
       end
         format.json { render json: @user_friendship.to_json, status: :precondition_failed }
       else
         format.html do
           flash[:notice] = "Friend request sent to #{@friend.name}"
-          redirect_to profile_path(@friend)
+          redirect_to user_path(@friend)
         end
         format.json { render json: @user_friendship.to_json }
       end
@@ -82,7 +82,7 @@ class UserFriendshipsController < ApplicationController
   
   def destroy
     @user_friendship = current_user.user_friendships.find(params[:id])
-    if !@user_friendship.block
+    if @user_friendship.blocked?
       if @user_friendship.destroy && @user_friendship.delete_mutual_friendship!
         flash[:notice] = "User unblocked"
       else

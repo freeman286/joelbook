@@ -38,4 +38,16 @@ class UserFriendship < ActiveRecord::Base
   def delete_mutual_friendship!
     mutual_friendship.delete if mutual_friendship
   end
+  
+  def requested?
+    self.state == 'requested'
+  end
+  
+  def blocked?
+    self.state == 'blocked'
+  end
+  
+  def declined?
+    self.state == 'declined'
+  end
 end

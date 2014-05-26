@@ -13,6 +13,47 @@ class User < ActiveRecord::Base
 
   has_many :posts
   
+  has_many :user_friendships, dependent: :destroy
+
+    has_many :friends, through: :user_friendships,
+                       conditions: { user_friendships: {state: 'accepted' }},
+                       dependent: :destroy
+                     
+    has_many :pending_user_friendships, class_name: 'UserFriendship',
+                                        foreign_key: :user_id,
+                                        conditions: { state: 'pending'},
+                                           dependent: :destroy
+                                      
+                                      
+    has_many :pending_friends, through: :pending_user_friendships, source: :friend, dependent: :destroy
+  
+    has_many :requested_user_friendships, class_name: 'UserFriendship',
+                                        foreign_key: :user_id,
+                                        conditions: { state: 'requested'}, dependent: :destroy
+                                      
+    has_many :requested_friends, through: :requested_user_friendships, source: :friend, dependent: :destroy
+  
+    has_many :blocked_user_friendships, class_name: 'UserFriendship',
+                                        foreign_key: :user_id,
+                                        conditions: { state: 'blocked'},
+                                        dependent: :destroy
+                                      
+    has_many :blocked_friends, through: :blocked_user_friendships, source: :friend, dependent: :destroy
+  
+    has_many :accepted_user_friendships, class_name: 'UserFriendship',
+                                        foreign_key: :user_id,
+                                        conditions: { state: 'accepted'},    
+                                        dependent: :destroy
+                                      
+    has_many :accepted_friends, through: :accepted_user_friendships, source: :friend, dependent: :destroy
+    
+    has_many :declined_user_friendships, class_name: 'UserFriendship',
+                                        foreign_key: :user_id,
+                                        conditions: { state: 'declined'},    
+                                        dependent: :destroy
+                                      
+    has_many :declined_friends, through: :declined_user_friendships, source: :friend, dependent: :destroy
+  
   dragonfly_accessor :avatar
   validates_property :format, of: :avatar, in: ['jpeg', 'png', 'gif']  
     

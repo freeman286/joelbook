@@ -1,0 +1,9 @@
+- if @friend
+  %h1= @friend.name
+  %p
+    Do you really want to friend #{@friend.name}?
+  = form_for @user_friendship, method: :post do |form|
+    .form.form-actions
+      = form.hidden_field :friend_id, value: @friend.id
+      = submit_tag "Yes, Add Friend", class: 'btn'
+      = link_to "Cancel", user_path(@friend), class: 'btn'
