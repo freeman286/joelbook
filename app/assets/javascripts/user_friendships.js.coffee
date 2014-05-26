@@ -26,16 +26,34 @@ $(document).ready ->
 
     return
 
-  $("#block-user").click (event) ->
+  $(document.body).on 'click', "#block-user", (event) ->
     event.preventDefault()
     BlockBtn = $(this)
     $.ajax
-      url: Routes.user_block_path((BlockBtn.data("friendId")))
+      url: Routes.block_user_friendship_path((BlockBtn.data("friendId")))
       dataType: "json"
-      type: "POST"
+      type: "PUT"
       success: (e) ->
         BlockBtn.hide()
-        $("#friend-status").html "<a href='#' class='btn btn-success'>Blocked User</a>"
+        $("#add-friendship").hide()
+        $("#block-status").html "<a href='/user_friendships/" + BlockBtn.data("friendId") + "/block?friend_id=" + BlockBtn.data("friendId") + "' class='btn btn-success' data-friend-id='" + BlockBtn.data("friendId") + "' id='unblock-user'>Unblock User</a>"
+        return
+        return
+        return
+
+    return
+    
+  $(document.body).on 'click', "#unblock-user", (event) ->
+    event.preventDefault()
+    BlockBtn = $(this)
+    $.ajax
+      url: Routes.unblock_user_friendship_path((BlockBtn.data("friendId")))
+      dataType: "json"
+      type: "PUT"
+      success: (e) ->
+        BlockBtn.hide()
+        $("#add-friendship").show()
+        $("#block-status").html "<a href='/user_friendships/" + BlockBtn.data("friendId") + "/block?friend_id=" + BlockBtn.data("friendId") + "' class='btn btn-danger' data-friend-id='" + BlockBtn.data("friendId") + "' id='block-user'>Block User</a>"
         return
 
     return
