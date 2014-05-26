@@ -20,7 +20,7 @@
             = form_for friendship, url: decline_user_friendship_path(friendship), method: :put do |form|
               = submit_tag "Decline Friendship", class: 'btn'
           - else
-            -if friendship.ignored?
+            -if friendship.ignored? || friendship.pending?
               = form_for friendship, url: user_friendship_path(friendship), method: :delete do |form|
                 = submit_tag "Delete Friendship", class: 'btn'
         - if friendship.requested?

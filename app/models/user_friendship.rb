@@ -54,4 +54,8 @@ class UserFriendship < ActiveRecord::Base
   def ignored?
     self.state == 'ignored'
   end
+  
+  def pending?
+    self.state == 'pending'
+  end
 end
