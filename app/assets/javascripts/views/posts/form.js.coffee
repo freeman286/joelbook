@@ -4,7 +4,9 @@ app.views.posts.Form = Backbone.View.extend
   id : 'form-view'
   className : 'action-view'
   template : JST['templates/posts/form']
-  events : {'click input[type=submit]' : 'save'}
+  events :
+    'click input[type=submit]' : 'save'
+    
   initialize : ->
     @model = new app.models.Posts()
   clear : () ->
@@ -27,11 +29,11 @@ app.views.posts.Form = Backbone.View.extend
     @isNew = @model.isNew()
     @model.save @formValues(),
         success : () =>
+          @clear()
+          app.navigate '/posts/', true
           if @isNew
             app.collections.Posts.add @model
             
-          @clear()
-          app.navigate '/posts/', true
         error :(error) =>
           console.log error
           

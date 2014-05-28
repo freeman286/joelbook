@@ -28,4 +28,4 @@ app.routers.Posts = Backbone.Router.extend
   new : () ->
     $('.action-view').show()
     @formView.clear()
-    @formView.$el.show()     
+    @formView.$el.show()       
