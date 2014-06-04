@@ -34,3 +34,5 @@ $(document).ready ->
       $(".dropdown-menu").delay(800).hide()
       return
     ), 200
+    
+  $('a[data-toggle="tab"]:first').tab 'show'

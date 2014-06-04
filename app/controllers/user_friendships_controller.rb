@@ -4,6 +4,9 @@ class UserFriendshipsController < ApplicationController
   
   def index
     @user_friendships = current_user.user_friendships
+    @accepted = current_user.user_friendships.where(:state => 'accepted')
+    @pending = current_user.user_friendships.where(:state => 'pending')
+    @blocked = current_user.user_friendships.where(:state => 'blocked')
     respond_with @user_friendships
   end
   

@@ -1,28 +1,25 @@
-- @user_friendships.each do |friendship|
-  - friend = friendship.friend
-  .media.friend{id: dom_id(friendship)}
-    = image_tag avatar_url(friend, "80"), class: "rounded_corners"
-    .media-body
-      %h4.media-heading= friend.name
-      = succeed "." do
-        %em
-          Friendship is #{friendship.state}
-      %br/
-      - if !friendship.declined?
-        - if friendship.requested? || friendship.ignored?
-          = form_for friendship, url: accept_user_friendship_path(friendship), method: :put do |form|
-            = submit_tag "Accept Friendship", class: 'btn'
-        - if friendship.blocked?
-          = form_for friendship, url: user_friendship_path(friendship), method: :delete do |form|
-            = submit_tag "Unblock User", class: 'btn'
-        - else
-          - if friendship.requested?
-            = form_for friendship, url: decline_user_friendship_path(friendship), method: :put do |form|
-              = submit_tag "Decline Friendship", class: 'btn'
-          - else
-            -if friendship.ignored? || friendship.pending?
-              = form_for friendship, url: user_friendship_path(friendship), method: :delete do |form|
-                = submit_tag "Delete Friendship", class: 'btn'
-        - if friendship.requested?
-          = form_for friendship, url: block_user_friendship_path(friendship), method: :put do |form|
-            = submit_tag "Block Friendship", class: 'btn btn-danger'
+%ul.nav.nav-tabs
+  %li
+    %a{"data-toggle" => "tab", href: "#all"} All
+  %li
+    %a{"data-toggle" => "tab", href: "#accepted"} Accepted
+  %li
+    %a{"data-toggle" => "tab", href: "#pending"} Pending
+  %li
+    %a{"data-toggle" => "tab", href: "#blocked"} Blocked
+.tab-content
+  #all.tab-pane
+    - @user_friendships.each do |friendship|
+      = render 'card', :friendship => friendship
+  #accepted.tab-pane
+    - @accepted.each do |friendship|
+      = render 'card', :friendship => friendship
+  #pending.tab-pane
+    - @pending.each do |friendship|
+      = render 'card', :friendship => friendship
+  #blocked.tab-pane
+    - @blocked.each do |friendship|
+      = render 'card', :friendship => friendship
+      
+      
+                
