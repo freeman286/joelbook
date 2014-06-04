@@ -26,9 +26,10 @@
                 = f.text_field :name, placeholder: "Search for user", autocomplete: "off"
                 %ul.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
           
-          %ul.nav.navbar-nav.navbar-left
-            %li
-              =link_to( "Friends", user_friendships_path)
+          -if !current_user
+            %ul.nav.navbar-nav.navbar-left
+              %li
+                =link_to( "Friends", user_friendships_path)
 
                     
           %ul.nav.navbar-nav.navbar-right
