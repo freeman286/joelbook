@@ -106,13 +106,13 @@ class UserFriendshipsController < ApplicationController
     respond_to do |format|
       format.html do
         if @user_friendship.blocked?
-          if @user_friendship.destroy && @user_friendship.delete_mutual_friendship!
+          if @user_friendship.destroy 
             flash[:notice] = "User unblocked"
           else
             flash[:alert] = "User is still blocked"
           end
         else
-          if @user_friendship.destroy
+          if @user_friendship.destroy && @user_friendship.delete_mutual_friendship!
             flash[:notice] = "Friendship deleted"
           else
             flash[:alert] = "Friendship failed delete"
