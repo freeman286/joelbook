@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140427183534) do
+ActiveRecord::Schema.define(:version => 20140427203523) do
+
+  create_table "channels", :force => true do |t|
+    t.string   "name"
+    t.boolean  "private"
+    t.integer  "owner_user_id"
+    t.integer  "secondary_owner_user_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
 
   create_table "posts", :force => true do |t|
     t.datetime "created_at",   :null => false
@@ -22,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20140427183534) do
     t.string   "youtube_url"
     t.string   "user_name"
     t.string   "user_img_url"
+    t.string   "channel_id"
   end
 
   create_table "user_friendships", :force => true do |t|
