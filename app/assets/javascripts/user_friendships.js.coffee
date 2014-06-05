@@ -20,8 +20,8 @@ $(document).ready ->
       type: "POST"
       success: (e) ->
         window.friendId = e.id
-        addFriendshipBtn.hide()
-        BlockBtn.hide()
+        addFriendshipBtn.fadeOut()
+        BlockBtn.fadeOut()
         $("#friend-status").html "<a href='/user_friendships/" + addFriendshipBtn.data("friendId") + "' class='btn btn-danger' data-friend-id='" + addFriendshipBtn.data("friendId") + "' id='unfriend-user'>Unfriend User</a>"
         return
 
@@ -38,9 +38,11 @@ $(document).ready ->
       dataType: "json"
       type: "DELETE"
       success: (e) ->
-        addFriendshipBtn.hide()
-        BlockBtn.show()
+        addFriendshipBtn.fadeOut()
+        BlockBtn.fadeIn()
+        $("#friend-status").hide
         $("#friend-status").html "<a href='/user_friendships/new?friend_id=" + addFriendshipBtn.data("friendId") + "' class='btn btn-success' data-friend-id='" + addFriendshipBtn.data("friendId") + "' id='add-friendship'>Add Friend</a>"
+        $("#friend-status").fadeIn()
         return
 
     return
@@ -53,8 +55,9 @@ $(document).ready ->
       dataType: "json"
       type: "PUT"
       success: (e) ->
-        BlockBtn.hide()
-        $("#add-friendship").hide()
+        BlockBtn.fadeOut()
+        $("#add-friendship").fadeOut()
+        $("#friend-status").animate({height:'0px'}, 500)
         $("#block-status").html "<a href='/user_friendships/" + BlockBtn.data("friendId") + "/block?friend_id=" + BlockBtn.data("friendId") + "' class='btn btn-success' data-friend-id='" + BlockBtn.data("friendId") + "' id='unblock-user'>Unblock User</a>"
         return
         return
@@ -70,8 +73,9 @@ $(document).ready ->
       dataType: "json"
       type: "PUT"
       success: (e) ->
-        BlockBtn.hide()
-        $("#add-friendship").show()
+        BlockBtn.fadeOut()
+        $("#add-friendship").fadeIn()
+        $("#friend-status").animate({height:'34px'}, 500)
         $("#block-status").html "<a href='/user_friendships/" + BlockBtn.data("friendId") + "/block?friend_id=" + BlockBtn.data("friendId") + "' class='btn btn-danger' data-friend-id='" + BlockBtn.data("friendId") + "' id='block-user'>Block User</a>"
         return
 
