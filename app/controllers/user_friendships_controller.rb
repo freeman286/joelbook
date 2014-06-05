@@ -7,6 +7,7 @@ class UserFriendshipsController < ApplicationController
     @accepted = current_user.user_friendships.where(:state => 'accepted')
     @pending = current_user.user_friendships.where(:state => 'pending')
     @blocked = current_user.user_friendships.where(:state => 'blocked')
+    @ignored = current_user.user_friendships.where(:state => 'ignored')
     respond_with @user_friendships
   end
   
@@ -115,7 +116,8 @@ class UserFriendshipsController < ApplicationController
             flash[:alert] = "User is still blocked"
           end
         else
-          if @user_friendship.destroy && @user_friendship.delete_mutual_friendship!
+          if @user_friendship.destroy
+            @user_friendship.delete_mutual_friendship!
             flash[:notice] = "Friendship deleted"
           else
             flash[:alert] = "Friendship failed delete"

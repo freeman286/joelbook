@@ -7,6 +7,8 @@
     %a{"data-toggle" => "tab", href: "#pending"} Pending
   %li
     %a{"data-toggle" => "tab", href: "#blocked"} Blocked
+  %li
+    %a{"data-toggle" => "tab", href: "#ignored"} Ignored  
 .tab-content
   #all.tab-pane
     - @user_friendships.each do |friendship|
@@ -20,6 +22,10 @@
   #blocked.tab-pane
     - @blocked.each do |friendship|
       = render 'card', :friendship => friendship
+  #ignored.tab-pane
+    - @ignored.each do |friendship|
+      = render 'card', :friendship => friendship    
+      
       
       
                 

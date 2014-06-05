@@ -20,13 +20,13 @@
         =link_to("Joelbook", root_path, :class => "navbar-brand")
         
         .navbar-collapse.collapse  
-          =form_for (@user || User.new), remote: true, :url => search_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
-            .form-group
-              .dropdown
-                = f.text_field :name, placeholder: "Search for user", autocomplete: "off"
-                %ul.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
-          
           -if current_user
+            =form_for (@user || User.new), remote: true, :url => search_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
+              .form-group
+                .dropdown
+                  = f.text_field :name, placeholder: "Search for user", autocomplete: "off"
+                  %ul.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
+          
             %ul.nav.navbar-nav.navbar-left
               %li
                 =link_to( "Friends", user_friendships_path)
