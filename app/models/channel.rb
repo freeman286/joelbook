@@ -1,4 +1,6 @@
 class Channel < ActiveRecord::Base
+  has_and_belongs_to_many :users
+  
   belongs_to :owner_user, class_name: 'User', foreign_key: 'owner_user_id'
   belongs_to :secondary_owner_user, class_name: 'User', foreign_key: 'secondary_owner_user_id'
   

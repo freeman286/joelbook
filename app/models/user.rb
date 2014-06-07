@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 
   has_many :posts
   
+  has_and_belongs_to_many :channels
+  
   has_many :user_friendships, dependent: :destroy
 
   has_many :friends, through: :user_friendships,
