@@ -9,15 +9,17 @@
     <th></th>
   </tr>
   <% posts.each(function(post){ %>
-    <tr>
-      <td><a href="/users/<%= post.get('user_id') %>"><img src="<%= post.get('user_img_url') %>" class="rounded_corners"></a></td>
-      <td><%= post.get('name') %></td>
-      <td><%= post.get('user_name') %></td>
-	  <% if (post.get('user_name') == window.user.name){ %> 
-      	<td><a href="/posts/<%= post.id %>/edit#modal" data-toggle="modal" data-static="true" id="show_modal" onclick="app.navigate('/posts/<%= post.id %>/edit', true);">Edit</a></td>
-      	<td><a href="" data-method="delete" data-id="<%= post.id %>" data-static="true">Destroy</a></td>
-	  <% } %>
-    </tr>
+    <% if (post.get('channel_id') == window.channel_id){ %> 
+      <tr>
+        <td><a href="/users/<%= post.get('user_id') %>"><img src="<%= post.get('user_img_url') %>" class="rounded_corners"></a></td>
+        <td><%= post.get('name') %></td>
+        <td><%= post.get('user_name') %></td>
+  	  <% if (post.get('user_name') == window.user.name){ %> 
+        	<td><a href="/posts/<%= post.id %>/edit#modal" data-toggle="modal" data-static="true" id="show_modal" onclick="app.navigate('/posts/<%= post.id %>/edit', true);">Edit</a></td>
+        	<td><a href="" data-method="delete" data-id="<%= post.id %>" data-static="true">Destroy</a></td>
+  	  <% } %>
+      </tr>
+    <% } %>
   <% }); %>
 </table>
 <a href="/posts/new#modal" data-toggle="modal" id="show_modal" data-static="true">New Post</a>

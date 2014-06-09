@@ -20,6 +20,7 @@ app.views.posts.Form = Backbone.View.extend
       user_name : window.user.name
       user_id : window.user.id
       user_img_url: window.user.avatar_url
+      channel_id: window.channel_id
       
   render : ->
     @$el.html @template(@serialize())
