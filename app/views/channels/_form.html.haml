@@ -1,0 +1,23 @@
+= form_for(@channel) do |f|
+  - if @channel.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@channel.errors.count, "error")
+        prohibited this channel from being saved:
+      %ul
+        - @channel.errors.full_messages.each do |msg|
+          %li= msg
+  
+  .field
+    = f.label :name
+    %br/
+    = f.text_field :name
+  .field
+    = f.label :public
+    %br/
+    = f.check_box :public
+          
+  .actions
+    = f.submit
+
+=@channel.owner_user_id

@@ -1,5 +1,5 @@
 RailsRealtime::Application.routes.draw do
-  
+
   root :to => "posts#index"
   
   match '/search' => 'users#search'
@@ -18,9 +18,12 @@ RailsRealtime::Application.routes.draw do
       put :unblock
     end
   end
-
-
+  
+  resources :channels do
+    resources :posts
+  end
   resources :posts
+
   
 
 

@@ -4,7 +4,7 @@ class ChannelsController < ApplicationController
   end
 
   def create
-    @channel = Post.new(params[:channel])
+    @channel = Channel.new(params[:channel].merge(:owner_user_id => current_user.id))
     if @channel.save
       redirect_to channel_path(@channel), notice: 'Channel was successfully created.'
     else
@@ -24,7 +24,7 @@ class ChannelsController < ApplicationController
   end
 
   def edit
-    @diagnostic = Diagnostic.find(params[:id])
+    @channel = Channel.find(params[:id])
   end
 
   def destroy
@@ -37,10 +37,11 @@ class ChannelsController < ApplicationController
   end
 
   def index
-    @channels = Channels.all
+    @channels = Channel.all
   end
 
   def show
-    @channels = Channels.find(params[:id])
+    @channel = Channel.find(params[:id])
+    @posts = @channel.posts
   end
 end
