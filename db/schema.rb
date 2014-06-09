@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20140607152610) do
   create_table "channels", :force => true do |t|
     t.string   "name"
     t.boolean  "private"
+    t.boolean  "public"
     t.integer  "owner_user_id"
     t.integer  "secondary_owner_user_id"
     t.datetime "created_at",              :null => false
