@@ -3,6 +3,6 @@
 = link_to 'Edit', edit_channel_path(@channel)
 |
 \#{link_to 'Back', channels_path}
--#
-  :javascript
-    window.posts = #{@posts.to_json.html_safe};
+
+:javascript
+  window.posts = #{@posts.to_json.html_safe}; 

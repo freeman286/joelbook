@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20140607152610) do
     t.string   "youtube_url"
     t.string   "user_name"
     t.string   "user_img_url"
-    t.string   "channel_id"
+    t.integer  "channel_id"
   end
 
   create_table "user_friendships", :force => true do |t|
