@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-
+  before_filter :select_posts
+  
   def index
-    select_posts
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -9,7 +9,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    select_posts
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -18,9 +17,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    select_posts
     @post = Post.new
-
     respond_to do |format|
       format.html {
             @posts = Post.all
@@ -32,12 +29,10 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    select_posts
     render :action => 'index'
   end
 
   def create
-    select_posts
     @post = Post.new(params[:post])
 
     respond_to do |format|
@@ -52,7 +47,6 @@ class PostsController < ApplicationController
   end
 
   def update
-    select_posts
     @post = Post.find(params[:id])
 
     respond_to do |format|
@@ -67,7 +61,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    select_posts
     @post = Post.find(params[:id])
     @post.destroy
 
