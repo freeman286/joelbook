@@ -15,7 +15,7 @@ class ChannelsController < ApplicationController
   def update
     @channel = Channel.find(params[:id])
   
-    if @channel.update_attributes(params[:channel])
+    if @channel.update_attributes(params[:channel].merge(:owner_user_id => current_user.id))
       @diagnostic.make_wheel()
       redirect_to channel_path(@channel), notice: 'Channel was successfully updated.'
     else
