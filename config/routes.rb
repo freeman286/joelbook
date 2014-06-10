@@ -22,6 +22,7 @@ RailsRealtime::Application.routes.draw do
   resources :channels do
     resources :posts
   end
+  match "/channels/:channel_id/posts" => "posts#index"
   resources :posts
 
   

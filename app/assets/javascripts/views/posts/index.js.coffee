@@ -21,7 +21,7 @@ app.views.posts.Index = Backbone.View.extend
     model = @collection.get id
     model.destroy()
     @collection.remove model
-    
+    app.navigate 'channels/' + window.channel_id + '/posts', true
 
 
   serialize : ->
