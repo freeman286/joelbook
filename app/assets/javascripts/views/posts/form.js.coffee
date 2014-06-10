@@ -31,7 +31,7 @@ app.views.posts.Form = Backbone.View.extend
     @model.save @formValues(),
         success : () =>
           @clear()
-          app.navigate '/posts/', true
+          app.navigate 'channels/' + window.channel_id + '/posts', true
           if @isNew
             app.collections.Posts.add @model
             

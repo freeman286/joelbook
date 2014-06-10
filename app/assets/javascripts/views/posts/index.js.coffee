@@ -19,9 +19,9 @@ app.views.posts.Index = Backbone.View.extend
     $a = $(evt.currentTarget)
     id = $a.attr('data-id')
     model = @collection.get id
-    app.navigate '/', true
     model.destroy()
     @collection.remove model
+    
 
 
   serialize : ->

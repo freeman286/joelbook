@@ -3,7 +3,14 @@ class PostsController < ApplicationController
   
   def index
     respond_to do |format|
-      format.html # index.html.erb
+      format.html {
+        if params[:channel_id]
+          @channel = Channel.find(params[:channel_id]) 
+          @posts = @channel.posts
+        else
+          @posts = Post.all
+        end
+      }
       format.json { render json: @posts }
     end
   end
@@ -65,7 +72,7 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to channel_path(@channel) }
       format.json { render json: @post }
     end
 

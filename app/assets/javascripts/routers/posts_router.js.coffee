@@ -10,16 +10,16 @@ app.routers.Posts = Backbone.Router.extend
     $('.backbone').append @formView.render()
 
   routes :
-    "posts/" : "index"
-    "posts/new" : "new"
-    "posts/:id" : "show"
-    "posts/:id/edit" : "edit"
+    "channels/:channel_id/posts" : "index"
+    "channels/:channel_id/posts/new" : "new"
+    "channels/:channel_id/posts/:id" : "show"
+    "channels/:channel_id/posts/:id/edit" : "edit"
 
   index : () ->
     $('.action-view').show()
     @indexView.$el.show()
 
-  edit : (id) ->
+  edit : (channel_id, id) ->
     $('.action-view').show()
     @formView.model = @posts.get id
     @formView.render()
