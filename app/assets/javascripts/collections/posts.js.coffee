@@ -21,7 +21,7 @@ app.collections.Posts = Backbone.Collection.extend
     b = b.get(@sort_key)
     (if a > b then 1 else (if a < b then -1 else 0))      
 
-  sort_by_time = ->
+  sort_by_time : ->
     @sort_key = "time"
     @sort()
     return
