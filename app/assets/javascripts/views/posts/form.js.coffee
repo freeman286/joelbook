@@ -21,6 +21,7 @@ app.views.posts.Form = Backbone.View.extend
       user_id : window.user.id
       user_img_url: window.user.avatar_url
       channel_id: window.channel_id
+      time: if @model.isNew() then Math.round(new Date() / 1000) else @model.time
       
   render : ->
     @$el.html @template(@serialize())

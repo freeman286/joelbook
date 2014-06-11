@@ -8,3 +8,4 @@ app.models.Posts = Backbone.Model.extend
     user_img_url : ''
     img_url : ''
     youtube_url : ''
+    time : 0
