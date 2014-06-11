@@ -11,7 +11,7 @@ app.views.posts.Index = Backbone.View.extend
     'click a[data-method=delete]' : 'destroy'
   
   initialize : ->
-    @collection.on 'reset', @.render, @
+    @collection.on 'reset sort', @.render, @
     @collection.on 'change add remove', @.render, @
 
   destroy : (evt) ->
