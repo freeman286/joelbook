@@ -36,3 +36,14 @@ $(document).ready ->
     ), 200
     
   $('a[data-toggle="tab"]:first').tab 'show'
+      
+  $("#channel_user_name").bind 'keyup', (e) ->
+    $("#channel_user_name").trigger "submit"
+  
+  $("#channel_user_name").focusout ->
+    $(".panel-body").animate({height: 73}, 500);
+    $("#channel_user_name").val('')
+    setTimeout (->
+      $(".channel-dropdown-menu").delay(800).hide()
+      return
+    ), 200

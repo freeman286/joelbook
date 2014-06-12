@@ -57,7 +57,7 @@
       :javascript
         window.user = #{current_user.as_json(:only => :name, :methods => [:encrypted_password, :id, :auth, :avatar_url]).to_json};
         if (window.posts != undefined) {
-          $( ".container" ).append( "<div class='backbone'></div>" );
+          $( ".container" ).append( "<div class='col-md-12'><div class='backbone'></div></div>" );
         }
     
     -if @channel

@@ -3,6 +3,7 @@ RailsRealtime::Application.routes.draw do
   root :to => "posts#index"
   
   match '/search' => 'users#search'
+  match '/channel_search' => 'channels#search'
     
   devise_for :users, :controllers => {:registrations => "registrations"}
   devise_scope :user do

@@ -1,4 +1,22 @@
-=@channel.name if @channel
+.col-md-12
+  %h3
+    =@channel.name if @channel
+
+-if @channel.owner_user == current_user
+  .col-md-6
+    #accordion.panel-group
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title
+            %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapse", :style => "display: static;"}
+              Add user to channel
+        #collapse.panel-collapse.collapse
+          .panel-body
+            =form_for (@user || User.new), remote: true, :url => channel_search_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
+              .form-group
+                .dropdown
+                  = f.text_field :name, placeholder: "Search for user", autocomplete: "off", :id => "channel_user_name"
+                  %ul.channel-dropdown-menu.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
 
 :javascript
   window.posts = #{@posts.to_json.html_safe};

@@ -44,4 +44,14 @@ class ChannelsController < ApplicationController
   def show
     @channel = Channel.find(params[:id])
   end
+  
+  def search
+    if params[:user][:name]
+      @users = User.search(params[:user][:name])
+    end
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
 end
