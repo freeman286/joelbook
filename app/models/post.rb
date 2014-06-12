@@ -15,15 +15,17 @@ class Post < ActiveRecord::Base
             obj: self,
            }   
     
-    if User.current && User.current.name == self.user_name && (self.channel && (self.channel.public == true || self.channel.includes_user?(User.current)))
+    if can_be_published?
       $redis.publish 'rt-change', msg.to_json
-    else
-      self.destroy
     end
   end
 
   validates :user_name, presence: true
   validates :channel_id, presence: true
   validates :name, presence: true
-
+  validate :can_be_published?
+  
+  def can_be_published?
+    User.current && User.current.name == self.user_name && (self.channel && (self.channel.public == true || self.channel.includes_user?(User.current)))
+  end
 end
