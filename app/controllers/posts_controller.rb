@@ -5,8 +5,12 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html {
         if params[:channel_id]
-          @channel = Channel.find(params[:channel_id]) 
-          @posts = @channel.posts
+          @channel = Channel.find(params[:channel_id])
+          if @channel.includes_user?(current_user)
+            @posts = @channel.posts
+          else
+            redirect_to root_path, alert: "You are not a member of that channel"
+          end
         else
           @posts = Post.all
         end

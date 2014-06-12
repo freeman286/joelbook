@@ -19,4 +19,8 @@ class Channel < ActiveRecord::Base
   def private?
     self.private == true
   end
+  
+  def includes_user?(user)
+    self.users.include?(user)
+  end
 end

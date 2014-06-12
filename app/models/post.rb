@@ -15,8 +15,10 @@ class Post < ActiveRecord::Base
             obj: self,
            }   
     
-    if User.current && User.current.name == self.user_name
+    if User.current && User.current.name == self.user_name && (self.channel && (self.channel.public == true || self.channel.includes_user?(User.current)))
       $redis.publish 'rt-change', msg.to_json
+    else
+      self.destroy
     end
   end
 

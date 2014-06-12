@@ -5,6 +5,7 @@ class ChannelsController < ApplicationController
 
   def create
     @channel = Channel.new(params[:channel].merge(:owner_user_id => current_user.id))
+    @channel.users << current_user
     if @channel.save
       redirect_to channel_path(@channel), notice: 'Channel was successfully created.'
     else
