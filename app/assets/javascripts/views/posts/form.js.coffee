@@ -7,6 +7,10 @@ app.views.posts.Form = Backbone.View.extend
   events :
     'click input[type=submit]' : 'save'
     
+  appendHtml : (cv, iv) ->
+    cv.$el.prepend iv.el
+    return
+  
   initialize : ->
     @model = new app.models.Posts()
   clear : () ->
