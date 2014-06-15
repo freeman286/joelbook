@@ -25,7 +25,7 @@
               .form-group
                 .dropdown
                   = f.text_field :name, placeholder: "Search for user", autocomplete: "off"
-                  %ul.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
+                  %ul.dropdown-menu.user-dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
           
             %ul.nav.navbar-nav.navbar-left
               %li

@@ -31,7 +31,7 @@ $(document).ready ->
   $("#user_name").focusout ->
     $("#user_name").val('')
     setTimeout (->
-      $(".dropdown-menu").delay(800).hide()
+      $(".user-dropdown-menu").delay(800).hide()
       return
     ), 200
     
