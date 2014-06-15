@@ -57,7 +57,10 @@ class ChannelsController < ApplicationController
   end
   
   def add
+    @channel = Channel.find([:channel_id])
+    @user = User.find(params[:id])
     respond_to do |format|
+      format.js
       format.json { render json: @channel.to_json }
     end
   end

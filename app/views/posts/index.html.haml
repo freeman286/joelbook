@@ -19,5 +19,3 @@
 
 :javascript
   window.posts = #{@posts.to_json.html_safe};
-  
-= link_to User.first.name, add_channel_path(channel_id: @channel, id: User.first), class: "add_user", data: { id: User.first.id, channel_id: @channel.id }

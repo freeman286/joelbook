@@ -4,7 +4,6 @@ $(document).ready ->
     addUserBtn = $(this)
     $.ajax
       url: Routes.add_channel_path( addUserBtn.data("channelId"), addUserBtn.data("id"))
-      dataType: "json"
+      dataType: "script"
       type: "POST"
       success: (e) ->
-        alert('success')
