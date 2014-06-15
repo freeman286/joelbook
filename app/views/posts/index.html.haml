@@ -2,7 +2,7 @@
   %h3
     =@channel.name if @channel
 
--if @channel.owner_user == current_user
+-if @channel && @channel.owner_user == current_user
   .col-md-6
     #accordion.panel-group
       .panel.panel-default
