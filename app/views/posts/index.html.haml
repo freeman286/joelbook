@@ -15,7 +15,9 @@
             .form-group
               = f.text_field :name, placeholder: "Search for user", autocomplete: "off", :id => "channel_user_name"
               %ul.channel-dropdown-menu.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
+              = f.hidden_field :channel_id, :value => @channel.id
 
 :javascript
   window.posts = #{@posts.to_json.html_safe};
   
+= link_to User.first.name, add_channel_path(channel_id: @channel, id: User.first), class: "add_user", data: { id: User.first.id, channel_id: @channel.id }

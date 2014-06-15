@@ -3,7 +3,7 @@
     %li
       .search-item
         =image_tag avatar_url(user, "40"), class: "rounded_corners"
-        =link_to user.name, user
+        = link_to user.name, add_channel_path(channel_id: @channel, id: user), class: "add_user", data: { id: user.id, channel_id: @channel.id }
 -else
   .search-item
     No results

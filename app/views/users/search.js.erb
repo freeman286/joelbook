@@ -1,6 +1,6 @@
 <% if @users %>
-  $('.dropdown-menu').html('<%= escape_javascript(render "users/dropdown", :@users => @users)%>');
-  $('.dropdown-menu').show();
+  $('.user-dropdown-menu').html('<%= escape_javascript(render "users/dropdown", :@users => @users)%>');
+  $('.user-dropdown-menu').show();
 <% else %>
-  $('.dropdown-menu').hide();
+  $('.user-dropdown-menu').hide();
 <% end %>

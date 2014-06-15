@@ -24,6 +24,8 @@ RailsRealtime::Application.routes.draw do
     resources :posts
   end
   match "/channels/:channel_id/posts" => "posts#index"
+  match "/channels/:channel_id/add/:id" => "channels#add", as: 'add_channel'
+  match "/channels/:channel_id/remove/:id" => "channels#remove", as: 'remove_channel'
   resources :posts
 
   
