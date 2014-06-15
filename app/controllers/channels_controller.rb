@@ -46,12 +46,19 @@ class ChannelsController < ApplicationController
   end
   
   def search
+    @channel = Channel.find(params[:user][:channel_id])
     if params[:user][:name]
       @users = User.search(params[:user][:name])
     end
     respond_to do |format|
       format.js
       format.html
+    end
+  end
+  
+  def add
+    respond_to do |format|
+      format.json { render json: @channel.to_json }
     end
   end
 end
