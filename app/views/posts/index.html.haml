@@ -9,8 +9,16 @@
         .panel-heading
           %h4.panel-title
             %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapse", :style => "display: inline;"}
-              Add user to channel
+              Manage Users
         #collapse.collapse
+          .col-md-12
+            %ul.no-dec.ul-user
+              -@channel.users.each do |user|
+                %li{:id => "li-user-#{user.id}"}
+                  .user-list-item{:id => "user-#{user.id}"}
+                    =image_tag avatar_url(user, "40"), class: "rounded_corners"
+                    =link_to user.name, user
+                    = link_to 'Remove user', remove_channel_path(channel_id: @channel, id: user), class: "remove_user btn btn-danger btn-small", data: { id: user.id, channel_id: @channel.id }
           =form_for (@user || User.new), remote: true, :url => channel_search_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
             .form-group
               = f.text_field :name, placeholder: "Search for user", autocomplete: "off", :id => "channel_user_name"

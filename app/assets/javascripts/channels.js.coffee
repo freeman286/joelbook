@@ -7,3 +7,12 @@ $(document).ready ->
       dataType: "script"
       type: "POST"
       success: (e) ->
+  
+  $(document.body).on 'click', ".remove_user", (event) ->
+    event.preventDefault()
+    removeUserBtn = $(this)
+    $.ajax
+      url: Routes.remove_channel_path( removeUserBtn.data("channelId"), removeUserBtn.data("id"))
+      dataType: "script"
+      type: "POST"
+      success: (e) ->      

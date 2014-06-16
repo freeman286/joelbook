@@ -57,11 +57,34 @@ class ChannelsController < ApplicationController
   end
   
   def add
-    @channel = Channel.find([:channel_id])
+    @channel = Channel.find(params[:channel_id])
     @user = User.find(params[:id])
     respond_to do |format|
-      format.js
-      format.json { render json: @channel.to_json }
+      if @channel.users.include?(@user)
+        @new = false
+        format.js
+      else
+        @new = true  
+        if @channel.users << @user
+          format.js
+          format.json { render json: @channel.to_json }
+        else
+          format.json { render json: @channel.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  end
+  
+  def remove
+    @channel = Channel.find(params[:channel_id])
+    @user = User.find(params[:id])
+    respond_to do |format|
+      if @channel.users.delete(@user)
+        format.js
+        format.json { render json: @channel.to_json }
+      else
+        format.json { render json: @channel.errors, status: :unprocessable_entity }
+      end
     end
   end
 end

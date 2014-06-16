@@ -215,6 +215,20 @@
   padding-bottom: 2%;
 }
 
+.user-list {
+  padding-left: 0%;
+  &-item {
+    padding-left: 0%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-left:-7.5%;
+  }
+}
+
+.no-dec {
+  list-style-type: none;
+}
+
 .contact-link {
 	text-decoration: underline;
 	color: #616161;
