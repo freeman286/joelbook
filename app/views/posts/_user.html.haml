@@ -1,0 +1,5 @@
+%li.no-dec{:id => "li-user-#{user.id}"}
+  .user-list-item{:id => "user-#{user.id}"}
+    =image_tag avatar_url(user, "40"), class: "rounded_corners"
+    =link_to user.name, user
+    =link_to 'Remove user', remove_channel_path(channel_id: channel, id: user), class: "remove_user btn btn-danger btn-small", data: { id: user.id, channel_id: channel.id }
