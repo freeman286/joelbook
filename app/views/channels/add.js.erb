@@ -1,1 +1,6 @@
-alert('<%=@new%>');
+$(".ul-user").animate({height:'+=60px'}, 500);
+setTimeout(
+  function() 
+  {
+    $(".ul-user").append('<%= escape_javascript(render "posts/user", :user => @user, :channel => @channel)%>').children(':last').hide().fadeIn(500);
+  }, 500);

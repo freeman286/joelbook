@@ -13,8 +13,8 @@
         #collapse.collapse
           .col-md-12
             %ul.no-dec.ul-user
-            -@channel.users.each do |user|
-              =render :partial => 'user', :locals => {:user => user, :channel => @channel}
+              -@channel.users.reverse.each do |user|
+                =render :partial => 'user', :locals => {:user => user, :channel => @channel}
           =form_for (@user || User.new), remote: true, :url => channel_search_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
             .form-group
               = f.text_field :name, placeholder: "Search for user", autocomplete: "off", :id => "channel_user_name"
