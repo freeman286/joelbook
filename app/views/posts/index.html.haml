@@ -20,6 +20,20 @@
               = f.text_field :name, placeholder: "Add user to channel", autocomplete: "off", :id => "channel_user_name"
               %ul.channel-dropdown-menu.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
               = f.hidden_field :channel_id, :value => @channel.id
+              
+-elsif @channel
+  .col-md-6
+    #accordion.panel-group.dropdown
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title
+            %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapse", :style => "display: inline;"}
+              Users
+        #collapse.collapse
+          .col-md-12
+            %ul.no-dec.ul-user
+              -@channel.users.reverse.each do |user|
+                =render :partial => 'user', :locals => {:user => user, :channel => @channel}
 
 :javascript
   window.posts = #{@posts.to_json.html_safe};

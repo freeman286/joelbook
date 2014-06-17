@@ -61,7 +61,7 @@ class ChannelsController < ApplicationController
     @channel = Channel.find(params[:channel_id])
     @user = User.find(params[:id])
     respond_to do |format|
-      if @channel.users.include?(@user) && !@channel.current_user_valid
+      if @channel.users.include?(@user) || !@channel.current_user_valid
         @valid = false
         format.js
       else
@@ -80,7 +80,7 @@ class ChannelsController < ApplicationController
     @channel = Channel.find(params[:channel_id])
     @user = User.find(params[:id])
     respond_to do |format|
-      if !@channel.users.include?(@user) && !@channel.current_user_valid
+      if !@channel.users.include?(@user) || !@channel.current_user_valid
         @valid = false
         format.js
       else  
