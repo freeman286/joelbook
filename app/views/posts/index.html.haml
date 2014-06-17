@@ -17,7 +17,7 @@
                 =render :partial => 'user', :locals => {:user => user, :channel => @channel}
           =form_for (@user || User.new), remote: true, :url => channel_search_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
             .form-group
-              = f.text_field :name, placeholder: "Search for user", autocomplete: "off", :id => "channel_user_name"
+              = f.text_field :name, placeholder: "Add user to channel", autocomplete: "off", :id => "channel_user_name"
               %ul.channel-dropdown-menu.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
               = f.hidden_field :channel_id, :value => @channel.id
 

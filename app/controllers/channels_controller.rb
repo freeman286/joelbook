@@ -1,4 +1,5 @@
 class ChannelsController < ApplicationController
+  
   def new
     @channel = Channel.new
   end
@@ -48,7 +49,7 @@ class ChannelsController < ApplicationController
   def search
     @channel = Channel.find(params[:user][:channel_id])
     if params[:user][:name]
-      @users = User.search(params[:user][:name])
+      @users = User.search(params[:user][:name], @channel.users)
     end
     respond_to do |format|
       format.js
@@ -60,11 +61,11 @@ class ChannelsController < ApplicationController
     @channel = Channel.find(params[:channel_id])
     @user = User.find(params[:id])
     respond_to do |format|
-      if @channel.users.include?(@user)
-        @new = false
+      if @channel.users.include?(@user) && !@channel.current_user_valid
+        @valid = false
         format.js
       else
-        @new = true  
+        @valid = true  
         if @channel.users << @user
           format.js
           format.json { render json: @channel.to_json }
@@ -79,11 +80,17 @@ class ChannelsController < ApplicationController
     @channel = Channel.find(params[:channel_id])
     @user = User.find(params[:id])
     respond_to do |format|
-      if @channel.users.delete(@user)
+      if !@channel.users.include?(@user) && !@channel.current_user_valid
+        @valid = false
         format.js
-        format.json { render json: @channel.to_json }
-      else
-        format.json { render json: @channel.errors, status: :unprocessable_entity }
+      else  
+        @valid = true
+        if @channel.users.delete(@user)
+          format.js
+          format.json { render json: @channel.to_json }
+        else
+          format.json { render json: @channel.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

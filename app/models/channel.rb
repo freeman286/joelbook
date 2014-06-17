@@ -23,4 +23,8 @@ class Channel < ActiveRecord::Base
   def includes_user?(user)
     self.users.include?(user)
   end
+  
+  def current_user_valid
+    User.current && self.owner_user == User.current
+  end
 end

@@ -108,7 +108,7 @@ class User < ActiveRecord::Base
     { :x => md[1], :y => md[2],  :width  => md[3], :height => md[4] }
   end
   
-  def self.search(words)
+  def self.search(words, exceptions = [])
     users = Set.new
 
     words.split(" ").each do |keyword|
@@ -116,6 +116,6 @@ class User < ActiveRecord::Base
       users << where(['email LIKE ?', "%#{keyword}%"])
       users << where(['name LIKE ?', "%#{keyword.capitalize}%"])
     end
-    users.first
+    users.first - exceptions
   end  
 end
