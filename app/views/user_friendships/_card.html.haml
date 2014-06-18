@@ -5,7 +5,7 @@
     %h4.media-heading= friend.name
     = succeed "." do
       %em{class: "friendship-#{friendship.id}"}
-        Friendship is #{friendship.state}
+        Friendship is #{friendship.state_to_name}
     %br/
     %div{class: "friendship-actions-#{friendship.id}"}
       - if !friendship.declined?
@@ -19,8 +19,7 @@
             = link_to "Decline Friendship", decline_user_friendship_path(id: friendship), class: 'btn index-decline-friendship', data: { friendship_id: friendship.to_param }
           - else
             -if friendship.pending?
-              = form_for friendship, url: user_friendship_path(friendship), method: :delete do |form|
-                = submit_tag "Delete Request", class: 'btn index-delete-friendship'
+              = link_to "Delete Request", destroy_user_friendship_path(id: friendship), class: 'btn index-delete-friendship', data: { friendship_id: friendship.to_param }
             -if friendship.accepted?
               = link_to "Delete Friendship", destroy_user_friendship_path(id: friendship), class: 'btn index-delete-friendship', data: { friendship_id: friendship.to_param }
                   

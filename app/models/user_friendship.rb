@@ -63,4 +63,12 @@ class UserFriendship < ActiveRecord::Base
   def pending?
     self.state == 'pending'
   end
+  
+  def state_to_name
+    if self.state == 'pending'
+      'requested'
+    else
+      self.state
+    end
+  end
 end
