@@ -12,8 +12,7 @@
         - if friendship.requested? || friendship.ignored?
           = link_to "Accept Friendship", accept_user_friendship_path(id: friendship), class: 'btn index-accept-friendship', data: { friendship_id: friendship.to_param }
         - if friendship.blocked?
-          = form_for friendship, url: user_friendship_path(friendship), method: :delete do |form|
-            = submit_tag "Unblock User", class: 'btn index-unblock-user'
+          = link_to "Unblock User", block_user_friendship_path(id: friend), class: 'btn index-unblock-friendship', data: { friend_id: friend.to_param, friendship_id: friendship.to_param }
         - else
           - if friendship.requested?
             = link_to "Decline Friendship", decline_user_friendship_path(id: friendship), class: 'btn index-decline-friendship', data: { friendship_id: friendship.to_param }
@@ -24,5 +23,4 @@
               = link_to "Delete Friendship", destroy_user_friendship_path(id: friendship), class: 'btn index-delete-friendship', data: { friendship_id: friendship.to_param }
                   
         - if friendship.requested?
-          = form_for friendship, url: block_user_friendship_path(friendship), method: :put do |form|
-            = submit_tag "Block Friendship", class: 'btn btn-danger index-delete-friendship'
+          = link_to "Block Friendship", block_user_friendship_path(id: friend), class: 'btn index-block-friendship', data: { friend_id: friend.to_param, friendship_id: friendship.to_param }

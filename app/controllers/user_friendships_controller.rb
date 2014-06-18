@@ -33,7 +33,7 @@ class UserFriendshipsController < ApplicationController
   
   def block
     if current_user.user_friendships.where(:friend_id => params[:id]).present?
-      @user_friendship = current_user.user_friendships.where(:friend_id => params[:id])
+      @user_friendship = current_user.user_friendships.where(:friend_id => params[:id]).first
       @user_friendship.delete_mutual_friendship!
       friendship = UserFriendship.create!(user: current_user, friend: @user_friendship.friend, state: 'pending')
       friendship.update_attribute(:state, 'blocked')
@@ -43,12 +43,10 @@ class UserFriendshipsController < ApplicationController
       else
         flash[:alert] = "That friendship could not be blocked"
       end
-    end
-    @user_friendship = UserFriendship.create!(user: current_user, friend: User.find(params[:id]), state: 'pending')
-    @user_friendship.update_attribute(:state, 'blocked')
-    @user_friendship.delete_mutual_friendship!
-    respond_to do |format|
-      format.json { render json: @user_friendship.to_json }
+    else
+      @user_friendship = UserFriendship.create!(user: current_user, friend: User.find(params[:id]), state: 'pending')
+      @user_friendship.update_attribute(:state, 'blocked')
+      @user_friendship.delete_mutual_friendship!
     end
   end
   
