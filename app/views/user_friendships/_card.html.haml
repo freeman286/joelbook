@@ -1,5 +1,5 @@
 - friend = friendship.friend
-.media.friend{id: dom_id(friendship)}
+.media.friend{class: "user-friendship-#{friendship.id}"}
   = image_tag avatar_url(friend, "80"), class: "rounded_corners"
   .media-body
     %h4.media-heading= friend.name
@@ -7,7 +7,7 @@
       %em{class: "friendship-#{friendship.id}"}
         Friendship is #{friendship.state}
     %br/
-    .friendsip-actions
+    %div{class: "friendship-actions-#{friendship.id}"}
       - if !friendship.declined?
         - if friendship.requested? || friendship.ignored?
           = link_to "Accept Friendship", accept_user_friendship_path(id: friendship), class: 'btn index-accept-friendship', data: { friendship_id: friendship.to_param }
@@ -16,8 +16,7 @@
             = submit_tag "Unblock User", class: 'btn index-unblock-user'
         - else
           - if friendship.requested?
-            = form_for friendship, url: decline_user_friendship_path(friendship), method: :put do |form|
-              = submit_tag "Decline Friendship", class: 'btn index-decline-friendship'
+            = link_to "Decline Friendship", decline_user_friendship_path(id: friendship), class: 'btn index-decline-friendship', data: { friendship_id: friendship.to_param }
           - else
             -if friendship.pending?
               = form_for friendship, url: user_friendship_path(friendship), method: :delete do |form|
