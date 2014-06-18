@@ -4,28 +4,27 @@
   .media-body
     %h4.media-heading= friend.name
     = succeed "." do
-      %em
+      %em{class: "friendship-#{friendship.id}"}
         Friendship is #{friendship.state}
     %br/
-    - if !friendship.declined?
-      - if friendship.requested? || friendship.ignored?
-        = form_for friendship, url: accept_user_friendship_path(friendship), method: :put do |form|
-          = submit_tag "Accept Friendship", class: 'btn'
-      - if friendship.blocked?
-        = form_for friendship, url: user_friendship_path(friendship), method: :delete do |form|
-          = submit_tag "Unblock User", class: 'btn'
-      - else
-        - if friendship.requested?
-          = form_for friendship, url: decline_user_friendship_path(friendship), method: :put do |form|
-            = submit_tag "Decline Friendship", class: 'btn'
+    .friendsip-actions
+      - if !friendship.declined?
+        - if friendship.requested? || friendship.ignored?
+          = link_to "Accept Friendship", accept_user_friendship_path(id: friendship), class: 'btn index-accept-friendship', data: { friendship_id: friendship.to_param }
+        - if friendship.blocked?
+          = form_for friendship, url: user_friendship_path(friendship), method: :delete do |form|
+            = submit_tag "Unblock User", class: 'btn index-unblock-user'
         - else
-          -if friendship.pending?
-            = form_for friendship, url: user_friendship_path(friendship), method: :delete do |form|
-              = submit_tag "Delete Request", class: 'btn'
-          -if friendship.accepted?
-            = form_for friendship, url: user_friendship_path(friendship), method: :delete do |form|
-              = submit_tag "Delete Friendship", class: 'btn'
+          - if friendship.requested?
+            = form_for friendship, url: decline_user_friendship_path(friendship), method: :put do |form|
+              = submit_tag "Decline Friendship", class: 'btn index-decline-friendship'
+          - else
+            -if friendship.pending?
+              = form_for friendship, url: user_friendship_path(friendship), method: :delete do |form|
+                = submit_tag "Delete Request", class: 'btn index-delete-friendship'
+            -if friendship.accepted?
+              = link_to "Delete Friendship", destroy_user_friendship_path(id: friendship), class: 'btn index-delete-friendship', data: { friendship_id: friendship.to_param }
                   
-      - if friendship.requested?
-        = form_for friendship, url: block_user_friendship_path(friendship), method: :put do |form|
-          = submit_tag "Block Friendship", class: 'btn btn-danger'
+        - if friendship.requested?
+          = form_for friendship, url: block_user_friendship_path(friendship), method: :put do |form|
+            = submit_tag "Block Friendship", class: 'btn btn-danger index-delete-friendship'

@@ -14,9 +14,14 @@ RailsRealtime::Application.routes.draw do
   resources :user_friendships do
     member do
       put :accept
+      post :accept
       put :decline
+      post :decline
       put :block
+      post :block
       put :unblock
+      post :unblock
+      post :destroy, as: 'destroy'
     end
   end
   
