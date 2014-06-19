@@ -53,7 +53,7 @@
       
       
 	  
-    -if current_user
+    -if current_user && !@user
       :javascript
         window.user = #{current_user.as_json(:only => :name, :methods => [:encrypted_password, :id, :auth, :avatar_url]).to_json};
         if (window.posts != undefined) {

@@ -1,12 +1,16 @@
-<h1>Listing Posts</h1>
+<% if (window.profile == true){ %> 
+  <a href="channels/<%= window.channel_id %>/posts/new#modal" data-toggle="modal" id="show_modal" data-static="true">New Post</a>
+<% } %>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <% if (window.profile == true){ %> 
+      <th>Name</th>
+      <th>User</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    <% } %>
   </tr>
   <% posts.each(function(post){ %>
     <% if (post.get('channel_id') == window.channel_id){ %> 
@@ -16,10 +20,9 @@
         <td><%= post.get('user_name') %></td>
   	  <% if (post.get('user_name') == window.user.name){ %> 
         	<td><a href="/channels/<%= window.channel_id %>/posts/<%= post.id %>/edit#modal" data-toggle="modal" data-static="true" id="show_modal" onclick="app.navigate('channels/<%= window.channel_id %>/posts/<%= post.id %>/edit', true);">Edit</a></td>
-        	<td><a href="" data-method="delete" data-id="<%= post.id %>" data-static="true">Destroy</a></td>
+        	<td><a href="" data-method="delete" data-id="<%= post.id %>" data-static="true" >Destroy</a></td>
   	  <% } %>
       </tr>
     <% } %>
   <% }); %>
 </table>
-<a href="channels/<%= window.channel_id %>/posts/new#modal" data-toggle="modal" id="show_modal" data-static="true">New Post</a>

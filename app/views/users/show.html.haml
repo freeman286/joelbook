@@ -33,6 +33,7 @@
 .col-md-9
   %h3
     Recent Activity
+  .backbone  
     
 -if UserFriendship.where(:friend_id => @user.id).first
   :javascript
@@ -41,3 +42,7 @@
 - if current_user.friends.include?(@user) || current_user.pending_friends.include?(@user)
   :javascript
     $("#block-user").hide();
+
+:javascript
+  window.posts = #{@posts.to_json.html_safe};
+    
