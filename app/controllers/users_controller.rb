@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
-
+        
     if @user.update_attributes(params[:user])
       redirect_to root_path, notice: 'Avatar was successfully cropped.'
     else
@@ -21,5 +21,6 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @channel = Channel.find_private_channel(@user, current_user)
   end
 end

@@ -13,7 +13,10 @@
   %br
   
   %i.fa.fa-comment-o
-  =link_to("send a message", "###")
+    -if @channel
+      =link_to("send a message", channel_posts_path(@channel))
+    -else
+      =link_to("send a message", add_private_channel_path(current_user, @user))
   
   - if signed_in?
     #friend-status

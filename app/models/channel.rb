@@ -27,4 +27,9 @@ class Channel < ActiveRecord::Base
   def current_user_valid
     User.current && self.owner_user == User.current
   end
+  
+  def self.find_private_channel(user_1, user_2)
+    (Channel.where(:owner_user_id => user_1.id, :secondary_owner_user_id => user_2.id, :private => true) + Channel.where(:owner_user_id => user_2.id, :secondary_owner_user_id => user_1.id, :private => true)).first
+  end
 end
+
