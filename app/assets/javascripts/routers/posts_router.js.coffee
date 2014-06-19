@@ -11,6 +11,7 @@ app.routers.Posts = Backbone.Router.extend
 
   routes :
     "channels/:channel_id/posts" : "index"
+    "user/:id" : "index"
     "channels/:channel_id/posts/new" : "new"
     "channels/:channel_id/posts/:id" : "show"
     "channels/:channel_id/posts/:id/edit" : "edit"
