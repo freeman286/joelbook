@@ -12,6 +12,10 @@
           <label for="title">Name</label>
           <input type="text" name="name" value="<%= name %>">
         </div>
+        <form accept-charset="UTF-8" action="/upload" class="new_post" enctype="multipart/form-data" id="new_post" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="jz7ol9iXdiKIuFliUwbptbZKcnzyRwH8p1F33aPuVjg=" /></div>  <input id="form_img_input" name="post[img]" type="file" />
+          <input name="commit" type="submit" value="Update" />
+          <img alt="Rails" id="form_img" src="/assets/rails.png" />
+        </form>
         <div class="field">
           <input type="hidden" name="user_name" value="<%= window.user.name %>">
         </div>

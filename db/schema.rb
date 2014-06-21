@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140611153952) do
+ActiveRecord::Schema.define(:version => 20140621094401) do
 
   create_table "channels", :force => true do |t|
     t.string   "name"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(:version => 20140611153952) do
     t.string   "user_img_url"
     t.integer  "channel_id"
     t.integer  "time"
+    t.string   "img_uid"
+    t.string   "img_name"
   end
 
   create_table "user_friendships", :force => true do |t|

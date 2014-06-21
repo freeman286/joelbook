@@ -82,7 +82,13 @@ class PostsController < ApplicationController
 
     rescue ActiveRecord::RecordNotFound
   end
-
+  
+  def upload
+    respond_to do |format|
+      format.js
+    end
+  end
+  
   private
 
   def select_posts

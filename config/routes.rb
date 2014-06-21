@@ -4,6 +4,8 @@ RailsRealtime::Application.routes.draw do
   
   match '/search' => 'users#search'
   match '/channel_search' => 'channels#search'
+  
+  match '/upload' => 'posts#upload'
     
   devise_for :users, :controllers => {:registrations => "registrations"}
   devise_scope :user do

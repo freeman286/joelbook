@@ -3,6 +3,9 @@ class Post < ActiveRecord::Base
   belongs_to :channel
 
   attr_accessible :user_name, :name, :img_url, :youtube_url, :user_img_url, :user_id, :channel_id, :time
+  
+  dragonfly_accessor :img
+  validates_property :format, of: :img, in: ['jpeg', 'png', 'gif']
 
   after_create {|post| post.message 'create' }
   after_update {|post| post.message 'update' }
