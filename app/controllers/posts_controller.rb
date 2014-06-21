@@ -86,6 +86,7 @@ class PostsController < ApplicationController
   def upload
     respond_to do |format|
       format.js
+      format.html
     end
   end
   

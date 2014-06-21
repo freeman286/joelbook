@@ -5,7 +5,7 @@ app.views.posts.Form = Backbone.View.extend
   className : 'action-view'
   template : JST['templates/posts/form']
   events :
-    'click input[type=submit]' : 'save'
+    'click #save' : 'save'
     
   appendHtml : (cv, iv) ->
     cv.$el.prepend iv.el
