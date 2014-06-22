@@ -13,6 +13,7 @@
 #= require_tree ./routers
 #= require_tree .
 #= require js-routes
+#= require jquery.remotipart
 
 
 $(document).ready ->
@@ -60,4 +61,6 @@ $(document).ready ->
   
   $("#form_img_input").change ->
     readURL this
+    $("#new_image").submit()
     return
+    
