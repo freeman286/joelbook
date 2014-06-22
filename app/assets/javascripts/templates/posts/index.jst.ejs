@@ -1,5 +1,5 @@
-<% if (window.profile == true){ %> 
-  <a href="channels/<%= window.channel_id %>/posts/new#modal" data-toggle="modal" id="show_modal" data-static="true">New Post</a>
+<% if (window.profile == false){ %> 
+  <a href="channels/<%= window.channel_id %>/posts/new#modal" data-toggle="modal" id="new_post" data-static="true">New Post</a>
 <% } %>
 
 <table>
@@ -18,6 +18,11 @@
         <td><a href="/users/<%= post.get('user_id') %>"><img src="<%= post.get('user_img_url') %>" class="rounded_corners"></a></td>
         <td><%= post.get('name') %></td>
         <td><%= post.get('user_name') %></td>
+        <td>
+          <% if (post.get('img_url')){ %> 
+            <img src="<%= post.get('img_url') %>" height="200">
+          <% } %>
+        </td>
   	  <% if (post.get('user_name') == window.user.name){ %> 
         	<td><a href="/channels/<%= window.channel_id %>/posts/<%= post.id %>/edit#modal" data-toggle="modal" data-static="true" id="show_modal" onclick="app.navigate('channels/<%= window.channel_id %>/posts/<%= post.id %>/edit', true);">Edit</a></td>
         	<td><a href="" data-method="delete" data-id="<%= post.id %>" data-static="true" >Destroy</a></td>

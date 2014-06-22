@@ -64,3 +64,6 @@ $(document).ready ->
     $("#new_image").submit()
     return
     
+  $("#new_post").bind 'click', (e) ->  
+    window.image_url = ''
+    $("#form_img").attr "src", '' 
