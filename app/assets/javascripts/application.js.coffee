@@ -59,7 +59,7 @@ $(document).ready ->
       reader.readAsDataURL input.files[0]
     return
   
-  $("#form_img_input").change ->
+  $(document.body).on 'change', "#form_img_input", (e) ->
     readURL this
     $("#new_image").submit()
     return
