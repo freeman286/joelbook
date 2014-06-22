@@ -35,6 +35,8 @@ RailsRealtime::Application.routes.draw do
   match "/channels/:channel_id/remove/:id" => "channels#remove", as: 'remove_channel'
   match "/channels/:id/add_private/:user_id" => "channels#add_private", as: 'add_private_channel'
   resources :posts
+  
+  resources :images
 
   
 

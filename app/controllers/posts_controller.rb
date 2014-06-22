@@ -6,6 +6,7 @@ class PostsController < ApplicationController
       format.html {
         if params[:channel_id]
           @channel = Channel.find(params[:channel_id])
+          @image = Image.new
           if @channel.includes_user?(current_user)
             @posts = @channel.posts
           else
