@@ -53,6 +53,7 @@ $(document).ready ->
     if input.files and input.files[0]
       reader = new FileReader()
       reader.onload = (e) ->
+        $("#form_img").animate({height: 0}, 0).show().animate({height: 200}, 500);
         $("#form_img").attr "src", e.target.result
         return
 
@@ -66,4 +67,5 @@ $(document).ready ->
     
   $(document.body).on 'click', "#new_post", (e) ->  
     window.image_url = ''
+    $("#form_img").hide()
     $("#form_img").attr "src", '' 
