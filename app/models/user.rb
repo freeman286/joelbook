@@ -64,7 +64,9 @@ class User < ActiveRecord::Base
   has_many :ignored_friends, through: :ignored_user_friendships, source: :friend, dependent: :destroy
   
   dragonfly_accessor :avatar
-  validates_property :format, of: :avatar, in: ['jpeg', 'png', 'gif']  
+  validates_property :format, of: :avatar, in: ['jpeg', 'png', 'gif']
+  
+  has_many :iamges
     
   validates_presence_of :name
   validates_uniqueness_of :name

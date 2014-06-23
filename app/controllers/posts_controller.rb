@@ -46,9 +46,13 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(params[:post])
-
+    @image = Image.select{|i| i.image.url == params[:post][:img_url]}.first
+    puts @image.class
+    @image.post = @post
+    @image.user = User.find(params[:post][:user_id])
+    
     respond_to do |format|
-      if @post.save
+      if @post.save && @image.save
         format.html { redirect_to @post, notice: 'post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
