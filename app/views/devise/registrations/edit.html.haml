@@ -15,14 +15,11 @@
     = f.text_field :name
   %div  
     -if f.object.avatar.present?
-      .control-group
-        %label.control-label Current avatar
-        .controls
-          = image_tag avatar_url(current_user), :id => "avatar_img"
-      =link_to('Crop avatar', crop_user_registration_path, :id => 'crop_link')    
+      =link_to('Crop avatar', crop_user_registration_path, :id => 'crop_link')
+    
     .file_upload
-      
-    = f.file_field :avatar      
+      = image_tag f.object.avatar.present? ? avatar_url(current_user) : '', :id => "form_img", :style => "#{f.object.avatar.present? ? '' : 'display: none;'}"
+    = f.file_field :avatar, :id => "form_img_input"
   %div
     = f.label :password
     %i (leave blank if you don't want to change it)
@@ -37,3 +34,25 @@
 %p
   Unhappy? #{button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete}
 = link_to "Back", :back
+
+
+:javascript
+  readURL = function(input) {
+        var reader;
+        if (input.files && input.files[0]) {
+          reader = new FileReader();
+          reader.onload = function(e) {
+            $("#form_img").animate({
+              height: 0
+            }, 0).show().animate({
+              height: 200
+            }, 500);
+            $("#form_img").attr("src", e.target.result);
+          };
+          reader.readAsDataURL(input.files[0]);
+        }
+      };
+      $(document.body).on('change', "#form_img_input", function(e) {
+        readURL(this);
+        $("#new_image").submit();
+      });
