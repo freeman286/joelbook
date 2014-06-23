@@ -19,14 +19,7 @@
     marginTop: '-' + Math.round(ry * coords.y) + 'px'
     });
     }
-
-    $(function() {
-    $('#cropbox').Jcrop({
-    onSelect: showPreview,
-    onChange: showPreview,
-    aspectRatio: 80/80
-    });
-    });
+    
 %p
   Click and drag to crop your avatar
 = image_tag @user.avatar.thumb("400x").url, :id => 'cropbox'
@@ -36,3 +29,11 @@
   = f.hidden_field :avatar_cropping, :id => 'avatar_cropping', :value => @user.avatar_cropping
   %br/
   = f.submit "Crop!"
+
+:javascript
+  $('#cropbox').Jcrop({
+  onSelect: showPreview,
+  onChange: showPreview,
+  aspectRatio: 80/80
+  });
+  
