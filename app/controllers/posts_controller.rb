@@ -46,9 +46,11 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(params[:post])
+    
     @image = Image.select{|i| i.url == params[:post][:img_url]}.first
     @image.post = @post
     @image.user = User.find(params[:post][:user_id])
+        
     
     respond_to do |format|
       if @post.save && @image.save
@@ -63,9 +65,13 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-
+    
+    @image = Image.select{|i| i.url == params[:post][:img_url]}.first
+    @image.post = @post
+    @image.user = User.find(params[:post][:user_id])
+    
     respond_to do |format|
-      if @post.update_attributes(params[:post])
+      if @post.update_attributes(params[:post]) && @image.save
         format.html { redirect_to @post, notice: 'post was successfully updated.' }
         format.json { render json: @post }
       else

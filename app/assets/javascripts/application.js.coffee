@@ -61,6 +61,7 @@ $(document).ready ->
     return
   
   $(document.body).on 'change', "#form_img_input", (e) ->
+    $("#img_url").val('')
     readURL this
     $("#new_image").submit()
     return
@@ -68,6 +69,7 @@ $(document).ready ->
   $(document.body).on 'change', "#img_url", (e) ->
     $("#form_img").animate({height: 0}, 0).show().animate({height: 200}, 500);
     $("#form_img").attr "src", $('#img_url').val()
+    $("#new_image").submit()
     
   $(document.body).on 'click', "#new_post", (e) ->  
     window.image_url = ''
