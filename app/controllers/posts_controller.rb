@@ -46,7 +46,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(params[:post])
-    @image = Image.select{|i| i.image.url == params[:post][:img_url]}.first
+    @image = Image.select{|i| i.url == params[:post][:img_url]}.first
     @image.post = @post
     @image.user = User.find(params[:post][:user_id])
     

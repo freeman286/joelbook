@@ -1,12 +1,13 @@
 class ImagesController < ApplicationController
   def create
     @image = Image.new(params[:image])
+    @image.original_image_url = params[:image_url]
 
     respond_to do |format|
       if @image.save
-        format.js { render :js => "window.image_url = '#{@image.image.url}'" }
+        format.js { render :js => "window.image_url = '#{@image.url}'" }
       else
-        format.js { render :js => "alert('that cimage could not be uploaded')"}
+        format.js { render :js => "alert('that image could not be uploaded')"}
       end
     end
   end

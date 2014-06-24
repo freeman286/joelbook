@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140622083730) do
+ActiveRecord::Schema.define(:version => 20140624155758) do
 
   create_table "channels", :force => true do |t|
     t.string   "name"
@@ -33,8 +33,9 @@ ActiveRecord::Schema.define(:version => 20140622083730) do
     t.string   "image_name"
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "original_image_url"
   end
 
   create_table "posts", :force => true do |t|

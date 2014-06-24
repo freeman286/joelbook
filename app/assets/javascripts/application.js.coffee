@@ -65,6 +65,10 @@ $(document).ready ->
     $("#new_image").submit()
     return
     
+  $(document.body).on 'change', "#img_url", (e) ->
+    $("#form_img").animate({height: 0}, 0).show().animate({height: 200}, 500);
+    $("#form_img").attr "src", $('#img_url').val()
+    
   $(document.body).on 'click', "#new_post", (e) ->  
     window.image_url = ''
     $("#form_img").hide()
