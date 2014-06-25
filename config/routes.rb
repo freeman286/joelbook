@@ -11,7 +11,11 @@ RailsRealtime::Application.routes.draw do
   devise_scope :user do
     get "/registrations/crop" => "registrations#crop", as: 'crop_user_registration'
   end
-  resources :users
+  resources :users do
+    member do
+      get :images
+    end
+  end
   
   resources :user_friendships do
     member do

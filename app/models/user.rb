@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
   dragonfly_accessor :avatar
   validates_property :format, of: :avatar, in: ['jpeg', 'png', 'gif']
   
-  has_many :iamges
+  has_many :images
     
   validates_presence_of :name
   validates_uniqueness_of :name

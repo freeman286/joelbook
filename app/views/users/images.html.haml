@@ -1,0 +1,10 @@
+.col-md-12
+  %h3
+    ="Photos for #{@user.name}"
+
+.col-md-12
+  -@images.each_slice(4).to_a.each do |images|
+    .row
+      -images.each do |image|
+        .col-md-3
+          =image_tag image.url, :class => "img img-responsive"

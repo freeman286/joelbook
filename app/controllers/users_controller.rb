@@ -24,4 +24,9 @@ class UsersController < ApplicationController
     @channel = Channel.find_private_channel(@user, current_user)
     @posts = @user.posts
   end
+  
+  def images
+    @user = User.find(params[:id])
+    @images = @user.images
+  end
 end
