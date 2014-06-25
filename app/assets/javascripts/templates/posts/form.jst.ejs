@@ -16,7 +16,11 @@
           <input id="form_img_input" class="form_img_input" name="image[image]" type="file" />
           <div class="field">
             <label for="title">Image url</label>
-            <input type="text" id="img_url" name="image_url" value="<%= img_url %>">
+            <% if (img_url.indexOf("media") == 1) { %>
+              <input type="text" id="img_url" name="image_url">
+            <% } else { %>
+              <input type="text" id="img_url" name="image_url" value="<%= img_url %>">
+            <% } %>  
           </div>
           <img alt="Assets" id="form_img" src="<%= img_url %>" height="200" style="display: <% if (img_url) {'inline'} else {'none'} %>;"/>
         </form>
