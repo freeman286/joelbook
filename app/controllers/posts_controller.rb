@@ -47,13 +47,15 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post])
     
-    @image = Image.select{|i| i.url == params[:post][:img_url]}.first
-    @image.post = @post
-    @image.user = User.find(params[:post][:user_id])
+    if params[:post][:img_url].present?
+      @image = Image.select{|i| i.url == params[:post][:img_url]}.first
+      @image.post = @post
+      @image.user = User.find(params[:post][:user_id])
+    end
         
     
     respond_to do |format|
-      if @post.save && @image.save
+      if (!@image && @post.save) || (@image.save && @post.save)
         format.html { redirect_to @post, notice: 'post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
@@ -66,12 +68,15 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     
-    @image = Image.select{|i| i.url == params[:post][:img_url]}.first
-    @image.post = @post
-    @image.user = User.find(params[:post][:user_id])
+    
+    if params[:post][:img_url].present?
+      @image = Image.select{|i| i.url == params[:post][:img_url]}.first
+      @image.post = @post
+      @image.user = User.find(params[:post][:user_id])
+    end
     
     respond_to do |format|
-      if @post.update_attributes(params[:post]) && @image.save
+      if (!@image && @post.update_attributes(params[:post])) || (@image.save && @post.update_attributes(params[:post]))
         format.html { redirect_to @post, notice: 'post was successfully updated.' }
         format.json { render json: @post }
       else
