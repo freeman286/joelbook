@@ -1,14 +1,20 @@
-%h1 Listing channels
-%table
-  %tr
-    %th
-    %th
-    %th
-  - @channels.each do |channel|
-    %tr
-      %td= channel.name
-      %td= link_to 'Show', channel
-      %td= link_to 'Edit', edit_channel_path(channel)
-      %td= link_to 'Destroy', channel, method: :delete, data: { confirm: 'Are you sure?' }
+%h1
+  All channels
+          
+=form_for (@channel || Channel.new), remote: true, :url => channel_search_all_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
+  .form-group
+    = f.text_field :name, placeholder: "Channel name", autocomplete: "off", :id => "channel_search_name"
+    %ul.channel-dropdown-menu.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
+      
+- @channels.each do |channel|
+  -if !channel.private?
+    .row
+      .col-md-4
+        %h4
+          =link_to channel.name, channel_posts_path(channel)    
+      -if channel.owner_user == current_user
+        .col-md-4
+          =link_to "Edit details", edit_channel_path(channel)
+          =link_to "Delete channel", channel, :method => :delete
 %br/
 = link_to 'New Channel', new_channel_path

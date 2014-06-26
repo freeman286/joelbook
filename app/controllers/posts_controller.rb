@@ -7,7 +7,7 @@ class PostsController < ApplicationController
         if params[:channel_id]
           @channel = Channel.find(params[:channel_id])
           @image = Image.new
-          if @channel.includes_user?(current_user)
+          if @channel.includes_user?(current_user) || @channel.public
             @posts = @channel.posts
           else
             redirect_to root_path, alert: "You are not a member of that channel"

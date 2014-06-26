@@ -8,7 +8,7 @@ class ChannelsController < ApplicationController
     @channel = Channel.new(params[:channel].merge(:owner_user_id => current_user.id))
     @channel.users << current_user
     if @channel.save
-      redirect_to channel_path(@channel), notice: 'Channel was successfully created.'
+      redirect_to channels_path, notice: 'Channel was successfully created.'
     else
       render action: "new"
     end
@@ -17,8 +17,7 @@ class ChannelsController < ApplicationController
   def update
     @channel = Channel.find(params[:id])
   
-    if @channel.update_attributes(params[:channel].merge(:owner_user_id => current_user.id))
-      @diagnostic.make_wheel()
+    if @channel.owner_user == current_user && @channel.update_attributes(params[:channel])
       redirect_to channel_path(@channel), notice: 'Channel was successfully updated.'
     else
       render action: "edit"
@@ -50,6 +49,16 @@ class ChannelsController < ApplicationController
     @channel = Channel.find(params[:user][:channel_id])
     if params[:user][:name]
       @users = User.search(params[:user][:name], @channel.users)
+    end
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
+  
+  def search_all
+    if params[:channel][:name]
+      @channels = Channel.search(params[:channel][:name])
     end
     respond_to do |format|
       format.js

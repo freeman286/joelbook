@@ -15,11 +15,6 @@ class Channel < ActiveRecord::Base
 
   validates :name, presence: true
   
-  
-  def private?
-    self.private == true
-  end
-  
   def includes_user?(user)
     self.users.include?(user)
   end
@@ -30,6 +25,16 @@ class Channel < ActiveRecord::Base
   
   def self.find_private_channel(user_1, user_2)
     (Channel.where(:owner_user_id => user_1.id, :secondary_owner_user_id => user_2.id, :private => true) + Channel.where(:owner_user_id => user_2.id, :secondary_owner_user_id => user_1.id, :private => true)).first
+  end
+  
+  def self.search(words)
+    channels = Set.new
+
+    words.split(" ").each do |keyword|
+      channels << where(['name LIKE ?', "%#{keyword}%"])
+      channels << where(['name LIKE ?', "%#{keyword.capitalize}%"])
+    end
+    channels.first
   end
 end
 

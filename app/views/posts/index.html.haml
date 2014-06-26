@@ -2,7 +2,7 @@
   %h3
     =@channel.name if @channel
 
--if @channel && @channel.owner_user == current_user && !@channel.private?
+-if @channel && @channel.owner_user == current_user && !@channel.private? && !@channel.public?
   .col-md-6
     #accordion.panel-group.dropdown
       .panel.panel-default
@@ -21,7 +21,7 @@
               %ul.channel-dropdown-menu.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
               = f.hidden_field :channel_id, :value => @channel.id
               
--elsif @channel && !@channel.private?
+-elsif @channel && !@channel.private? && !@channel.public?
   .col-md-6
     #accordion.panel-group.dropdown
       .panel.panel-default

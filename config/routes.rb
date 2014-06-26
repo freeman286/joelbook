@@ -4,6 +4,7 @@ RailsRealtime::Application.routes.draw do
   
   match '/search' => 'users#search'
   match '/channel_search' => 'channels#search'
+  match '/channel_search_all' => 'channels#search_all'
   
   match '/upload' => 'posts#upload'
     

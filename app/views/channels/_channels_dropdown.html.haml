@@ -1,0 +1,8 @@
+-if @channels.present?
+  -@channels.each do |channel|
+    %li
+      .search-item
+        =link_to channel.name, channel_posts_path(channel)
+-else
+  .search-item
+    No results
