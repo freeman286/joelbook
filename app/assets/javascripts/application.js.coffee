@@ -40,6 +40,9 @@ $(document).ready ->
       
   $("#channel_user_name").bind 'keyup', (e) ->
     $("#channel_user_name").trigger "submit"
+    
+  $("#channel_search_name").bind 'keyup', (e) ->
+    $("#channel_search_name").trigger "submit"  
   
   $("#channel_user_name").focusout ->
     $(".panel-body").animate({height: 73}, 500);
@@ -74,4 +77,4 @@ $(document).ready ->
   $(document.body).on 'click', "#new_post", (e) ->  
     window.image_url = ''
     $("#form_img").hide()
-    $("#form_img").attr "src", '' 
+    $("#form_img").attr "src", ''

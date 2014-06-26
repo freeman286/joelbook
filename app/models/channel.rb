@@ -30,11 +30,15 @@ class Channel < ActiveRecord::Base
   def self.search(words)
     channels = Set.new
 
+    if words.present?
     words.split(" ").each do |keyword|
       channels << where(['name LIKE ?', "%#{keyword}%"])
       channels << where(['name LIKE ?', "%#{keyword.capitalize}%"])
     end
-    channels.first
+    channels.first - Channel.select {|c| c.private?}
+    else
+      Channel.all - Channel.select {|c| c.private?}
+    end
   end
 end
 

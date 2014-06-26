@@ -1,6 +1,7 @@
-<% if @users %>
-  $('.channel-dropdown-menu').html('<%= escape_javascript(render "channels/channels_dropdown", :@channels => @channels)%>');
-  $('.channel-dropdown-menu').show();
+<% if @channels %>
+  <% @channels.each do |channel| %>
+    $('#channel-list').html('<%= escape_javascript(render "channels/card", :@channel => channel)%>');
+  <% end %>
 <% else %>
-  $('.channel-dropdown-menu').hide();
+  $('#channel-list').html('No channels found')
 <% end %>
