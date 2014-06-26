@@ -6,9 +6,10 @@
     = f.text_field :name, placeholder: "Channel name", autocomplete: "off", :id => "channel_search_name"
     %ul.channel-dropdown-menu.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
       
-#channel-list
-  - @channels.each do |channel|
-    -if !channel.private?
-      = render 'card', :@channel => channel
+#channel-list-wrapper
+  #channel-list
+    - @channels.each do |channel|
+      -if !channel.private?
+        = render 'card', :@channel => channel
 %br/
 = link_to 'New Channel', new_channel_path

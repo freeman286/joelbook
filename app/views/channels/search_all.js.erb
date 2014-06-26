@@ -1,6 +1,6 @@
 <% if @channels %>
   <% @channels.each do |channel| %>
-    $('#channel-list').html('<%= escape_javascript(render "channels/card", :@channel => channel)%>');
+    $('#channel-list').hide().html('<%= escape_javascript(render "channels/card", :@channel => channel)%>').fadeIn();
   <% end %>
 <% else %>
   $('#channel-list').html('No channels found')
