@@ -1,0 +1,10 @@
+%ul.dropdown-menu.notification-menu.unstyled{:role => "menu"}
+  %li.notification-header.relative
+    .arrow-up
+    %p Notifications
+  -if notifications.present?
+    -notifications.each do |notification|
+      =render('notifications/dropdown_notification', :notification => notification)
+  -else
+    %li.center.p-2 You have no notifications yet.
+  =link_to("Show all", notifications_path, :class => "notification-show-all")
