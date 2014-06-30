@@ -117,5 +117,9 @@ class User < ActiveRecord::Base
       users << where(['name LIKE ?', "%#{keyword.capitalize}%"])
     end
     users.first - exceptions
-  end  
+  end
+  
+  def notifications
+    Notification.where(:owner_user_id => self.id)
+  end
 end

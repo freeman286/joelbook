@@ -28,4 +28,8 @@ module ApplicationHelper
       'Unblock User'
     end
   end
+  
+  def link_to_notification_resource(notification)
+    
+  end  
 end

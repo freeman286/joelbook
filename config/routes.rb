@@ -43,7 +43,7 @@ RailsRealtime::Application.routes.draw do
   
   resources :images
 
-  
+  resources :notifications
 
 
   # The priority is based upon order of creation:

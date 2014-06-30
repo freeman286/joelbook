@@ -1,0 +1,9 @@
+%li.notification{:class => "#{notification.read? ? '' : 'unread'} #{no_border ? 'no-border' : ''}"}
+  .notification-wrapper
+    =#link_to(image_for(notification.resource_for_image, '60x60#'), notification.image_path, :class => 'notification-img')
+    .notification-inner
+      =notification.content
+      %br
+      =link_to_notification_resource(notification)
+    %span.notification-time
+      ="#{time_ago_in_words(notification.created_at)} ago"
