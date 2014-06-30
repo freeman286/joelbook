@@ -33,12 +33,6 @@
 
                     
           %ul.nav.navbar-nav.navbar-right
-            %li
-              =link_to('#', :data => {:toggle => "dropdown"}, :class => 'navbar-notification', :icon => 'bell') do
-                %span{:class => ('hide' if current_user.notifications.count.zero?)}
-                  %i.fa.fa-bell-o
-                  =current_user.notifications.count
-              =render :partial => 'notifications/dropdown_header', locals: { :notifications => current_user.notifications.limit(5) }
             -if !current_user
               %li
                 =link_to("Sign in", user_session_path)
@@ -48,7 +42,13 @@
               %li
                 =link_to(current_user.name, edit_user_registration_path)
               %li  
-                =link_to("Sign out", destroy_user_session_path, :method => :delete) 
+                =link_to("Sign out", destroy_user_session_path, :method => :delete)
+              %li
+                =link_to('#', :data => {:toggle => "dropdown"}, :class => 'navbar-notification', :icon => 'bell') do
+                  %span{:class => ('hide' if current_user.notifications.count.zero?)}
+                    %i.fa.fa-bell-o
+                    =current_user.notifications.count
+                =render :partial => 'notifications/dropdown_header', locals: { :notifications => current_user.notifications.limit(5) }
     .container
       - flash.each do |type, message|
         .alert.alert-block{ :class => flash_class(type)}
