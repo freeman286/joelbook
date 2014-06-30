@@ -7,4 +7,8 @@ class Notification < ActiveRecord::Base
 
   validates :owner_user_id, presence: true
   validates :content, presence: true
+  
+  def resource_path
+    #polymorphic_path(resource_for_path)
+  end
 end
