@@ -8,6 +8,9 @@ class UserFriendship < ActiveRecord::Base
   
   validate :not_blocked
   
+  after_create {|friendship| friendship.notify_user 'create' }
+  after_update {|friendship| friendship.notify_user 'update' }
+  
   def self.request(user1, user2)
     transaction do
       friendship1 = create!(user: user1, friend: user2, state: 'pending')
@@ -70,5 +73,32 @@ class UserFriendship < ActiveRecord::Base
     else
       self.state
     end
+  end
+    
+  def notify_user action
+    case action
+    when 'create'
+      if self.requested?
+        Notification.create(
+          :owner_user_id => self.user.id,
+          :secondary_owner_user_id => self.friend.id,
+          :resource_type => "UserFriendship",
+          :resource_id => self.id,
+          :content => "#{self.friend.name} wants to be friends with you",
+          :read => false
+        )
+      end
+    when 'update'
+      if self.user != User.current
+        Notification.create(
+          :owner_user_id => self.user.id,
+          :secondary_owner_user_id => self.friend.id,
+          :resource_type => "UserFriendship",
+          :resource_id => self.id,
+          :content => "#{self.friend.name} has become friends with you",
+          :read => false
+        )
+      end
+    end  
   end
 end
