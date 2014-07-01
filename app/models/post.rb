@@ -25,8 +25,8 @@ class Post < ActiveRecord::Base
       Notification.create(
         :owner_user_id => self.channel.owner_user_id == User.current.id ? self.channel.secondary_owner_user_id : self.channel.owner_user_id,
         :secondary_owner_user_id => User.current.id,
-        :resource_type => "UserFriendship",
-        :resource_id => self.id,
+        :resource_type => "Channel",
+        :resource_id => self.channel.id,
         :content => "#{User.current.name} says '#{self.name}'",
         :read => false
       )
