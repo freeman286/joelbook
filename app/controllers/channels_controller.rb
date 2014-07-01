@@ -76,6 +76,14 @@ class ChannelsController < ApplicationController
       else
         @valid = true  
         if @channel.users << @user
+          Notification.create(
+            :owner_user_id => @user.id,
+            :secondary_owner_user_id => current_user.id,
+            :resource_type => "Channel",
+            :resource_id => @channel.id,
+            :content => "#{current_user.name} has added you to channel #{@channel.name}",
+            :read => false
+          )
           format.js
           format.json { render json: @channel.to_json }
         else
@@ -95,6 +103,14 @@ class ChannelsController < ApplicationController
       else  
         @valid = true
         if @channel.users.delete(@user)
+          Notification.create(
+            :owner_user_id => @user.id,
+            :secondary_owner_user_id => current_user.id,
+            :resource_type => "Channel",
+            :resource_id => @channel.id,
+            :content => "#{current_user.name} has removed you from channel #{@channel.name}",
+            :read => false
+          )
           format.js
           format.json { render json: @channel.to_json }
         else

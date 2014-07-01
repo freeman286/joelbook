@@ -43,6 +43,7 @@
   :javascript
     $("#block-user").hide();
 
-:javascript
-  window.posts = #{@posts.to_json.html_safe};
+-#
+  :javascript
+    window.posts = #{@posts.to_json.html_safe};
     

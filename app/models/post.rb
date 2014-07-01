@@ -20,6 +20,17 @@ class Post < ActiveRecord::Base
     if can_be_published?
       $redis.publish 'rt-change', msg.to_json
     end
+    
+    if self.channel.private?
+      Notification.create(
+        :owner_user_id => self.channel.owner_user_id == User.current.id ? self.channel.secondary_owner_user_id : self.channel.owner_user_id,
+        :secondary_owner_user_id => User.current.id,
+        :resource_type => "UserFriendship",
+        :resource_id => self.id,
+        :content => "#{User.current.name} says '#{self.name}'",
+        :read => false
+      )
+    end
   end
 
   validates :user_name, presence: true

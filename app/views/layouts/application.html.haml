@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title RailsRealtime
+    %title Joelbook
     = stylesheet_link_tag    "application", :media => "all"
     %link{href: "//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css", rel: "stylesheet"}/
     = javascript_include_tag "http://localhost:5001/socket.io/socket.io.js"
@@ -29,8 +29,9 @@
           
             %ul.nav.navbar-nav.navbar-left
               %li
-                =link_to( "Friends", user_friendships_path)
-
+                =link_to("Friends", user_friendships_path)
+              %li  
+                =link_to("Channels", channels_path)
                     
           %ul.nav.navbar-nav.navbar-right
             -if !current_user
