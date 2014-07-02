@@ -77,7 +77,7 @@ $(document).ready ->
 
     return
     
-  t = setInterval(getNotifications, 1000)  
+  t = setInterval(getNotifications, 10000)  
   
   $(document.body).on 'change', "#form_img_input", (e) ->
     $("#img_url").val('')
