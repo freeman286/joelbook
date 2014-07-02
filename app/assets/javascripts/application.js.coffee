@@ -69,12 +69,15 @@ $(document).ready ->
       dataType: "json"
       type: "GET"
       success: (e) ->
-        alert(JSON.stringify(e))
+        $('.dropdown-menu').replaceWith(e.notifications_to_string)
+        if parseInt(e.notifications_count) isnt 0
+          $('.notifications-count').html(e.notifications_count)
+          return
         return
 
     return
     
-  t = setInterval(getNotifications, 10000)  
+  t = setInterval(getNotifications, 1000)  
   
   $(document.body).on 'change', "#form_img_input", (e) ->
     $("#img_url").val('')
