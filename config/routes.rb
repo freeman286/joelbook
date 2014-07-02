@@ -6,6 +6,8 @@ RailsRealtime::Application.routes.draw do
   match '/channel_search' => 'channels#search'
   match '/channel_search_all' => 'channels#search_all'
   
+  match '/read' => 'notifications#read'
+  
   match '/upload' => 'posts#upload'
     
   devise_for :users, :controllers => {:registrations => "registrations"}

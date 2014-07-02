@@ -41,10 +41,11 @@
                 =link_to("Sign up", new_user_registration_path)
             -else
               %li
-                =link_to('#', :data => {:toggle => "dropdown"}, :class => 'navbar-notification', :icon => 'bell') do
-                  %span{:class => ('hide' if current_user.notifications.count.zero?)}
-                    %i.fa.fa-bell-o
-                    =current_user.notifications.count
+                =link_to(read_path(:notifications => current_user.notifications.limit(5)), :remote => true, :data => {:toggle => "dropdown"}, :class => 'navbar-notification') do
+                  %i.fa.fa-bell-o
+                  %span.notifications-count
+                    -if current_user.notifications.where(:read => false).count > 0
+                      =current_user.notifications.where(:read => false).count
                 =render :partial => 'notifications/dropdown_header', locals: { :notifications => current_user.notifications.limit(5) }
               %li
                 =link_to(current_user.name, edit_user_registration_path)

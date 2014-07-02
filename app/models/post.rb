@@ -21,7 +21,7 @@ class Post < ActiveRecord::Base
       $redis.publish 'rt-change', msg.to_json
     end
     
-    if self.channel.private?
+    if self.channel.private? && User.current
       Notification.create(
         :owner_user_id => self.channel.owner_user_id == User.current.id ? self.channel.secondary_owner_user_id : self.channel.owner_user_id,
         :secondary_owner_user_id => User.current.id,

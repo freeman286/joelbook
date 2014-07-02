@@ -1,0 +1,7 @@
+var num = parseInt($.trim($('.notifications-count').html()))-5;
+if (num < 1 && !window.notificationsClicked || isNan(num)) {
+  $('.notifications-count').remove();
+} else if (!window.notificationsClicked) {
+  $('.notifications-count').html(num);
+}
+window.notificationsClicked = true
