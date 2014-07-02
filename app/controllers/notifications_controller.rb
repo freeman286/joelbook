@@ -1,10 +1,16 @@
 class NotificationsController < ApplicationController
   def index
     @notifications = current_user.notifications
-    current_user.notifications.each do |notification|
-      notification.read = true
-      notification.save
-    end
+    
+    respond_to do |format|
+      format.html {
+        @notifications.each do |notification|
+          notification.read = true
+          notification.save
+        end
+      }
+      format.json { render json: {:notifications => @notifications.limit(5), :notifications_count => @notifications.where(:read => false).count}}
+    end  
   end
   
   def read
