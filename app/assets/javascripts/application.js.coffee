@@ -62,6 +62,19 @@ $(document).ready ->
 
       reader.readAsDataURL input.files[0]
     return
+    
+  getNotifications = ->
+    $.ajax
+      url: Routes.notifications_path()
+      dataType: "json"
+      type: "GET"
+      success: (e) ->
+        alert(JSON.stringify(e))
+        return
+
+    return
+    
+  t = setInterval(getNotifications, 10000)  
   
   $(document.body).on 'change', "#form_img_input", (e) ->
     $("#img_url").val('')
@@ -78,3 +91,6 @@ $(document).ready ->
     window.image_url = ''
     $("#form_img").hide()
     $("#form_img").attr "src", ''
+    
+    
+    
