@@ -10,11 +10,16 @@ class UserFriendshipsController < ApplicationController
       @blocked = current_user.user_friendships.where(:state => 'blocked')
       @ignored = current_user.user_friendships.where(:state => 'ignored')
       format.html {}
+      if UserFriendship.last_destroy > 10.seconds.ago
+        destroyed = 1
+      else
+        destroyed = 0
+      end
       response_hash = {
         :user_friendships => "",
-        :user_friendships_count => @user_friendships.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count,
+        :user_friendships_count => @user_friendships.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + destroyed,
         :accepted => "",
-        :accepted_count => @accepted.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count,
+        :accepted_count => @accepted.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + destroyed,
         :pending => "",
         :pending_count => @pending.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count,
         :blocked => "",
@@ -23,7 +28,7 @@ class UserFriendshipsController < ApplicationController
         :ignored_count => @ignored.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count,
       }
       @user_friendships.each do |friendship|
-        response_hash[:user_friendships] = render_to_string(:partial => 'card', :formats => [:html],locals: { :friendship => friendship}).gsub("\n",'') + response_hash[:user_friendships] 
+        response_hash[:user_friendships] = render_to_string(:partial => 'card', :formats => [:html],locals: { :friendship => friendship}).gsub("\n",'') + response_hash[:user_friendships]
       end
       @accepted.each do |friendship|
         response_hash[:accepted] = render_to_string(:partial => 'card', :formats => [:html],locals: { :friendship => friendship}).gsub("\n",'') + response_hash[:accepted]

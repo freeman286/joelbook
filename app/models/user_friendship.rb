@@ -4,12 +4,15 @@ class UserFriendship < ActiveRecord::Base
 
   attr_accessible :user, :friend, :user_id, :friend_id, :state
   
+  after_destroy :update_last_destroy
   after_destroy :delete_mutual_friendship!
   
   validate :not_blocked
   
   after_create {|friendship| friendship.notify_user 'create' }
   after_update {|friendship| friendship.notify_user 'update' }
+  
+  @@last_destroy = Time.now
   
   def self.request(user1, user2)
     transaction do
@@ -100,5 +103,13 @@ class UserFriendship < ActiveRecord::Base
         )
       end
     end  
+  end
+  
+  def update_last_destroy
+    @@last_destroy = Time.now
+  end
+  
+  def self.last_destroy
+    @@last_destroy
   end
 end
