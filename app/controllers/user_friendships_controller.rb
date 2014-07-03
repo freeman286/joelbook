@@ -3,12 +3,42 @@ class UserFriendshipsController < ApplicationController
 	respond_to :html, :json
   
   def index
-    @user_friendships = current_user.user_friendships
-    @accepted = current_user.user_friendships.where(:state => 'accepted')
-    @pending = current_user.user_friendships.where(:state => 'pending')
-    @blocked = current_user.user_friendships.where(:state => 'blocked')
-    @ignored = current_user.user_friendships.where(:state => 'ignored')
-    respond_with @user_friendships
+    respond_to do |format|
+      @user_friendships = current_user.user_friendships
+      @accepted = current_user.user_friendships.where(:state => 'accepted')
+      @pending = current_user.user_friendships.where(:state => 'pending')
+      @blocked = current_user.user_friendships.where(:state => 'blocked')
+      @ignored = current_user.user_friendships.where(:state => 'ignored')
+      format.html {}
+      response_hash = {
+        :user_friendships => "",
+        :user_friendships_count => @user_friendships.find(:all,:conditions => ["created_at > ?", 10.seconds.ago] ).count,
+        :accepted => "",
+        :accepted_count => @accepted.find(:all,:conditions => ["created_at > ?", 10.seconds.ago] ).count,
+        :pending => "",
+        :pending_count => @pending.find(:all,:conditions => ["created_at > ?", 10.seconds.ago] ).count,
+        :blocked => "",
+        :blocked_count => @blocked.find(:all,:conditions => ["created_at > ?", 10.seconds.ago] ).count,
+        :ignored => "",
+        :ignored_count => @ignored.find(:all,:conditions => ["created_at > ?", 10.seconds.ago] ).count,
+      }
+      @user_friendships.each do |friendship|
+        response_hash[:user_friendships] = response_hash[:user_friendships] + render_to_string(:partial => 'card', :formats => [:html],locals: { :friendship => friendship}).gsub("\n",'')
+      end
+      @accepted.each do |friendship|
+        response_hash[:accepted] = response_hash[:accepted] + render_to_string(:partial => 'card', :formats => [:html],locals: { :friendship => friendship}).gsub("\n",'')
+      end
+      @pending.each do |friendship|
+        response_hash[:pending] = response_hash[:pending] + render_to_string(:partial => 'card', :formats => [:html],locals: { :friendship => friendship}).gsub("\n",'')
+      end
+      @blocked.each do |friendship|
+        response_hash[:blocked] = response_hash[:blocked] + render_to_string(:partial => 'card', :formats => [:html],locals: { :friendship => friendship}).gsub("\n",'')
+      end
+      @ignored.each do |friendship|
+        response_hash[:ignored] = response_hash[:ignored] + render_to_string(:partial => 'card', :formats => [:html],locals: { :friendship => friendship}).gsub("\n",'')
+      end
+      format.json { render json: response_hash}
+    end
   end
   
   def accept
