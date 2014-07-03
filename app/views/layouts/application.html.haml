@@ -46,7 +46,7 @@
                   %span.notifications-count
                     -if current_user.notifications.where(:read => false).count > 0
                       =current_user.notifications.where(:read => false).count
-                =render :partial => 'notifications/dropdown_header', locals: { :notifications => current_user.notifications.limit(5) }
+                =render :partial => 'notifications/dropdown_header', locals: { :notifications => current_user.notifications[-5..-1] }
               %li
                 =link_to(current_user.name, edit_user_registration_path)
               %li  

@@ -1,5 +1,5 @@
 %li
-  =link_to(notification.resource_path, :class => "notification-list-item #{notification.read? ? '' : 'unread'}") do
+  =link_to(notification.resource_path, :id => "notification_#{notification.id}",:class => "notification-list-item #{notification.read? ? 'read' : 'unread'}") do
     .notification-view
       %i.icon-share-alt
     =#image_for(notification.resource_for_image, "25x25#", :class => "img-circle notification-thumbnail")  

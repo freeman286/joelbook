@@ -9,12 +9,12 @@ class NotificationsController < ApplicationController
           notification.save
         end
       }
-      format.json { render json: {:notifications_to_string => render_to_string(:partial => 'notifications/dropdown_header', :formats=>[:html], locals: { :notifications => @notifications.limit(5) }).gsub("\n",''), :notifications_count => @notifications.where(:read => false).count}}
+      format.json { render json: {:notifications_to_string => render_to_string(:partial => 'notifications/dropdown_header', :formats=>[:html], locals: { :notifications => @notifications[-5..-1] }).gsub("\n",''), :notifications_count => @notifications.where(:read => false).count}}
     end  
   end
   
   def read
-    current_user.notifications.limit(5).each do |notification|
+    current_user.notifications[-5..-1].each do |notification|
       notification.read = true
       notification.save
     end

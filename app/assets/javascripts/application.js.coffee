@@ -63,6 +63,8 @@ $(document).ready ->
       reader.readAsDataURL input.files[0]
     return
     
+  window.notificationsCount = 0
+  
   getNotifications = ->
     $.ajax
       url: Routes.notifications_path()
@@ -72,6 +74,9 @@ $(document).ready ->
         $('.dropdown-menu').replaceWith(e.notifications_to_string)
         if parseInt(e.notifications_count) isnt 0
           $('.notifications-count').html(e.notifications_count)
+          window.notificationsCount += parseInt(e.notifications_count)
+          if window.notificationsCount > 5
+            window.notificationsCount = 5
           return
         return
 
