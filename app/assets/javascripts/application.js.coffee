@@ -90,7 +90,22 @@ $(document).ready ->
       dataType: "json"
       type: "GET"
       success: (e) ->
-        console.log(e.user_friendships_count)
+        if parseInt(e.user_friendships_count) isnt 0
+          $('#all').hide().html(e.user_friendships).fadeIn()
+          return
+        if parseInt(e.accepted_count) isnt 0
+          $('#accepted').hide().html(e.accepted).fadeIn()
+          return
+        if parseInt(e.pending_count) isnt 0
+          $('#pending').hide().html(e.pending).fadeIn()
+          return
+        if parseInt(e.blocked_count) isnt 0
+          $('#blocked').hide().html(e.blocked).fadeIn()
+          return
+        if parseInt(e.ignored_count) isnt 0
+          $('#ignored').hide().html(e.ignored).fadeIn()
+          return      
+          
         return
 
     return

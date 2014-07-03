@@ -12,15 +12,15 @@ class UserFriendshipsController < ApplicationController
       format.html {}
       response_hash = {
         :user_friendships => "",
-        :user_friendships_count => @user_friendships.find(:all,:conditions => ["updated_at > ?", 100.seconds.ago] ).count,
+        :user_friendships_count => @user_friendships.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count,
         :accepted => "",
-        :accepted_count => @accepted.find(:all,:conditions => ["updated_at > ?", 100.seconds.ago] ).count,
+        :accepted_count => @accepted.find(:all,:conditions => ["updated_at > ?", 20.seconds.ago] ).count,
         :pending => "",
-        :pending_count => @pending.find(:all,:conditions => ["updated_at > ?", 100.seconds.ago] ).count,
+        :pending_count => @pending.find(:all,:conditions => ["updated_at > ?", 20.seconds.ago] ).count,
         :blocked => "",
-        :blocked_count => @blocked.find(:all,:conditions => ["updated_at > ?", 100.seconds.ago] ).count,
+        :blocked_count => @blocked.find(:all,:conditions => ["updated_at > ?", 20.seconds.ago] ).count,
         :ignored => "",
-        :ignored_count => @ignored.find(:all,:conditions => ["updated_at > ?", 100.seconds.ago] ).count,
+        :ignored_count => @ignored.find(:all,:conditions => ["updated_at > ?", 20.seconds.ago] ).count,
       }
       @user_friendships.each do |friendship|
         response_hash[:user_friendships] = response_hash[:user_friendships] + render_to_string(:partial => 'card', :formats => [:html],locals: { :friendship => friendship}).gsub("\n",'')
