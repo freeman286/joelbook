@@ -11,19 +11,19 @@
     %a{"data-toggle" => "tab", href: "#ignored"} Ignored  
 .tab-content
   #all.tab-pane
-    - @user_friendships.each do |friendship|
+    - @user_friendships.reverse.each do |friendship|
       = render 'card', :friendship => friendship
   #accepted.tab-pane
-    - @accepted.each do |friendship|
+    - @accepted.reverse.each do |friendship|
       = render 'card', :friendship => friendship
   #pending.tab-pane
-    - @pending.each do |friendship|
+    - @pending.reverse.each do |friendship|
       = render 'card', :friendship => friendship
   #blocked.tab-pane
-    - @blocked.each do |friendship|
+    - @blocked.reverse.each do |friendship|
       = render 'card', :friendship => friendship
   #ignored.tab-pane
-    - @ignored.each do |friendship|
+    - @ignored.reverse.each do |friendship|
       = render 'card', :friendship => friendship    
       
       
