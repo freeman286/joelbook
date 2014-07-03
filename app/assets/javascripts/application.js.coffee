@@ -82,7 +82,20 @@ $(document).ready ->
 
     return
     
-  t = setInterval(getNotifications, 10000)  
+  a = setInterval(getNotifications, 10000)
+  
+  getUserFriendships = ->
+    $.ajax
+      url: Routes.user_friendships_path()
+      dataType: "json"
+      type: "GET"
+      success: (e) ->
+        console.log(e.user_friendships_count)
+        return
+
+    return
+    
+  b = setInterval(getUserFriendships, 10000)
   
   $(document.body).on 'change', "#form_img_input", (e) ->
     $("#img_url").val('')
