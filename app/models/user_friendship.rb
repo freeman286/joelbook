@@ -12,8 +12,6 @@ class UserFriendship < ActiveRecord::Base
   after_create {|friendship| friendship.notify_user 'create' }
   after_update {|friendship| friendship.notify_user 'update' }
   
-  @@last_destroy = Time.now
-  
   def self.request(user1, user2)
     transaction do
       friendship1 = create!(user: user1, friend: user2, state: 'pending')
@@ -106,10 +104,18 @@ class UserFriendship < ActiveRecord::Base
   end
   
   def update_last_destroy
-    @@last_destroy = Time.now
-  end
-  
-  def self.last_destroy
-    @@last_destroy
+    user = self.user
+    friend = self.friend
+    user.last_destroyed_user_friendship_at = friend.last_destroyed_user_friendship_at = Time.now
+    case self.state
+    when 'accepted'
+      user.last_destroyed_accepted_user_friendship_at = Time.now
+    when 'blocked'
+      friend.last_destroyed_blocked_user_friendship_at = user.last_destroyed_blocked_user_friendship_at = Time.now
+    when 'ignored'
+      friend.last_destroyed_ignored_user_friendship_at = user.last_destroyed_ignored_user_friendship_at = Time.now
+    end
+    user.save
+    friend.save
   end
 end

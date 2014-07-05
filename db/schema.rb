@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140630153321) do
+ActiveRecord::Schema.define(:version => 20140705080654) do
 
   create_table "channels", :force => true do |t|
     t.string   "name"
@@ -73,24 +73,28 @@ ActiveRecord::Schema.define(:version => 20140630153321) do
   add_index "user_friendships", ["user_id", "friend_id"], :name => "index_user_friendships_on_user_id_and_friend_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                                      :default => "", :null => false
+    t.string   "encrypted_password",                         :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
+    t.integer  "sign_in_count",                              :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
     t.string   "name"
     t.string   "avatar_uid"
     t.string   "avatar_name"
     t.integer  "avatar_width"
     t.integer  "avatar_height"
     t.string   "avatar_cropping"
+    t.datetime "last_destroyed_user_friendship_at"
+    t.datetime "last_destroyed_accepted_user_friendship_at"
+    t.datetime "last_destroyed_blocked_user_friendship_at"
+    t.datetime "last_destroyed_ignored_user_friendship_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

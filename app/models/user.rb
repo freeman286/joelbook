@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   after_save :update_posts
+  after_create :set_user_friendship_times
     # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable  
@@ -7,7 +8,22 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :current_password, :remember_me, :name, :avatar, :avatar_cropping, :avatar_width, :avatar_height, :page
+  attr_accessible :email,
+                  :password, 
+                  :password_confirmation, 
+                  :current_password, 
+                  :remember_me, 
+                  :name, 
+                  :avatar, 
+                  :avatar_cropping, 
+                  :avatar_width, 
+                  :avatar_height, 
+                  :page, 
+                  :last_destroyed_user_friendship_at, 
+                  :last_destroyed_accepted_user_friendship_at, 
+                  :last_destroyed_blocked_user_friendship_at,
+                  :last_destroyed_ignored_user_friendship_at
+                  
   # attr_accessible :title, :body
   attr_accessor :current_password
 
@@ -121,5 +137,13 @@ class User < ActiveRecord::Base
   
   def notifications
     Notification.where(:owner_user_id => self.id)
+  end
+  
+  def set_user_friendship_times
+    self.last_destroyed_user_friendship_at =
+    self.last_destroyed_accepted_user_friendship_at = 
+    self.last_destroyed_blocked_user_friendship_at =
+    self.last_destroyed_ignored_user_friendship_at = Time.now
+    self.save
   end
 end

@@ -10,22 +10,17 @@ class UserFriendshipsController < ApplicationController
       @blocked = current_user.user_friendships.where(:state => 'blocked')
       @ignored = current_user.user_friendships.where(:state => 'ignored')
       format.html {}
-      if UserFriendship.last_destroy > 10.seconds.ago
-        destroyed = 1
-      else
-        destroyed = 0
-      end
       response_hash = {
         :user_friendships => "",
-        :user_friendships_count => @user_friendships.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + destroyed,
+        :user_friendships_count => @user_friendships.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + conditional_to_i(current_user.last_destroyed_user_friendship_at > 10.seconds.ago),
         :accepted => "",
-        :accepted_count => @accepted.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + destroyed,
+        :accepted_count => @accepted.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + conditional_to_i(current_user.last_destroyed_accepted_user_friendship_at > 10.seconds.ago),
         :pending => "",
         :pending_count => @pending.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count,
         :blocked => "",
-        :blocked_count => @blocked.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count,
+        :blocked_count => @blocked.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + conditional_to_i(current_user.last_destroyed_blocked_user_friendship_at > 10.seconds.ago),
         :ignored => "",
-        :ignored_count => @ignored.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count,
+        :ignored_count => @ignored.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + conditional_to_i(current_user.last_destroyed_ignored_user_friendship_at > 10.seconds.ago),
       }
       @user_friendships.each do |friendship|
         response_hash[:user_friendships] = render_to_string(:partial => 'card', :formats => [:html],locals: { :friendship => friendship}).gsub("\n",'') + response_hash[:user_friendships]
@@ -179,6 +174,14 @@ class UserFriendshipsController < ApplicationController
       current_user.accepted_user_friendships
     when 'requested'
       current_user.requested_user_friendships  
+    end
+  end
+  
+  def conditional_to_i(c)
+    if c
+      1
+    else
+      0
     end
   end
 end
