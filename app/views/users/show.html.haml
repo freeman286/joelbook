@@ -12,13 +12,17 @@
   
   %br
   
-  %i.fa.fa-comment-o
-    -if @channel
-      =link_to("send a message", channel_posts_path(@channel))
-    -else
-      =link_to("send a message", add_private_channel_path(current_user, @user))
+  %i.fa.fa-file-image-o
+  =link_to('pictures', images_user_path(@user))
   
-  - if signed_in?
+  %br
+  - if signed_in? && @user != current_user
+    %i.fa.fa-comment-o
+      -if @channel
+        =link_to("send a message", channel_posts_path(@channel))
+      -else
+        =link_to("send a message", add_private_channel_path(current_user, @user))
+  
     #friend-status
       - if current_user.friends.include?(@user) || current_user.pending_friends.include?(@user)
         = link_to "Unfriend User", user_friendship_path(friend_id: @user), class: 'btn btn-danger', id: 'unfriend-user', data: { friend_id: @user.to_param }

@@ -27,6 +27,6 @@ class UsersController < ApplicationController
   
   def images
     @user = User.find(params[:id])
-    @images = @user.images
+    @images = @user.images.select{|i| !i.private? || i.post.channel.includes_user?(current_user) }
   end
 end

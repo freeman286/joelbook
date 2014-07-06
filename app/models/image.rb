@@ -11,4 +11,7 @@ class Image < ActiveRecord::Base
     self.original_image_url && !self.original_image_url.empty? ? self.original_image_url : self.image.url 
   end
   
+  def private?
+    !self.post.channel.public? 
+  end
 end
