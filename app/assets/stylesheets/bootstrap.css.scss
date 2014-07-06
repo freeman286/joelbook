@@ -5783,4 +5783,9 @@ button.close {
     display: none !important;
   }
 }
+
+.secondary-container {
+  @extend .container
+}
+
 /*# sourceMappingURL=bootstrap.css.map */

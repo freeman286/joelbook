@@ -1,0 +1,38 @@
+- content_for :before_container do
+  .jumbotron
+    .container
+      .col-md-12
+        %h1
+          Welcome to Joelbook
+      .col-md-12
+        %p
+          Joelbook is a social network designed to operate in realtime through socket.io and various ajax tools. Please feel free to use Joelbook for any positive purpose and invite your friends.
+      .col-md-12
+        -if !user_signed_in?
+          =link_to("Sign in for free", new_user_registration_path, class: "btn btn-primary")
+          or
+          =link_to("login to your account", new_user_session_path)
+
+.col-md-6
+  .col-md-12
+    %h1
+      Recent events
+  -5.times do
+    .col-md-12.pv-1
+      %p
+        %strong Date
+      %p 
+        event  
+    
+.col-md-6
+  =image_tag "", class: "img img-responsive"
+  Image goes here
+  
+.col-md-12
+  .col-md-12
+    %h1
+      Latest posts
+  .backbone
+  
+:javascript
+  window.posts = #{@posts.to_json.html_safe};

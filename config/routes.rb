@@ -1,6 +1,6 @@
 RailsRealtime::Application.routes.draw do
 
-  root :to => "posts#index"
+  root :to => 'home#index'
   
   match '/search' => 'users#search'
   match '/channel_search' => 'channels#search'

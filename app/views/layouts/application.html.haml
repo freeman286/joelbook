@@ -52,12 +52,14 @@
               %li  
                 =link_to("Sign out", destroy_user_session_path, :method => :delete)
 
-    .container
+    .secondary-container
       - flash.each do |type, message|
         .alert.alert-block{ :class => flash_class(type)}
           %button.close{"data-dismiss" => "alert"} x
           %div
             = message
+    = yield :before_container
+    .container
       = yield
       
       
