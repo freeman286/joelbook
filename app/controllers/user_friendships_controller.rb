@@ -7,6 +7,7 @@ class UserFriendshipsController < ApplicationController
       @user_friendships = current_user.user_friendships
       @accepted = current_user.user_friendships.where(:state => 'accepted')
       @pending = current_user.user_friendships.where(:state => 'pending')
+      @requested = current_user.user_friendships.where(:state => 'requested')
       @blocked = current_user.user_friendships.where(:state => 'blocked')
       @ignored = current_user.user_friendships.where(:state => 'ignored')
       format.html {}
@@ -16,7 +17,7 @@ class UserFriendshipsController < ApplicationController
         :accepted => "",
         :accepted_count => @accepted.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + conditional_to_i(current_user.last_destroyed_accepted_user_friendship_at > 10.seconds.ago),
         :pending => "",
-        :pending_count => @pending.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count,
+        :pending_count => @pending.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + @requested.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + conditional_to_i(current_user.last_destroyed_pending_user_friendship_at > 10.seconds.ago),
         :blocked => "",
         :blocked_count => @blocked.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + conditional_to_i(current_user.last_destroyed_blocked_user_friendship_at > 10.seconds.ago),
         :ignored => "",
@@ -28,7 +29,7 @@ class UserFriendshipsController < ApplicationController
       @accepted.each do |friendship|
         response_hash[:accepted] = render_to_string(:partial => 'card', :formats => [:html],locals: { :friendship => friendship}).gsub("\n",'') + response_hash[:accepted]
       end
-      @pending.each do |friendship|
+      (@pending + @requested).each do |friendship|
         response_hash[:pending] = render_to_string(:partial => 'card', :formats => [:html],locals: { :friendship => friendship}).gsub("\n",'') + response_hash[:pending]
       end
       @blocked.each do |friendship|

@@ -106,14 +106,28 @@ class UserFriendship < ActiveRecord::Base
   def update_last_destroy
     user = self.user
     friend = self.friend
-    user.last_destroyed_user_friendship_at = friend.last_destroyed_user_friendship_at = Time.now
     case self.state
     when 'accepted'
-      user.last_destroyed_accepted_user_friendship_at = Time.now
+      user.last_destroyed_user_friendship_at =
+      user.last_destroyed_accepted_user_friendship_at =
+      friend.last_destroyed_user_friendship_at =
+      friend.last_destroyed_accepted_user_friendship_at = Time.now
+    when 'pending'
+      user.last_destroyed_user_friendship_at =
+      user.last_destroyed_pending_user_friendship_at =
+      friend.last_destroyed_user_friendship_at =
+      friend.last_destroyed_pending_user_friendship_at = Time.now
+    when 'requested'
+      user.last_destroyed_user_friendship_at =
+      user.last_destroyed_pending_user_friendship_at =
+      friend.last_destroyed_user_friendship_at =
+      friend.last_destroyed_pending_user_friendship_at = Time.now
     when 'blocked'
-      friend.last_destroyed_blocked_user_friendship_at = user.last_destroyed_blocked_user_friendship_at = Time.now
+      user.last_destroyed_user_friendship_at = 
+      user.last_destroyed_blocked_user_friendship_at = Time.now
     when 'ignored'
-      friend.last_destroyed_ignored_user_friendship_at = user.last_destroyed_ignored_user_friendship_at = Time.now
+      user.last_destroyed_user_friendship_at =
+      user.last_destroyed_ignored_user_friendship_at = Time.now
     end
     user.save
     friend.save

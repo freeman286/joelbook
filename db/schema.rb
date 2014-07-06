@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20140705080654) do
     t.string   "avatar_cropping"
     t.datetime "last_destroyed_user_friendship_at"
     t.datetime "last_destroyed_accepted_user_friendship_at"
+    t.datetime "last_destroyed_pending_user_friendship_at"
     t.datetime "last_destroyed_blocked_user_friendship_at"
     t.datetime "last_destroyed_ignored_user_friendship_at"
   end

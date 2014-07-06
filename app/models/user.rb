@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
                   :avatar_height, 
                   :page, 
                   :last_destroyed_user_friendship_at, 
-                  :last_destroyed_accepted_user_friendship_at, 
+                  :last_destroyed_accepted_user_friendship_at,
+                  :last_destroyed_pending_user_friendship_at,
                   :last_destroyed_blocked_user_friendship_at,
                   :last_destroyed_ignored_user_friendship_at
                   
