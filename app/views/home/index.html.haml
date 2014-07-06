@@ -6,7 +6,9 @@
           Welcome to Joelbook
       .col-md-12
         %p
-          Joelbook is a social network designed to operate in realtime through socket.io and various ajax tools. Please feel free to use Joelbook for any positive purpose and invite your friends.
+          Joelbook is a social network designed to operate in realtime using
+          =link_to("ruby on rails", "http://rubyonrails.org") + ", " + link_to("socket.io", "http://www.socket.io") + ", " + link_to("backbone.js", "http://backbonejs.org")
+          and various ajax tools. Please feel free to use Joelbook for any positive purpose and invite your friends.
       .col-md-12
         -if !user_signed_in?
           =link_to("Sign in for free", new_user_registration_path, class: "btn btn-primary")
