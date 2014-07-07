@@ -1,15 +1,19 @@
-%h1
-  All channels
+.row.col-md-12
+  %h1
+    Channels
           
-.col-md-12
-  =form_for (@channel || Channel.new), remote: true, :url => channel_search_all_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
-    = f.text_field :name, placeholder: "Channel name", autocomplete: "off", :id => "channel_search_name"
-    %ul.channel-dropdown-menu.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
-      
-#channel-list-wrapper
+.row.col-md-3
+  .col-md-3.col-correct-margin
+    =form_for (@channel || Channel.new), remote: true, :url => channel_search_all_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
+      = f.text_field :name, placeholder: "Search for channel", autocomplete: "off", :id => "channel_search_name", :class => "input-sm form-control"
+      %ul.channel-dropdown-menu.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
+    
+
+.row.col-md-12#channel-list-wrapper
   #channel-list
     - @channels.each do |channel|
       -if !channel.private?
         = render 'card', :@channel => channel
-%br/
-= link_to 'New Channel', new_channel_path
+
+.row.col-md-12
+  = link_to 'New Channel', new_channel_path

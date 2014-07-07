@@ -1,8 +1,9 @@
 .row
-  .col-md-4
-    %h4
-      =link_to @channel.name, channel_posts_path(@channel)    
-  -if @channel.owner_user == current_user
-    .col-md-4
-      =link_to "Edit details", edit_channel_path(@channel)
-      =link_to "Delete channel", @channel, :method => :delete
+  .col-md-12
+    =link_to  channel_posts_path(@channel) do
+      %strong{:style => "font-size:25px;"}
+        =@channel.name
+    -if @channel.owner_user == current_user
+      =link_to "<i class='fa fa-pencil pull-right'></i>".html_safe, edit_channel_path(@channel) 
+
+      =link_to "<i class='fa fa-times pull-right'></i>".html_safe, @channel, :method => :delete 

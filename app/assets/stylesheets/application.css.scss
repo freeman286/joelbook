@@ -247,3 +247,9 @@
 #channel-list-wrapper {
   min-height:81px;
 }
+
+@media (max-width: 768px) {
+  .col-correct-margin {
+    margin-left:15px;
+  }
+}
