@@ -20,7 +20,8 @@ class ChannelsController < ApplicationController
     if @channel.owner_user == current_user && @channel.update_attributes(params[:channel])
       redirect_to channel_path(@channel), notice: 'Channel was successfully updated.'
     else
-      render action: "edit"
+      @channels = Channel.all
+      render :template => "channels/index"
     end
   end
 
@@ -39,6 +40,7 @@ class ChannelsController < ApplicationController
 
   def index
     @channels = Channel.all
+    @channel = Channel.new
   end
 
   def show

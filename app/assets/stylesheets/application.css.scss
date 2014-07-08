@@ -253,3 +253,14 @@
     margin-left:15px;
   }
 }
+
+.has-error.form-control {
+  border-color: #C73737;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  &:focus {
+    border-color: #e19572;
+    -webkit-box-shadow: 0 0 2px #e19572;
+    box-shadow: 0 0 2px #e19572;
+  }
+}

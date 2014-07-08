@@ -1,5 +1,5 @@
 <% if @users %>
-  $('.channel-dropdown-menu').html('<%= escape_javascript(render "channels/dropdown", :@users => @users, :@channel => @channel)%>');
+  $('.channel-dropdown-menu').html('<%= escape_javascript(render "channels/dropdown", :@users => @users, :channel => @channel)%>');
   $('.channel-dropdown-menu').show();
 <% else %>
   $('.channel-dropdown-menu').hide();

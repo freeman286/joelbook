@@ -1,9 +1,26 @@
 .row
   .col-md-12
-    =link_to  channel_posts_path(@channel) do
+    =link_to  channel_posts_path(channel) do
       %strong{:style => "font-size:25px;"}
-        =@channel.name
-    -if @channel.owner_user == current_user
-      =link_to "<i class='fa fa-pencil pull-right'></i>".html_safe, edit_channel_path(@channel) 
+        =channel.name
+    -if channel.owner_user == current_user
+      =link_to "<i class='fa fa-pencil pull-right'></i>".html_safe, "##{channel.id}_edit_channel", :'data-toggle' => "modal"
 
-      =link_to "<i class='fa fa-times pull-right'></i>".html_safe, @channel, :method => :delete 
+      =link_to "<i class='fa fa-times pull-right'></i>".html_safe, channel, :method => :delete 
+
+-if channel.id.present?    
+  .modal.fade{id: "#{channel.id}_edit_channel"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+            %i.fa.fa-times
+          %p Editing channel
+        .modal-body
+          =render "channels/form", :@channel => channel
+  :javascript    
+    $( document ).ready(function() {
+      $( ".#{channel.id}_dismiss" ).click(function() {
+        $("##{channel.id}_edit_channel").modal('hide');
+      });
+    });

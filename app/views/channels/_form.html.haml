@@ -1,17 +1,9 @@
-= form_for(@channel) do |f|
-  - if @channel.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@channel.errors.count, "error")
-        prohibited this channel from being saved:
-      %ul
-        - @channel.errors.full_messages.each do |msg|
-          %li= msg
+= form_for(@channel || Channel.new) do |f|
   
   .field
     = f.label :name
     %br/
-    = f.text_field :name
+    = f.text_field :name, :class => "input-sm form-control #{'has-error' if @channel.errors[:name].present?}"
   .field
     = f.label :public
     %br/
@@ -19,5 +11,3 @@
           
   .actions
     = f.submit
-
-=@channel.owner_user_id

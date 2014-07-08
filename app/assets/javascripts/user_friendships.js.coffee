@@ -1,12 +1,5 @@
 window.userFriendships = []
 $(document).ready ->
-  $.ajax
-    url: Routes.user_friendships_path(format: "json")
-    dataType: "json"
-    type: "GET"
-    success: (data) ->
-      window.userFriendships = data
-      return
 
   $(document.body).on 'click', "#add-friendship", (event) ->
     event.preventDefault()

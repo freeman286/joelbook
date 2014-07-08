@@ -1,19 +1,39 @@
+-if @channel.errors.present? && controller.action_name == "update"
+  :javascript    
+    $( document ).ready(function() {
+      $("#edit_channel").modal('show');
+      $( ".click" ).click(function() {
+        $("#new_channel").modal('hide');
+      });
+    });
+  .modal.fade{id: "edit_channel"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+            %i.fa.fa-times
+          %p Editing channel
+        .modal-body
+          =render "channels/form"
+
 .row.col-md-12
-  %h1
-    Channels
+  .row.col-md-12
+    %h1
+      Channels
           
-.row.col-md-3
-  .col-md-3.col-correct-margin
-    =form_for (@channel || Channel.new), remote: true, :url => channel_search_all_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
-      = f.text_field :name, placeholder: "Search for channel", autocomplete: "off", :id => "channel_search_name", :class => "input-sm form-control"
-      %ul.channel-dropdown-menu.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
+  .row.col-md-3
+    .col-md-3.col-correct-margin
+      =form_for (Channel.new), remote: true, :url => channel_search_all_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
+        = f.text_field :name, placeholder: "Search for channel", autocomplete: "off", :id => "channel_search_name", :class => "input-sm form-control"
+        %ul.channel-dropdown-menu.dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
     
 
-.row.col-md-12#channel-list-wrapper
-  #channel-list
-    - @channels.each do |channel|
-      -if !channel.private?
-        = render 'card', :@channel => channel
+  .row.col-md-12#channel-list-wrapper
+    #channel-list
+      - @channels.each do |channel|
+        -if !channel.private?
+          = render 'card', :channel => channel
 
-.row.col-md-12
-  = link_to 'New Channel', new_channel_path
+  .row.col-md-12
+    = link_to 'New Channel', new_channel_path
+
