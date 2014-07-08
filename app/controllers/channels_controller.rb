@@ -10,7 +10,7 @@ class ChannelsController < ApplicationController
     if @channel.save
       redirect_to channels_path, notice: 'Channel was successfully created.'
     else
-      @channels = Channel.all
+      @channels = Channel.all - Channel.select {|c| c.private?}
       render :template => "channels/index"
     end
   end
@@ -21,7 +21,7 @@ class ChannelsController < ApplicationController
     if @channel.owner_user == current_user && @channel.update_attributes(params[:channel])
       redirect_to channels_path, notice: 'Channel was successfully updated.'
     else
-      @channels = Channel.all
+      @channels = Channel.all - Channel.select {|c| c.private?}
       render :template => "channels/index"
     end
   end
@@ -40,7 +40,7 @@ class ChannelsController < ApplicationController
   end
 
   def index
-    @channels = Channel.all
+    @channels = Channel.all - Channel.select {|c| c.private?}
     @channel = Channel.new
     @alert_align = true
   end
@@ -63,6 +63,8 @@ class ChannelsController < ApplicationController
   def search_all
     if params[:channel][:name].present?
       @channels = Channel.search(params[:channel][:name])
+    else
+      @channels = Channel.all - Channel.select {|c| c.private?}
     end
     respond_to do |format|
       format.js

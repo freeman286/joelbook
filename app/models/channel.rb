@@ -32,8 +32,7 @@ class Channel < ActiveRecord::Base
 
     if words.present?
     words.split(" ").each do |keyword|
-      channels << where(['name LIKE ?', "%#{keyword}%"])
-      channels << where(['name LIKE ?', "%#{keyword.capitalize}%"])
+      channels << where(['lower(name) LIKE ?', "%#{keyword.downcase}%"])
     end
     channels.first - Channel.select {|c| c.private?}
     else

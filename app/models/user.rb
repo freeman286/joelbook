@@ -129,11 +129,14 @@ class User < ActiveRecord::Base
     users = Set.new
 
     words.split(" ").each do |keyword|
-      users << where(['name LIKE ?', "%#{keyword}%"])
+      users << where(['lower(name) LIKE ?', "%#{keyword.downcase}%"])
       users << where(['email LIKE ?', "%#{keyword}%"])
-      users << where(['name LIKE ?', "%#{keyword.capitalize}%"])
     end
-    users.first - exceptions
+    if users.first
+      users.first - exceptions
+    else
+      nil
+    end   
   end
   
   def notifications
