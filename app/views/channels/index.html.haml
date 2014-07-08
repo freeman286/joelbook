@@ -15,11 +15,41 @@
           %p Editing channel
         .modal-body
           =render "channels/form"
+          
+-if @channel.errors.present? && controller.action_name == "create"
+  :javascript    
+    $( document ).ready(function() {
+      $("#new_channel").modal('show');
+      $( ".click" ).click(function() {
+        $("#new_channel").modal('hide');
+      });
+    });
+
+:javascript    
+  $( document ).ready(function() {
+    $('#new_channel').on('hidden.bs.modal', function () {
+      $("#channel_name").removeClass('has-error');
+      $("#channel_name").val('');
+      $("#channel_public").prop('checked', false);
+    });
+  });    
+
+.modal.fade{id: "new_channel"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+          %i.fa.fa-times
+        %p New Channel
+      .modal-body
+        =render "channels/form"          
 
 .row.col-md-12
   .row.col-md-12
     %h1
       Channels
+      %span{:style => "font-size:15px;"}
+        = link_to 'New Channel', "#new_channel", :class => "btn btn-primary mb-1", :'data-toggle' => "modal"
           
   .row.col-md-3
     .col-md-3.col-correct-margin
@@ -33,7 +63,4 @@
       - @channels.each do |channel|
         -if !channel.private?
           = render 'card', :channel => channel
-
-  .row.col-md-12
-    = link_to 'New Channel', new_channel_path
 

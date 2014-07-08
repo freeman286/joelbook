@@ -10,7 +10,8 @@ class ChannelsController < ApplicationController
     if @channel.save
       redirect_to channels_path, notice: 'Channel was successfully created.'
     else
-      render action: "new"
+      @channels = Channel.all
+      render :template => "channels/index"
     end
   end
 
@@ -18,7 +19,7 @@ class ChannelsController < ApplicationController
     @channel = Channel.find(params[:id])
   
     if @channel.owner_user == current_user && @channel.update_attributes(params[:channel])
-      redirect_to channel_path(@channel), notice: 'Channel was successfully updated.'
+      redirect_to channels_path, notice: 'Channel was successfully updated.'
     else
       @channels = Channel.all
       render :template => "channels/index"
@@ -41,6 +42,7 @@ class ChannelsController < ApplicationController
   def index
     @channels = Channel.all
     @channel = Channel.new
+    @alert_align = true
   end
 
   def show

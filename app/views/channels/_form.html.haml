@@ -1,13 +1,14 @@
 = form_for(@channel || Channel.new) do |f|
-  
-  .field
+
+  %div
     = f.label :name
-    %br/
     = f.text_field :name, :class => "input-sm form-control #{'has-error' if @channel.errors[:name].present?}"
-  .field
-    = f.label :public
-    %br/
+    %span.help-block
+      =@channel.errors[:name].first if @channel.errors[:name].present?
+  %div
     = f.check_box :public
-          
-  .actions
-    = f.submit
+    = f.label :public
+    %span.help-block
+      Enabling the option will mean anyone can use this channel
+        
+  %div= f.submit "Save", :class => 'btn btn-block btn-primary mt-1'

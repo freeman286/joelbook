@@ -6,21 +6,34 @@
     -if channel.owner_user == current_user
       =link_to "<i class='fa fa-pencil pull-right'></i>".html_safe, "##{channel.id}_edit_channel", :'data-toggle' => "modal"
 
-      =link_to "<i class='fa fa-times pull-right'></i>".html_safe, channel, :method => :delete 
+      =link_to "<i class='fa fa-times pull-right'></i>".html_safe, "##{channel.id}_delete_channel", :'data-toggle' => "modal"
 
--if channel.id.present?    
-  .modal.fade{id: "#{channel.id}_edit_channel"}
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
-            %i.fa.fa-times
-          %p Editing channel
-        .modal-body
-          =render "channels/form", :@channel => channel
-  :javascript    
-    $( document ).ready(function() {
-      $( ".#{channel.id}_dismiss" ).click(function() {
-        $("##{channel.id}_edit_channel").modal('hide');
-      });
+.modal.fade{id: "#{channel.id}_edit_channel"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+          %i.fa.fa-times
+        %h4 Editing channel
+      .modal-body
+        =render "channels/form", :@channel => channel
+:javascript    
+  $( document ).ready(function() {
+    $( ".#{channel.id}_dismiss" ).click(function() {
+      $("##{channel.id}_edit_channel").modal('hide');
     });
+  });
+    
+    
+
+.modal.fade{id: "#{channel.id}_delete_channel"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+          %i.fa.fa-times
+        %h4 Are you sure you want to delete this channel?
+      .modal-body
+        If you do it will no longer exist!
+      .modal-footer
+        %div=link_to("<i class='fa fa-times'></i> Delete".html_safe, channel_path(channel.id), :method => :delete, :'data-toggle' => "modal", :class => 'btn btn-block btn-danger')    
