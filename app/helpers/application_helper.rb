@@ -31,5 +31,9 @@ module ApplicationHelper
   
   def link_to_notification_resource(notification)
     
-  end  
+  end
+  
+  def image_for_notification(notification, size, options)
+    image_tag(avatar_url(notification.secondary_owner_user, size="25"), options)
+  end 
 end

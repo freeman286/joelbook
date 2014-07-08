@@ -82,7 +82,7 @@ $(document).ready ->
 
     return
     
-  a = setInterval(getNotifications, 10000)
+  #a = setInterval(getNotifications, 10000)
   
   getUserFriendships = ->
     $.ajax
