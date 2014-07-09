@@ -1,5 +1,5 @@
 -notifications.group_by{|n| n.created_at.to_date}.each do |date, notifications_on_date|
-  %li.date-divider
+  %li.date-divider.ml-1.mv-2
     .date-divider-line
     %span.message-date
       =date.today? ? 'Today' : "#{time_ago_in_words(date)} ago"

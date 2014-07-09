@@ -418,3 +418,69 @@
     width:315px;
   }
 }
+
+li.no-notifications {
+  text-align: center;
+}
+li.notification {
+  list-style-type: none;
+  position: relative;
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #ccc;    
+}
+.notifications-list li.no-border {
+  border: none;
+}
+.notification-wrapper {
+  padding: 10px;
+  float: left;
+  width: 100%;
+}
+.notification-img {
+  float: left;
+  width: 9%;
+  margin-right: 1%;
+}
+.notification-inner {
+  width: 90%;
+}
+.notification-summary {
+  color: #999;
+  display: block;
+  margin: 0;
+  height: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.notification-time {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  color: #999;
+  font-size: 12px;
+}
+.notification.unread {
+  background: #FFF7D9;
+}
+.notifications-list .date-divider {
+  float: left;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.notifications-list .date-divider-line {
+  border-top: 1px solid #ccc;
+  float: left;
+  width: 100%;
+}
+
+.date-divider {
+  list-style-type: none;  
+}
+
+.message-date {
+  font-size:25px;
+}

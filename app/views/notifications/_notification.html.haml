@@ -1,7 +1,7 @@
 %li.notification{:class => "#{notification.read? ? '' : 'unread'} #{no_border ? 'no-border' : ''}"}
   .notification-wrapper
-    =#link_to(image_for(notification.resource_for_image, '60x60#'), notification.image_path, :class => 'notification-img')
     .notification-inner
+      =link_to(image_for_notification(notification, "25x25#", :class => "img-circle notification-thumbnail")  )
       =notification.content
       %br
       =link_to_notification_resource(notification)
