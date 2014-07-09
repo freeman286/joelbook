@@ -280,6 +280,7 @@
   display: none;
   float: left;
   min-width: 320px;
+  width: 260px !important;
   padding: 0;
   margin: 2px 0 0;
   list-style: none;
@@ -402,7 +403,18 @@
   border-bottom: 1px solid #dddddd;
 }
 
+.notification-info {
+  vertical-align:top;
+  display:inline-block;
+  width: 90%;
+}
+
 .notification-message-summary {
-  width:138px;
-  white-space: nowrap;
+  overflow: hidden;
+  @media (min-width: 768px) {
+    width:200px;
+  }
+  @media (max-width: 767px) {
+    width:315px;
+  }
 }
