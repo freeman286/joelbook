@@ -9,7 +9,11 @@ class NotificationsController < ApplicationController
           notification.save
         end
       }
-      format.json { render json: {:notifications_to_string => render_to_string(:partial => 'notifications/dropdown_header', :formats=>[:html], locals: { :notifications => @notifications.pop(5) }).gsub("\n",''), :notifications_count => @notifications.where(:read => false).count}}
+      format.json { render json: {
+        :notifications_to_string => render_to_string(:partial => 'notifications/dropdown_header', :formats=>[:html], locals: { :notifications => @notifications.pop(5) }).gsub("\n",''),
+        :index_notifications_to_string => render_to_string(:partial => 'notifications/notifications', :formats=>[:html], locals: { :notifications => @notifications }).gsub("\n",''),
+        :notifications_count => @notifications.where(:read => false).count
+      }}
     end  
   end
   

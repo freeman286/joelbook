@@ -19,17 +19,16 @@ class Post < ActiveRecord::Base
     
     if can_be_published?
       $redis.publish 'rt-change', msg.to_json
-    end
-    
-    if self.channel.private? && User.current
-      Notification.create(
-        :owner_user_id => self.channel.owner_user_id == User.current.id ? self.channel.secondary_owner_user_id : self.channel.owner_user_id,
-        :secondary_owner_user_id => User.current.id,
-        :resource_type => "Channel",
-        :resource_id => self.channel.id,
-        :content => "#{User.current.name} says '#{self.name}'",
-        :read => false
-      )
+      if self.channel.private? && action == 'create'
+        Notification.create(
+          :owner_user_id => self.channel.owner_user_id == User.current.id ? self.channel.secondary_owner_user_id : self.channel.owner_user_id,
+          :secondary_owner_user_id => User.current.id,
+          :resource_type => "Channel",
+          :resource_id => self.channel.id,
+          :content => "#{User.current.name} says '#{self.name}'",
+          :read => false
+        )
+      end
     end
   end
 

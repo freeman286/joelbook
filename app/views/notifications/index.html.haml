@@ -1,16 +1,9 @@
-.container
-.strip.strip-header
-  .container
-    .row.pv-7
-      .col-md-12
-        %h1 Your Notifications
-
-.strip-background
-  .container.pt-4
-    .row
-      .col-xs-12
-        -if @notifications.empty?
-          %p
-            You have no notifications yet.
-        -else
-          =render("notifications", :notifications => @notifications)
+-self.formats = [:json, :html]
+%h1.ml-2
+  Your Notifications
+.col-md-12
+  -if @notifications.empty?
+    %p
+      You have no notifications yet.
+  -else
+    =render("notifications", :notifications => @notifications)

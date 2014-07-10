@@ -1,4 +1,4 @@
--notifications.group_by{|n| n.created_at.to_date}.each do |date, notifications_on_date|
+-notifications.reverse.group_by{|n| n.created_at.to_date}.each do |date, notifications_on_date|
   %li.date-divider.ml-1.mv-2
     .date-divider-line
     %span.message-date
