@@ -81,7 +81,7 @@ $(document).ready ->
       type: "POST"
       success: (e) ->
         $('.friendship-' + FriendshipBtn.data("friendshipId")).hide().html("Friendship is accepted ").fadeIn();
-        $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).hide().html("<a href='/user_friendships/'" + FriendshipBtn.data("friendshipId") + " class='btn index-delete-friendship' data-friendship-id='" + FriendshipBtn.data("friendshipId") + "'>Delete Friendship</a>").fadeIn();
+        $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).hide().html("<div class='col-xs-12 col-md-4'><a href='/user_friendships/" + FriendshipBtn.data("friendshipId") + "' class='friendship-action-btn btn btn-block btn-danger index-delete-friendship' data-friendship-id='" + FriendshipBtn.data("friendshipId") + "'>Delete Friendship</a></div>").fadeIn();
         
   $(document.body).on 'click', ".index-delete-friendship", (event) ->
     event.preventDefault()    
@@ -102,7 +102,7 @@ $(document).ready ->
       type: "POST"
       success: (e) ->
         $('.friendship-' + FriendshipBtn.data("friendshipId")).hide().html("Friendship is ignored ").fadeIn();
-        $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).hide().html("<a href='/user_friendships/'" + FriendshipBtn.data("friendshipId") + " class='btn index-accept-friendship' data-friendship-id='" + FriendshipBtn.data("friendshipId") + "'>Accept Friendship</a>").fadeIn();
+        $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).hide().html("<div class='col-xs-12 col-md-4'><a href='/user_friendships/" + FriendshipBtn.data("friendshipId") + "' class='friendship-action-btn btn btn-block btn-success index-accept-friendship' data-friendship-id='" + FriendshipBtn.data("friendshipId") + "'>Accept Friendship</a></div>").fadeIn();
           
   $(document.body).on 'click', ".index-block-friendship", (event) ->
     event.preventDefault()    
@@ -113,7 +113,7 @@ $(document).ready ->
       type: "POST"
       success: (e) ->
         $('.friendship-' + FriendshipBtn.data("friendshipId")).hide().html("Friendship is blocked ").fadeIn();
-        $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).hide().html("<a href='/user_friendships/'" + FriendshipBtn.data("friendshipId") + " class='btn index-unblock-friendship' data-friendship-id='" + FriendshipBtn.data("friendshipId") + "'>Unblock User</a>").fadeIn();
+        $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).hide().html("<div class='col-xs-12 col-md-4'><a href='/user_friendships/" + FriendshipBtn.data("friendshipId") + "' class='friendship-action-btn btn btn-block btn-success index-unblock-friendship' data-friendship-id='" + FriendshipBtn.data("friendshipId") + "'>Unblock User</a></div>").fadeIn();
   
   $(document.body).on 'click', ".index-unblock-friendship", (event) ->
     event.preventDefault()    
