@@ -1,5 +1,5 @@
-var num = parseInt($.trim($('.notifications-count').html()))-($('.unread').length / 2);
-var num ||= 0
+var count = parseInt($.trim($('.notifications-count').html()))-($('.unread').length);
+var num = count || 0
 if (!window.notificationsClicked) {
   if (num < 0) {
     num = 0;
