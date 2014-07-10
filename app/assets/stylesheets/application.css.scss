@@ -490,3 +490,22 @@ li.notification {
     margin-right:15px;
   }
 }
+
+@media (max-width: 991px) {
+  .friendship-action-btn {
+    width:50% !important;
+    margin-top:10px;
+  }
+}
+
+.img-centered {
+  @media (max-width: 991px) and (min-width: 600px) {
+    margin-left: 17.5%;
+  }
+}
+
+.text-centered {
+  @media (max-width: 991px) and (min-width: 600px) {
+    margin-left: 12.5%;
+  }
+}
