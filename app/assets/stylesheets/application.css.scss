@@ -529,3 +529,17 @@ li.notification {
     cursor: inherit;
     display: block;
 }
+
+.wrap {
+  overflow: auto;
+  float: left;
+}
+
+.preview {
+  @media (max-width: 991px) {
+    margin-left: 35%;
+  }
+  @media (min-width: 990px) {
+   margin-left: 25%;
+  } 
+}

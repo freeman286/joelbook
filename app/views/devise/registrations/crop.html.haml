@@ -20,15 +20,26 @@
     });
     }
     
-%p
-  Click and drag to crop your avatar
-= image_tag @user.avatar.thumb("400x").url, :id => 'cropbox'
-%div{style: "width:80px;height:80px;overflow:hidden"}
-  = image_tag @user.avatar.thumb("400x").url, :id => 'preview'
-= form_for @user do |f|
-  = f.hidden_field :avatar_cropping, :id => 'avatar_cropping', :value => @user.avatar_cropping
-  %br/
-  = f.submit "Crop!"
+.wrap
+  %h2
+    Avatar cropping
+  .well
+    %p
+      Click and drag to crop your avatar
+    = image_tag @user.avatar.thumb("400x").url, :id => 'cropbox'
+    .preview
+      .mv-2
+        .col-md-2
+          %h5  
+            Preview:
+        .col-md-10
+          %div{style: "width:80px;height:80px;overflow:hidden"}
+            = image_tag @user.avatar.thumb("400x").url, :id => 'preview'
+      
+    = form_for @user do |f|
+      = f.hidden_field :avatar_cropping, :id => 'avatar_cropping', :value => @user.avatar_cropping
+      = f.submit "Crop", class: 'btn btn-block btn-primary'
+    .clear    
 
 :javascript
   $('#cropbox').Jcrop({
