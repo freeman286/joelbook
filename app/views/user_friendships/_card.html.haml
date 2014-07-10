@@ -1,27 +1,29 @@
 -self.formats = [:json, :html]
 - friend = friendship.friend
-.media.friend{class: "user-friendship-#{friendship.id}"}
-  = image_tag avatar_url(friend, "80"), class: "rounded_corners"
-  .media-body
-    %h4.media-heading= friend.name
-    = succeed "." do
-      %em{class: "friendship-#{friendship.id}"}
-        Friendship is #{friendship.state_to_name}
-    %br/
-    %div{class: "friendship-actions-#{friendship.id}"}
-      - if !friendship.declined?
-        - if friendship.requested? || friendship.ignored?
-          = link_to "Accept Friendship", accept_user_friendship_path(id: friendship), class: 'btn index-accept-friendship', data: { friendship_id: friendship.to_param }
-        - if friendship.blocked?
-          = link_to "Unblock User", block_user_friendship_path(id: friend), class: 'btn index-unblock-friendship', data: { friend_id: friend.to_param, friendship_id: friendship.to_param }
-        - else
-          - if friendship.requested?
-            = link_to "Decline Friendship", decline_user_friendship_path(id: friendship), class: 'btn index-decline-friendship', data: { friendship_id: friendship.to_param }
+.friend.row.col-md-12{class: "user-friendship-#{friendship.id} mt-1 pv-1"}
+  .col-md-1.gap
+    = image_tag avatar_url(friend, "80"), class: "rounded_corners"
+  .col-md-10
+    .media-body
+      %h4.media-heading= friend.name
+      = succeed "." do
+        %em{class: "friendship-#{friendship.id}"}
+          Friendship is #{friendship.state_to_name}
+      %br/
+      %div{class: "friendship-actions-#{friendship.id}"}
+        - if !friendship.declined?
+          - if friendship.requested? || friendship.ignored?
+            = link_to "Accept Friendship", accept_user_friendship_path(id: friendship), class: 'btn btn-success index-accept-friendship', data: { friendship_id: friendship.to_param }
+          - if friendship.blocked?
+            = link_to "Unblock User", block_user_friendship_path(id: friend), class: 'btn btn-success index-unblock-friendship', data: { friend_id: friend.to_param, friendship_id: friendship.to_param }
           - else
-            -if friendship.pending?
-              = link_to "Delete Request", destroy_user_friendship_path(id: friendship), class: 'btn index-delete-friendship', data: { friendship_id: friendship.to_param }
-            -if friendship.accepted?
-              = link_to "Delete Friendship", destroy_user_friendship_path(id: friendship), class: 'btn index-delete-friendship', data: { friendship_id: friendship.to_param }
+            - if friendship.requested?
+              = link_to "Decline Friendship", decline_user_friendship_path(id: friendship), class: 'btn btn-default index-decline-friendship', data: { friendship_id: friendship.to_param }
+            - else
+              -if friendship.pending?
+                = link_to "Delete Request", destroy_user_friendship_path(id: friendship), class: 'btn btn-danger index-delete-friendship', data: { friendship_id: friendship.to_param }
+              -if friendship.accepted?
+                = link_to "Delete Friendship", destroy_user_friendship_path(id: friendship), class: 'btn btn-danger index-delete-friendship', data: { friendship_id: friendship.to_param }
                   
-        - if friendship.requested?
-          = link_to "Block Friendship", block_user_friendship_path(id: friend), class: 'btn index-block-friendship', data: { friend_id: friend.to_param, friendship_id: friendship.to_param }
+          - if friendship.requested?
+            = link_to "Block Friendship", block_user_friendship_path(id: friend), class: 'btn btn-danger index-block-friendship', data: { friend_id: friend.to_param, friendship_id: friendship.to_param }

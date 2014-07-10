@@ -1,14 +1,15 @@
-%ul.nav.nav-tabs
-  %li
-    %a{"data-toggle" => "tab", href: "#all"} All
-  %li
-    %a{"data-toggle" => "tab", href: "#accepted"} Accepted
-  %li
-    %a{"data-toggle" => "tab", href: "#pending"} Pending
-  %li
-    %a{"data-toggle" => "tab", href: "#blocked"} Blocked
-  %li
-    %a{"data-toggle" => "tab", href: "#ignored"} Ignored  
+.col-md-12
+  %ul.nav.nav-tabs
+    %li
+      %a{"data-toggle" => "tab", href: "#all"} All
+    %li
+      %a{"data-toggle" => "tab", href: "#accepted"} Accepted
+    %li
+      %a{"data-toggle" => "tab", href: "#pending"} Pending
+    %li
+      %a{"data-toggle" => "tab", href: "#blocked"} Blocked
+    %li
+      %a{"data-toggle" => "tab", href: "#ignored"} Ignored  
 .tab-content
   #all.tab-pane
     - @user_friendships.reverse.each do |friendship|
