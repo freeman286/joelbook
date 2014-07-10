@@ -63,7 +63,7 @@ $(document).ready ->
       reader.readAsDataURL input.files[0]
     return
     
-  window.notificationsCount = 0
+  window.notificationsCount = parseInt($.trim($('.notifications-count').html()));
   
   getNotifications = ->
     $.ajax

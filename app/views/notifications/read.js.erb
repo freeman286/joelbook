@@ -1,22 +1,9 @@
-var count = parseInt($.trim($('.notifications-count').html()))-($('.unread').length);
-var num = count || 0
-if (!window.notificationsClicked) {
-  if (num < 0) {
-    num = 0;
-  }
-  if (num == 0) {
-    $('.notifications-count').hide();
-  } else {
-    $('.notifications-count').html(num);
-  }
-} else if (window.notificationsClicked && window.notificationsCount) {
-  if (num + 5 - window.notificationsCount == 0) {
-    $('.notifications-count').hide();
-  } else {
-    $('.notifications-count').html(num + 5 - window.notificationsCount);
-  }
-  window.notificationsCount = 0;
+window.notificationsCount = parseInt($.trim($('.notifications-count').html()) / 2);
+var num = window.notificationsCount
+if (num - $('.unread').length < 1) {
+  $('.notifications-count').hide();
+} else {
+  $('.notifications-count').html(num - $('.unread').length);
 }
 
 $('.unread').addClass('read').removeClass('.unread')
-window.notificationsClicked = true
