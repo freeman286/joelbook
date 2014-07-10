@@ -71,14 +71,17 @@ $(document).ready ->
       dataType: "json"
       type: "GET"
       success: (e) ->
-        $('.dropdown-menu').replaceWith(e.notifications_to_string)
-        $('#index-notification-list').html(e.index_notifications_to_string)
         if parseInt(e.notifications_count) isnt 0
-          $('.notifications-count').html(e.notifications_count)
+          $('.dropdown-menu').hide().replaceWith(e.notifications_to_string).fadeIn('slow');
+          $('#index-notification-list').hide().html(e.index_notifications_to_string).fadeIn('slow');
+          $('.notifications-count').hide().html(e.notifications_count).fadeIn('slow');
           window.notificationsCount += parseInt(e.notifications_count)
           if window.notificationsCount > 5
             window.notificationsCount = 5
           return
+        else
+          $('#index-notification-list').html(e.index_notifications_to_string)
+          return 
         return
 
     return
