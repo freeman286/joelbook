@@ -15,13 +15,14 @@
       %br/
       = f.text_field :name, :class => "input-sm form-control"
     %div.row.mv-1
-      .col-md-6.file_upload
-        = image_tag f.object.avatar.present? ? avatar_url(current_user) : '', :id => "form_img", :style => "#{f.object.avatar.present? ? '' : 'display: none;'}"
-      -if f.object.avatar.present?
-        .col-md-6
-          =link_to('Crop avatar', crop_user_registration_path, :id => 'crop_link', :class => 'btn btn-default mv-1')  
+      .col-md-12.file_upload
+        = image_tag f.object.avatar.present? ? avatar_url(current_user) : '', :id => "form_img", :style => "#{f.object.avatar.present? ? '' : 'display: none;'}", :width => "100%"
       .col-md-12
-        = f.file_field :avatar, :id => "form_img_input"
+        %span.btn.btn-default.btn-file
+          Upload avatar
+          = f.file_field :avatar, :id => "form_img_input"
+        -if f.object.avatar.present?
+          =link_to('Crop avatar', crop_user_registration_path, :id => 'crop_link', :class => 'btn btn-default mv-1')    
     %div
       = f.label :password
       %i (leave blank if you don't want to change it)
@@ -56,7 +57,7 @@
       .modal-body
         If you do you will not be able to access your account again
       .modal-footer
-        = link_to "Cancel", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger"
+        = link_to "Yes, cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger"
         %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Close
         
 :javascript
