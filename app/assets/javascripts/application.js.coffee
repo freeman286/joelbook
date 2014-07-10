@@ -72,6 +72,7 @@ $(document).ready ->
       type: "GET"
       success: (e) ->
         $('.dropdown-menu').replaceWith(e.notifications_to_string)
+        $('#index-notification-list').html(e.index_notifications_to_string)
         if parseInt(e.notifications_count) isnt 0
           $('.notifications-count').html(e.notifications_count)
           window.notificationsCount += parseInt(e.notifications_count)
