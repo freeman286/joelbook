@@ -24,10 +24,11 @@
             =form_for (@user || User.new), remote: true, :url => search_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
               .form-group
                 .dropdown
-                  = f.text_field :name, placeholder: "Search for user", autocomplete: "off"
-                  %ul.dropdown-menu.user-dropdown-menu{"aria-labelledby" => "dLabel", role: "menu"}
+                  = f.text_field :name, placeholder: "Search for user", autocomplete: "off", :class => "input-sm form-control"
+                  %ul.dropdown-menu.user-dropdown-menu.search-users{"aria-labelledby" => "dLabel", role: "menu"}
           
             %ul.nav.navbar-nav.navbar-left
+              %li
               %li
                 =link_to("Friends", user_friendships_path)
               %li  

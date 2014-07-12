@@ -299,6 +299,17 @@
       font-weight: 500;
     }
   }
+  &.search {
+    width: 215px !important;
+  }
+  &.search-users {
+    @media (max-width: 768px) {
+      width: 100% !important;
+    }
+    @media (min-width: 767px) {
+      width: 196px !important;
+    }
+  }
 }
 .navbar-nav > li > .dropdown-menu {
   margin-top: 10px;
