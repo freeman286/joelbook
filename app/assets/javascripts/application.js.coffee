@@ -129,6 +129,7 @@ $(document).ready ->
     
   $(document.body).on 'click', "#new_post", (e) ->  
     window.image_url = ''
+    $(".container").find('input[type=text]').val('')
     $("#form_img").hide()
     $("#form_img").attr "src", ''
     
