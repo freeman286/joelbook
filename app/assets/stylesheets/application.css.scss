@@ -203,10 +203,10 @@
 .p10, .p-10 { padding: 100px !important; }
 
 .rounded_corners {
-  border-radius: 10%;
-  -moz-border-radius: 10%;
-  -khtml-border-radius: 10%;
-  -webkit-border-radius: 10%;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  -webkit-border-radius: 4px;
 }
 
 .search-item {
@@ -571,4 +571,9 @@ li.notification {
   text-transform: uppercase;
   font-weight: bold;
   background: #fff;
+}
+
+.header-sections {
+  width:33.33333333% !important;
+  float: left !important;
 }

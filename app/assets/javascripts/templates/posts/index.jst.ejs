@@ -1,33 +1,34 @@
 <% if (window.profile == false){ %> 
-  <a href="channels/<%= window.channel_id %>/posts/new#modal" data-toggle="modal" id="new_post" data-static="true">New Post</a>
+  <div class="col-md-12 mb-1">
+    <a href="channels/<%= window.channel_id %>/posts/new#modal" data-toggle="modal" id="new_post" data-static="true">New Post</a>
+  </div>
 <% } %>
 
-<table>
-  <tr>
-    <% if (window.profile == true){ %> 
-      <th>Name</th>
-      <th>User</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    <% } %>
-  </tr>
+<div class="col-md-6">
   <% posts.each(function(post){ %>
     <% if (post.get('channel_id') == window.channel_id){ %> 
-      <tr>
-        <td><a href="/users/<%= post.get('user_id') %>"><img src="<%= post.get('user_img_url') %>" class="rounded_corners"></a></td>
-        <td><%= post.get('name') %></td>
-        <td><%= post.get('user_name') %></td>
-        <td>
-          <% if (post.get('img_url')){ %> 
-            <img src="<%= post.get('img_url') %>" height="200">
-          <% } %>
-        </td>
-  	  <% if (post.get('user_name') == window.user.name){ %> 
-        	<td><a href="/channels/<%= window.channel_id %>/posts/<%= post.id %>/edit#modal" data-toggle="modal" data-static="true" id="show_modal" onclick="app.navigate('channels/<%= window.channel_id %>/posts/<%= post.id %>/edit', true); $('.nav-tabs a:first').tab('show');">Edit</a></td>
-        	<td><a href="" data-method="delete" data-id="<%= post.id %>" data-static="true" >Destroy</a></td>
-  	  <% } %>
-      </tr>
+      <div class="well">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="header-sections"><a href="/users/<%= post.get('user_id') %>"><img src="<%= post.get('user_img_url') %>" class="rounded_corners"></a></div>
+            <div class="header-sections"><h3><%= post.get('user_name') %></h3></div>
+            <div class="header-sections">
+              <% if (post.get('user_name') == window.user.name){ %> 
+              	<div><a href="/channels/<%= window.channel_id %>/posts/<%= post.id %>/edit#modal" data-toggle="modal" data-static="true" id="show_modal" onclick="app.navigate('channels/<%= window.channel_id %>/posts/<%= post.id %>/edit', true); $('.nav-tabs a:first').tab('show');">Edit</a></div>
+              	<div><a href="" data-method="delete" data-id="<%= post.id %>" data-static="true" >Destroy</a></div>
+        	     <% } %>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-12"><%= post.get('name') %></div>
+          <div class="col-md-12 mt-1">
+            <% if (post.get('img_url')){ %> 
+              <img src="<%= post.get('img_url') %>" width="100%" class="rounded_corners">
+            <% } %>
+      	  </div>
+        </div>
+      </div>
     <% } %>
   <% }); %>
-</table>
+</div>
