@@ -56,7 +56,8 @@ $(document).ready ->
     if input.files and input.files[0]
       reader = new FileReader()
       reader.onload = (e) ->
-        $("#form_img").animate({height: 0}, 0).show().animate({height: 200}, 500);
+        asp = $("#form_img").width() / $("#form_img").height()
+        $("#form_img").animate({height: 0}, 0).show().animate({height: asp * $('.modal-content').width() / 2}, 500);
         $("#form_img").attr "src", e.target.result
         return
 
@@ -123,7 +124,7 @@ $(document).ready ->
     return
     
   $(document.body).on 'change', "#img_url", (e) ->
-    $("#form_img").animate({height: 0}, 0).show().animate({height: 200}, 500);
+    $("#form_img").animate({height: 0}, 0).show().animate({height: $("#form_img").height()}, 500);
     $("#form_img").attr "src", $('#img_url').val()
     $("#new_image").submit()
     

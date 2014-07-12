@@ -14,8 +14,8 @@
             <div class="header-sections"><h3><%= post.get('user_name') %></h3></div>
             <div class="header-sections">
               <% if (post.get('user_name') == window.user.name){ %> 
-              	<div><a href="/channels/<%= window.channel_id %>/posts/<%= post.id %>/edit#modal" data-toggle="modal" data-static="true" id="show_modal" onclick="app.navigate('channels/<%= window.channel_id %>/posts/<%= post.id %>/edit', true); $('.nav-tabs a:first').tab('show');">Edit</a></div>
-              	<div><a href="" data-method="delete" data-id="<%= post.id %>" data-static="true" >Destroy</a></div>
+              	<div><a href="/channels/<%= window.channel_id %>/posts/<%= post.id %>/edit#modal" data-toggle="modal" data-static="true" id="show_modal" class="btn btn-block btn-primary mb-1" onclick="app.navigate('channels/<%= window.channel_id %>/posts/<%= post.id %>/edit', true); $('.nav-tabs a:first').tab('show');">Edit</a></div>
+              	<div><a href="" data-method="delete"  class="btn btn-block btn-danger" data-id="<%= post.id %>" data-static="true" >Destroy</a></div>
         	     <% } %>
             </div>
           </div>
@@ -24,7 +24,7 @@
           <div class="col-md-12"><%= post.get('name') %></div>
           <div class="col-md-12 mt-1">
             <% if (post.get('img_url')){ %> 
-              <img src="<%= post.get('img_url') %>" width="100%" class="rounded_corners">
+              <img src="<%= post.get('img_url') %>" width="100%" class="rounded_corners img img-responsive">
             <% } %>
       	  </div>
         </div>

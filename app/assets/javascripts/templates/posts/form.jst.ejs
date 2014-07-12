@@ -46,7 +46,11 @@
             </form>
           </div>  
         </div>
-        <img alt="Assets" id="form_img" src="<%= img_url %>" height="200" style="display: <% if (img_url) {'inline'} else {'none'} %>;"/>
+        <% if (img_url) { %> 
+          <img alt="Assets" id="form_img" src="<%= img_url %>" width="100%" heigth="100%" style="display: inline"/>
+        <% } else { %>
+          <img alt="Assets" id="form_img" src="<%= img_url %>" width="100%" heigth="100%" style="display: none"/>
+        <% } %>
         <div class="actions">
           <input id="save" type="submit" value="Save" data-dismiss="modal" data-static="true" class="btn btn-block btn-primary mt-1">
         </div>
