@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   after_save :update_posts
-  after_create :set_user_friendship_times
+  before_create :set_user_friendship_times
     # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable  
@@ -148,6 +148,5 @@ class User < ActiveRecord::Base
     self.last_destroyed_accepted_user_friendship_at = 
     self.last_destroyed_blocked_user_friendship_at =
     self.last_destroyed_ignored_user_friendship_at = Time.now
-    self.save
   end
 end
