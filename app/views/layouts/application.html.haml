@@ -33,14 +33,14 @@
               %li  
                 =link_to("Channels", channels_path)
                     
-          %ul.nav.navbar-nav.navbar-right
+          %ul.nav.navbar-nav.navbar-right#navbar-right
             -if !current_user
               %li
                 =link_to("Sign in", user_session_path)
               %li
                 =link_to("Sign up", new_user_registration_path)
             -else
-              %li
+              %li#notifications-li
                 =link_to(read_path(:notifications => current_user.notifications.limit(5)), :remote => true, :data => {:toggle => "dropdown"}, :class => 'navbar-notification') do
                   %i.fa.fa-bell-o
                   %span.notifications-count
@@ -77,3 +77,23 @@
       :javascript
         window.channel_id = #{@channel.id}
       
+    :javascript
+      if ($(window).width() < 768) {
+        $('#notifications-li').appendTo(".navbar-right");
+      } else {
+        $('#notifications-li').prependTo(".navbar-right");
+      }
+      $(window).resize(function() {
+        if ($(window).width() < 768) {
+          $('#notifications-li').appendTo(".navbar-right");
+        } else {
+          $('#notifications-li').prependTo(".navbar-right");
+        }
+      });
+      
+    :javascript  
+      $(document.body).on('click', ".navbar-notification", function(e) {
+        $(".navbar-collapse").animate({
+          scrollTop: $("#notifications-li").offset().top
+        }, 2000);
+      });
