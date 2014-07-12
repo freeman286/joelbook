@@ -31,12 +31,12 @@ class Channel < ActiveRecord::Base
     channels = Set.new
 
     if words.present?
-    words.split(" ").each do |keyword|
-      channels << where(['lower(name) LIKE ?', "%#{keyword.downcase}%"])
-    end
-    channels.first - Channel.select {|c| c.private?}
+      words.split(" ").each do |keyword|
+        channels << User.current.channels.where(['lower(name) LIKE ?', "%#{keyword.downcase}%"])
+      end
+      channels.first - channels.first.where(:private => true)
     else
-      Channel.all - Channel.select {|c| c.private?}
+      User.current.channels
     end
   end
 end

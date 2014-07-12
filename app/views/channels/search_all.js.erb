@@ -1,7 +1,9 @@
 <% if @channels %>
-  <% @channels.each do |channel| %>
-    $('#channel-list').hide().html('<%= escape_javascript(render "channels/card", :channel => channel)%>').fadeIn();
+  $('#channel-list').hide().html('')
+  <% @channels.count do |channel| %>
+    $('#channel-list').append('<%= escape_javascript(render "channels/card", :channel => channel)%>').fadeIn();
   <% end %>
+  $('#channel-list').fadeIn();
 <% else %>
   $('#channel-list').html('No channels found')
 <% end %>

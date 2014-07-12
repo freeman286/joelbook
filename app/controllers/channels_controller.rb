@@ -40,7 +40,7 @@ class ChannelsController < ApplicationController
   end
 
   def index
-    @channels = Channel.all - Channel.select {|c| c.private?}
+    @channels = current_user.channels
     @channel = Channel.new
     @alert_align = true
   end
@@ -63,9 +63,8 @@ class ChannelsController < ApplicationController
   def search_all
     if params[:channel][:name].present?
       @channels = Channel.search(params[:channel][:name])
-    else
-      @channels = Channel.all - Channel.select {|c| c.private?}
     end
+    puts @channels.count
     respond_to do |format|
       format.js
       format.html
