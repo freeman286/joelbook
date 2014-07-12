@@ -543,3 +543,21 @@ li.notification {
    margin-left: 25%;
   } 
 }
+
+.section-title {
+  border-top: solid 2px #eaeaea;
+  text-align: center;
+}
+
+.section-title .header {
+  position: relative;
+  display: inline-block;
+  top: -11px;
+  padding: 0 10px;
+  margin-bottom: 0;
+  font-size: 11px;
+  color: #bbb;
+  text-transform: uppercase;
+  font-weight: bold;
+  background: #fff;
+}

@@ -8,27 +8,47 @@
         <p>New Post</p>
       </div>
       <div class="modal-body">
-        <div class="field">
-          <label for="title">Name</label>
-          <input type="text" name="name" value="<%= name %>">
-        </div>
-        <form accept-charset="UTF-8" action="/images" class="new_image" data-remote="true" enctype="multipart/form-data" id="new_image" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" />
-          <input id="form_img_input" class="form_img_input" name="image[image]" type="file" />
-          <div class="field">
-            <label for="title">Image url</label>
-            <% if (img_url.indexOf("media") == 1) { %>
-              <input type="text" id="img_url" name="image_url">
-            <% } else { %>
-              <input type="text" id="img_url" name="image_url" value="<%= img_url %>">
-            <% } %>  
+        <ul class="nav nav-tabs">
+          <li>
+            <a data-toggle="tab" href="#post">Post</a>
+          </li>
+          <li>
+            <a data-toggle="tab" href="#photos">Attch photos</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active mt-1" id="post">
+            <div class="field">
+              <input type="text" name="name" value="<%= name %>" class="input-sm form-control" placeholder="What do you have to say?">
+            </div>
+            <div class="field">
+              <input type="hidden" name="user_name" value="<%= window.user.name %>">
+            </div>
           </div>
-          <img alt="Assets" id="form_img" src="<%= img_url %>" height="200" style="display: <% if (img_url) {'inline'} else {'none'} %>;"/>
-        </form>
-        <div class="field">
-          <input type="hidden" name="user_name" value="<%= window.user.name %>">
+          <div class="tab-pane active" id="photos">
+            <form accept-charset="UTF-8" action="/images" class="new_image" data-remote="true" enctype="multipart/form-data" id="new_image" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" />
+              <span class="btn btn-default btn-file btn-block mt-1">
+                Attach file
+                <input id="form_img_input" class="form_img_input" name="image[image]" type="file" />
+              </span>
+              <div class="section-title mt-2">
+                <span class="header">
+                  or
+                </span>
+              </div>
+              <div class="field">
+                <% if (img_url.indexOf("media") == 1) { %>
+                  <input type="text" id="img_url" name="image_url" class="input-sm form-control" placeholder="Paste image url here">
+                <% } else { %>
+                  <input type="text" id="img_url" name="image_url" value="<%= img_url %>" class="input-sm form-control">
+                <% } %>  
+              </div>
+            </form>
+          </div>  
         </div>
+        <img alt="Assets" id="form_img" src="<%= img_url %>" height="200" style="display: <% if (img_url) {'inline'} else {'none'} %>;"/>
         <div class="actions">
-          <input id="save" type="submit" value="Save" data-dismiss="modal" data-static="true">
+          <input id="save" type="submit" value="Save" data-dismiss="modal" data-static="true" class="btn btn-block btn-primary mt-1">
         </div>
       </div>
     </div>
