@@ -64,7 +64,6 @@ class ChannelsController < ApplicationController
     if params[:channel][:name].present?
       @channels = Channel.search(params[:channel][:name])
     end
-    puts @channels.count
     respond_to do |format|
       format.js
       format.html

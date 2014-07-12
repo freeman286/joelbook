@@ -1,5 +1,5 @@
 <% if @channels %>
-  $('#channel-list').hide().html('')
+  $('#channel-list').hide().html('');
   <% @channels.count do |channel| %>
     $('#channel-list').append('<%= escape_javascript(render "channels/card", :channel => channel)%>').fadeIn();
   <% end %>
