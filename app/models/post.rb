@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
   attr_accessible :user_name, :name, :img_url, :youtube_url, :user_img_url, :user_id, :channel_id, :time
   
   has_one :image
+  has_one :video
 
   after_create {|post| post.message 'create' }
   after_update {|post| post.message 'update' }

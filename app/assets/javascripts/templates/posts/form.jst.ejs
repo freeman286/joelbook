@@ -15,6 +15,9 @@
           <li>
             <a data-toggle="tab" href="#photos">Attach photos</a>
           </li>
+          <li>
+            <a data-toggle="tab" href="#videos">Attach videos</a>
+          </li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane active mt-1" id="post">
@@ -46,6 +49,15 @@
             </form>
           </div>  
         </div>
+        <div class="tab-pane active" id="videos">
+          <form accept-charset="UTF-8" action="/videos" class="new_video" data-remote="true" enctype="multipart/form-data" id="new_video" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
+            <% if (youtube_url == "") { %>
+              <input type="text" id="youtube_url" name="youtube_url" class="input-sm form-control mt-1" placeholder="Paste video url here">
+            <% } else { %>
+              <input type="text" id="youtube_url" name="youtube_url" value="<%= youtube_url %>" class="input-sm form-control mt-1">
+            <% } %> 
+          </form>
+        </div>  
         <% if (img_url) { %> 
           <img alt="Assets" id="form_img" src="<%= img_url %>" width="100%" heigth="100%" style="display: inline"/>
         <% } else { %>

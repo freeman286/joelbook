@@ -51,11 +51,18 @@ class PostsController < ApplicationController
       @image = Image.select{|i| i.url == params[:post][:img_url]}.first
       @image.post = @post
       @image.user = User.find(params[:post][:user_id])
+      @image.save
     end
-        
+    
+    if params[:youtube_url].present?
+      @video = Video.select{|v| v.body == params[:youtube_url]}.first
+      @video.post = @post
+      @video.save
+      puts ">>>>>>>>>>>>>>>#{@video.body}"
+    end    
     
     respond_to do |format|
-      if (!@image && @post.save) || (@image.save && @post.save)
+      if @post.save
         format.html { redirect_to @post, notice: 'post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else

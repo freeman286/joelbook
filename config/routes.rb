@@ -44,6 +44,7 @@ RailsRealtime::Application.routes.draw do
   resources :posts
   
   resources :images
+  resources :videos
 
   resources :notifications
 

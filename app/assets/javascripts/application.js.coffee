@@ -128,8 +128,12 @@ $(document).ready ->
     $("#form_img").attr "src", $('#img_url').val()
     $("#new_image").submit()
     
+  $(document.body).on 'change', "#youtube_url", (e) ->
+    $("#new_video").submit()  
+    
   $(document.body).on 'click', "#new_post", (e) ->  
     window.image_url = ''
+    window.youtube_url = ''
     $(".container").find('input[type=text]').val('')
     $("#form_img").hide()
     $("#form_img").attr "src", ''
