@@ -56,8 +56,7 @@ $(document).ready ->
     if input.files and input.files[0]
       reader = new FileReader()
       reader.onload = (e) ->
-        asp = $("#form_img").width() / $("#form_img").height()
-        $("#form_img").animate({height: 0}, 0).show().animate({height: asp * $('.modal-content').width() / 2}, 500);
+        $("#form_img").animate({height: 0}, 0).show().animate({height: $("#form_img").width()}, 500);
         $("#form_img").attr "src", e.target.result
         return
 
