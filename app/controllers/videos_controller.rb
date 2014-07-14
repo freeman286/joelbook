@@ -7,7 +7,7 @@ class VideosController < ApplicationController
       if @video.save
         format.html { redirect_to videos_path(:campaign => "#{@video.campaign_id}"), notice: 'Video was successfully created.' }
         format.json { render json: @video, status: :created, location: @video }
-        format.js { render :js => "window.youtube_url = '#{@video.body.match(/https?:\/\/[\S]+/).to_s}'" }
+        format.js { render :js => "window.youtube_url = '#{@video.body_html.match(/https?:\/\/[\S]+/).to_s}'" }
       else
         format.html { render action: "new" }
         format.json { render json: @video.errors, status: :unprocessable_entity }
