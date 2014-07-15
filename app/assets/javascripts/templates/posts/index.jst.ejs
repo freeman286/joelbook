@@ -27,7 +27,7 @@
               <img src="<%= post.get('img_url') %>" width="100%" class="rounded_corners img img-responsive">
             <% } %>
       	  </div>
-          <div class="col-md-12 mt-1">
+          <div class="flex-video widescreen col-md-12 mt-1" style="margin: 0 auto;text-align:center;">
             <% if (post.get('youtube_url')) { %>
               <p class="mt-1"><iframe width="400" height="250" src="<%= post.get('youtube_url') %>" frameborder="0" allowfullscreen></iframe></p>
             <% } %>
