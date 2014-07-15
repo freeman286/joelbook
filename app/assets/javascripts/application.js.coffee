@@ -116,6 +116,16 @@ $(document).ready ->
     
   b = setInterval(getUserFriendships, 10000)
   
+  #getYoutubeUrl = ->
+  #  if window.youtube_url isnt "" && window.youtube_url.toString() isnt "[object HTMLInputElement]" && !window.youtube_url_present
+  #    $("#iframe-container").show()
+  #    $("#form_vid").animate({height: 0}, 0).show().animate({height: $("#form_vid").width()}, 500)
+  #    $("#form_vid").attr "src", window.youtube_url
+  #    window.youtube_url_present = true
+  #  return
+  #  
+  #c = setInterval(getYoutubeUrl, 250)  
+  
   $(document.body).on 'change', "#form_img_input", (e) ->
     $("#img_url").val('')
     readURL this
@@ -123,12 +133,12 @@ $(document).ready ->
     return
     
   $(document.body).on 'change', "#img_url", (e) ->
-    $("#form_img").animate({height: 0}, 0).show().animate({height: $("#form_img").height()}, 500);
+    $("#form_img").animate({height: 0}, 0).show().animate({height: $("#form_img").height()}, 500)
     $("#form_img").attr "src", $('#img_url').val()
     $("#new_image").submit()
     
   $(document.body).on 'change', "#youtube_url", (e) ->
-    $("#new_video").submit()  
+    $("#new_video").submit()
     
   $(document.body).on 'click', "#new_post", (e) ->  
     window.image_url = ''

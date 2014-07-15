@@ -65,9 +65,13 @@
         <% } %>
         
         <% if (youtube_url) { %> 
-          <p class="mt-1"><iframe id="form_vid" width="400" height="250" src="<%= youtube_url %>" frameborder="0" allowfullscreen></iframe></p>
+          <div id="iframe-container" class="flex-video widescreen col-md-12 mt-1" style="margin: 0 auto;text-align:center;">
+            <p class="mt-1"><iframe id="form_vid" width="400" height="250" src="<%= youtube_url %>" frameborder="0" allowfullscreen></iframe></p>
+          </div>
         <% } else { %>
-          <p class="mt-1"><iframe id="form_vid" width="400" height="250" src="<%= youtube_url %>" frameborder="0" style="display: none" allowfullscreen></iframe></p>
+          <div id="iframe-container" class="flex-video widescreen col-md-12 mt-1" style="margin: 0 auto;text-align:center; display: none">
+            <p class="mt-1"><iframe id="form_vid" width="400" height="250" src="<%= youtube_url %>" frameborder="0" style="display: none" allowfullscreen></iframe></p>
+          </div>  
         <% } %>
         <div class="actions">
           <input id="save" type="submit" value="Save" data-dismiss="modal" data-static="true" class="btn btn-block btn-primary mt-1">
