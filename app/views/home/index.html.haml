@@ -19,12 +19,14 @@
   .col-md-12
     %h1
       Recent events
-  -5.times do
+  -@events.each do |event|
     .col-md-12.pv-1
       %p
-        %strong Date
+        %strong=event.name
       %p 
-        event  
+        =event.content  
+      %span.event-time
+        ="#{time_ago_in_words(event.created_at)} ago"    
     
 .col-md-6
   =image_tag "", class: "img img-responsive"
