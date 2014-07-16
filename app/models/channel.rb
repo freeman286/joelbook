@@ -36,7 +36,8 @@ class Channel < ActiveRecord::Base
       end
       channels.first - channels.first.where(:private => true)
     else
-      User.current.channels
+      channels << User.current.channels.where(:private => nil) + Channel.where(:public => true)
+      channels.first.uniq
     end
   end
 end

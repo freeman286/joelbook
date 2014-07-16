@@ -4,10 +4,16 @@
     =link_to  channel_posts_path(channel) do
       %strong{:style => "font-size:25px;"}
         =channel.name
+  
+  
+        
     -if channel.owner_user == current_user
       =link_to "<i class='fa fa-pencil pull-right'></i>".html_safe, "##{channel.id}_edit_channel", :'data-toggle' => "modal"
 
       =link_to "<i class='fa fa-times pull-right'></i>".html_safe, "##{channel.id}_delete_channel", :'data-toggle' => "modal"
+  
+    %span.channel-time
+      ="last updated about #{time_ago_in_words(channel.updated_at)} ago"
 
 .modal.fade{id: "#{channel.id}_edit_channel"}
   .modal-dialog

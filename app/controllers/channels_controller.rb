@@ -61,9 +61,7 @@ class ChannelsController < ApplicationController
   end
   
   def search_all
-    if params[:channel][:name].present?
-      @channels = Channel.search(params[:channel][:name])
-    end
+    @channels = Channel.search(params[:channel][:name])
     respond_to do |format|
       format.js
       format.html
