@@ -34,7 +34,8 @@
               %li  
                 =link_to("Channels", channels_path)
               -if current_user.admin?
-                =link_to("Events", events_path)
+                %li
+                  =link_to("Events", events_path)
                     
           %ul.nav.navbar-nav.navbar-right#navbar-right
             -if !current_user
