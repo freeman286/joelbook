@@ -3,6 +3,7 @@ class EventsController < ApplicationController
   
   def index
     @events = Event.all
+    @event = Event.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,10 +42,10 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.html { redirect_to events_path, notice: 'Event was successfully created.' }
         format.json { render json: @event, status: :created, location: @event }
       else
-        format.html { render action: "new" }
+        format.html { render :template => "channels/index" }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -56,10 +57,10 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.html { redirect_to events_path, notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render :template => "channels/index" }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
