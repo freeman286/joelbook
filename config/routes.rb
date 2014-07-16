@@ -47,6 +47,8 @@ RailsRealtime::Application.routes.draw do
   resources :videos
 
   resources :notifications
+  
+  resources :events
 
 
   # The priority is based upon order of creation:

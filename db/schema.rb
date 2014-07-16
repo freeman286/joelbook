@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140713092256) do
+ActiveRecord::Schema.define(:version => 20140716162854) do
 
   create_table "channels", :force => true do |t|
     t.string   "name"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(:version => 20140713092256) do
   create_table "channels_users", :id => false, :force => true do |t|
     t.integer "channel_id"
     t.integer "user_id"
+  end
+
+  create_table "events", :force => true do |t|
+    t.string   "name"
+    t.string   "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "images", :force => true do |t|
@@ -96,6 +103,7 @@ ActiveRecord::Schema.define(:version => 20140713092256) do
     t.datetime "last_destroyed_pending_user_friendship_at"
     t.datetime "last_destroyed_blocked_user_friendship_at"
     t.datetime "last_destroyed_ignored_user_friendship_at"
+    t.boolean  "admin"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
