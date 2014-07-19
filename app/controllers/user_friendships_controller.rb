@@ -162,6 +162,10 @@ class UserFriendshipsController < ApplicationController
     end
   end
   
+  def show
+    redirect_to user_friendships_path
+  end
+  
   private
   def friendship_association
     case params[:list]

@@ -9,6 +9,11 @@ class Notification < ActiveRecord::Base
   validates :content, presence: true
   
   def resource_path
-    #polymorphic_path(resource_for_path)
+    polymorphic_path(resource_for_path)
+  end
+  
+  private
+  def resource_for_path
+    resource
   end
 end

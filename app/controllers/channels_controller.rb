@@ -47,6 +47,11 @@ class ChannelsController < ApplicationController
 
   def show
     @channel = Channel.find(params[:id])
+    if @channel.includes_user?(current_user)
+      redirect_to channel_posts_path(@channel)
+    else
+      redirect_to channels_path
+    end
   end
   
   def search
