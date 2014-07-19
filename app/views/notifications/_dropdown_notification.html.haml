@@ -1,5 +1,5 @@
 %li
-  =link_to(polymorphic_path(notification.resource), :id => "notification_#{notification.id}",:class => "notification-list-item #{notification.read? ? 'read' : 'unread'}") do
+  =link_to(polymorphic_path(notification.resource ? notification.resource : notification.class_path), :id => "notification_#{notification.id}",:class => "notification-list-item #{notification.read? ? 'read' : 'unread'}") do
     .row.pv-1.pl-1
       =image_for_notification(notification, "25x25#", :class => "img-circle notification-thumbnail")  
       .notification-info
