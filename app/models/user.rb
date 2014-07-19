@@ -145,7 +145,8 @@ class User < ActiveRecord::Base
   
   def set_user_friendship_times
     self.last_destroyed_user_friendship_at =
-    self.last_destroyed_accepted_user_friendship_at = 
+    self.last_destroyed_accepted_user_friendship_at =
+    self.last_destroyed_pending_user_friendship_at =
     self.last_destroyed_blocked_user_friendship_at =
     self.last_destroyed_ignored_user_friendship_at = Time.now
   end
