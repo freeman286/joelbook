@@ -5,7 +5,7 @@
     = favicon_link_tag('/assets/favicon.ico') 
     = stylesheet_link_tag    "application", :media => "all"
     %link{href: "//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css", rel: "stylesheet"}/
-    = javascript_include_tag "http://localhost:5001/socket.io/socket.io.js"
+    = javascript_include_tag "http://#{request.host}:5001/socket.io/socket.io.js"
     = javascript_include_tag "application"
     = csrf_meta_tags
     = yield :head
@@ -102,3 +102,4 @@
           scrollTop: $("#notifications-li").offset().top
         }, 2000);
       });
+=request.host
