@@ -5,6 +5,7 @@ class ChannelsController < ApplicationController
   end
 
   def create
+    params[:channel].delete :page
     @channel = Channel.new(params[:channel].merge(:owner_user_id => current_user.id))
     @channel.users << current_user
     if @channel.save

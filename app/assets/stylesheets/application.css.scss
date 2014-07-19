@@ -641,19 +641,38 @@ li.notification {
 }
 
 .imac {
-  @media (min-width: 1199px) {
-    margin-top:-20%;
+  &.logged-in {
+    @media (min-width: 1199px) {
+      margin-top:-20%;
+    }
+    @media (min-width: 990px) and (max-width: 1200px) {
+     margin-top:-25%;
+    }
+    @media (min-width: 620px) and (max-width: 991px) {
+     margin-top:-15%;
+    }
+    @media (min-width: 424px) and (max-width: 621px) {
+      margin-top:-20%;
+    }
+    @media (max-width: 425px) {
+      margin-top:-30%;
+    }
   }
-  @media (min-width: 990px) and (max-width: 1200px) {
-   margin-top:-25%;
-  }
-  @media (min-width: 620px) and (max-width: 991px) {
-   margin-top:-15%;
-  }
-  @media (min-width: 424px) and (max-width: 621px) {
-    margin-top:-20%;
-  }
-  @media (max-width: 425px) {
-    margin-top:-30%;
+  &.logged-out {
+    @media (min-width: 1199px) {
+      margin-top:-17.5%;
+    }
+    @media (min-width: 990px) and (max-width: 1200px) {
+     margin-top:-22.5%;
+    }
+    @media (min-width: 620px) and (max-width: 991px) {
+     margin-top:-12.5%;
+    }
+    @media (min-width: 424px) and (max-width: 621px) {
+      margin-top:-15%;
+    }
+    @media (max-width: 425px) {
+      margin-top:-25%;
+    }
   }
 }

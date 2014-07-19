@@ -16,7 +16,7 @@
           =link_to("login to your account", new_user_session_path)
 
 .col-md-6
-  =image_tag "imac.png", class: "imac img img-responsive"
+  =image_tag "imac.png", class: "imac img img-responsive #{user_signed_in? ? 'logged-in' : 'logged-out'}"
 
 .col-md-6
   .col-md-12
