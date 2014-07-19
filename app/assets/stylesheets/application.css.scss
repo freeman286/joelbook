@@ -639,3 +639,21 @@ li.notification {
    margin-left: 67%;
   }
 }
+
+.imac {
+  @media (min-width: 1199px) {
+    margin-top:-20%;
+  }
+  @media (min-width: 990px) and (max-width: 1200px) {
+   margin-top:-25%;
+  }
+  @media (min-width: 620px) and (max-width: 991px) {
+   margin-top:-15%;
+  }
+  @media (min-width: 424px) and (max-width: 621px) {
+    margin-top:-20%;
+  }
+  @media (max-width: 425px) {
+    margin-top:-30%;
+  }
+}

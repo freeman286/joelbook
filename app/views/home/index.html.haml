@@ -16,6 +16,9 @@
           =link_to("login to your account", new_user_session_path)
 
 .col-md-6
+  =image_tag "imac.png", class: "imac img img-responsive"
+
+.col-md-6
   .col-md-12
     %h1
       Recent events
@@ -28,9 +31,7 @@
       %span.event-time
         ="#{time_ago_in_words(event.created_at)} ago"    
     
-.col-md-6
-  =image_tag "", class: "img img-responsive"
-  Image goes here
+
   
 .col-md-12
   .col-md-12
