@@ -17,12 +17,19 @@ class ChannelsController < ApplicationController
 
   def update
     @channel = Channel.find(params[:id])
+    
+    page =  params[:channel][:page]
+    
+    params[:channel].delete :page
   
     if @channel.owner_user == current_user && @channel.update_attributes(params[:channel])
-      redirect_to channels_path, notice: 'Channel was successfully updated.'
+      redirect_to url_from_params(page, @channel), notice: 'Channel was successfully updated.'
     else
       @channels = Channel.all - Channel.select {|c| c.private?}
-      render :template => "channels/index"
+      @alert_align = true
+      @image = Image.new
+      @posts = @channel.posts
+      render :template => template_from_params(page, @channel)
     end
   end
 
@@ -133,5 +140,23 @@ class ChannelsController < ApplicationController
     @channel.users << User.find(params[:user_id])
     @channel.save
     redirect_to channel_posts_path(@channel)
+  end
+  
+  private
+  
+  def template_from_params(params, channel)
+    if params == "posts"
+      "posts/index"
+    else
+      "channels/index"
+    end
+  end
+  
+  def url_from_params(params, channel)
+    if params == "posts"
+      channel_posts_path(channel)
+    else
+      channels_path
+    end
   end
 end

@@ -607,6 +607,9 @@ li.notification {
   @media (min-width: 990px) {
     width: 48.25%;
   }
+  @media (min-width: 1199px) {
+    width: 48.66666667%;
+  }
 }
 
 .channel-time {
@@ -623,4 +626,16 @@ li.notification {
   right: 12.5px;
   color: #999;
   font-size: 12px;
+}
+
+.crud-icon {
+  @media (min-width: 1199px) {
+    margin-left: 28.5%;
+  }
+  @media (min-width: 990px) and (max-width: 1200px){
+    margin-left: 24%;
+  }
+  @media (min-width: 754px) and (max-width: 991px) {
+   margin-left: 67%;
+  }
 }

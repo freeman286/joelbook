@@ -14,7 +14,7 @@
             %i.fa.fa-times
           %p Editing channel
         .modal-body
-          =render "channels/form"
+          =render "channels/form", :name => "channels"          
           
 -if @channel.errors.present? && controller.action_name == "create"
   :javascript    
@@ -42,7 +42,7 @@
           %i.fa.fa-times
         %p New Channel
       .modal-body
-        =render "channels/form"          
+        =render "channels/form", :name => "channels"          
 
 .row.col-md-12
   .row.col-md-12

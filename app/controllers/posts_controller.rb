@@ -5,6 +5,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html {
         if params[:channel_id]
+          @alert_align = true
           @channel = Channel.find(params[:channel_id])
           @image = Image.new
           if @channel.includes_user?(current_user) || @channel.public

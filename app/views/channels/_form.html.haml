@@ -11,4 +11,6 @@
     %span.help-block
       Enabling the option will mean anyone can use this channel
         
+  - name ||= "channels"
+  = f.hidden_field :page, :value => name
   %div= f.submit "Save", :class => 'btn btn-block btn-primary mt-1'

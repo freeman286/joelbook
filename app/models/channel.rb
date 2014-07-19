@@ -6,7 +6,7 @@ class Channel < ActiveRecord::Base
   
   has_many :posts
 
-  attr_accessible :owner_user_id, :secondary_owner_user_id, :name, :private, :public
+  attr_accessible :owner_user_id, :secondary_owner_user_id, :name, :private, :public, :page
 
 
 
