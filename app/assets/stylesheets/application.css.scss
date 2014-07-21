@@ -202,6 +202,35 @@
 .p9, .p-9 { padding: 90px !important; }
 .p10, .p-10 { padding: 100px !important; }
 
+/* Width */
+
+.w0, .w-0 { width: 0% !important; }
+.w1, .w-1 { width: 10% !important; }
+.w2, .w-2 { width: 20% !important; }
+.w3, .w-3 { width: 30% !important; }
+.w4, .w-4 { width: 40% !important; }
+.w5, .w-5 { width: 50% !important; }
+.w6, .w-6 { width: 60% !important; }
+.w7, .w-7 { width: 70% !important; }
+.w8, .w-8 { width: 80% !important; }
+.w9, .w-9 { width: 90% !important; }
+.w10, .w-10 { width: 100% !important; }
+
+/* Heigth */
+
+.h0, .h-0 { height: 0% !important; }
+.h1, .h-1 { height: 10% !important; }
+.h2, .h-2 { height: 20% !important; }
+.h3, .h-3 { height: 30% !important; }
+.h4, .h-4 { height: 40% !important; }
+.h5, .h-5 { height: 50% !important; }
+.h6, .h-6 { height: 60% !important; }
+.h7, .h-7 { height: 70% !important; }
+.h8, .h-8 { height: 80% !important; }
+.h9, .h-9 { height: 90% !important; }
+.h10, .h-10 { height: 100% !important; }
+
+
 .rounded_corners {
   border-radius: 4px;
   -moz-border-radius: 4px;
@@ -675,4 +704,30 @@ li.notification {
       margin-top:-25%;
     }
   }
+}
+
+.friend-image {
+	@media (min-width: 424px) {
+	  width:10%;
+	}
+	@media (max-width: 425px) {
+    width:20%;
+  }
+}
+
+.friend-name {
+  @media (min-width: 620px) {
+   width:80%;
+  }
+  @media (min-width: 424px) and (max-width: 621px) {
+    width:77.5%;
+  }
+	@media (max-width: 425px) {
+    width:70%;
+  }
+	h4 {
+		position: relative;
+	  bottom: 60px;
+	  left: 90px;
+	}
 }

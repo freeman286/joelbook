@@ -29,4 +29,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @images = @user.images.select{|i| !i.private? || i.post.channel.includes_user?(current_user) }
   end
+  
+  def friends
+    @user = User.find(params[:id])
+    @friends = @user.accepted_friends
+  end
 end

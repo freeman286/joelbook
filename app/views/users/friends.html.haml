@@ -1,0 +1,12 @@
+%h3.ml-3.mb-1="Friends of #{@user.name}"
+
+-@friends.each_slice(2).to_a.each do |arr|
+  .col-md-12
+    -arr.each do |friend|
+      .col-md-6
+        =link_to(friend) do
+          %div
+            .friend-image{class: "user-friendship-#{friend.id}"}
+              = image_tag avatar_url(friend, "80"), class: "rounded_corners"
+            .friend-name.mt-1
+              %h4=friend.name

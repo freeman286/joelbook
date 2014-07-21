@@ -16,6 +16,11 @@
   =link_to('pictures', images_user_path(@user))
   
   %br
+  
+  %i.fa.fa-users
+  =link_to('friends', friends_user_path(@user))
+  
+  %br
   - if signed_in? && @user != current_user
     %i.fa.fa-comment-o
       -if @channel
