@@ -23,7 +23,11 @@ class User < ActiveRecord::Base
                   :last_destroyed_accepted_user_friendship_at,
                   :last_destroyed_pending_user_friendship_at,
                   :last_destroyed_blocked_user_friendship_at,
-                  :last_destroyed_ignored_user_friendship_at
+                  :last_destroyed_ignored_user_friendship_at,
+                  :images_visable,
+                  :email_visable, 
+                  :friends_visable,
+                  :can_be_messaged
                   
   # attr_accessible :title, :body
   attr_accessor :current_password
