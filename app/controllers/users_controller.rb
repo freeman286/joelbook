@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    
   def update
     @user = User.find(params[:id])
         
@@ -27,11 +28,19 @@ class UsersController < ApplicationController
   
   def images
     @user = User.find(params[:id])
-    @images = @user.images.select{|i| !i.private? || i.post.channel.includes_user?(current_user) }
+    if !@user.images_visable
+      redirect_to root_path, alert: 'That user does not want to share their photos.'
+    else
+      @images = @user.images.select{|i| !i.private? || i.post.channel.includes_user?(current_user) }
+    end
   end
   
   def friends
     @user = User.find(params[:id])
-    @friends = @user.accepted_friends
+    if !@user.friends_visable
+      redirect_to root_path, alert: 'That user does not want to share their friends.'
+    else
+      @friends = @user.accepted_friends
+    end
   end
 end
