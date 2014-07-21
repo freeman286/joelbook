@@ -22,7 +22,7 @@
   .col-md-12
     %h1
       Recent events
-  -@events.each do |event|
+  -@events.reverse.each do |event|
     .col-md-12.pv-1
       %p
         %strong=event.name
