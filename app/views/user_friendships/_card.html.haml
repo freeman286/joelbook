@@ -3,11 +3,13 @@
 .friend.row.col-md-12{class: "user-friendship-#{friendship.id} mt-1 pv-1"}
   .col-md-1.gap
     .col-md-12.img-centered
-      = image_tag avatar_url(friend, "80"), class: "rounded_corners"
+      =link_to(friend) do
+        = image_tag avatar_url(friend, "80"), class: "rounded_corners"
   .col-md-10
     .media-body
       .col-md-12.text-centered
-        %h4.media-heading= friend.name
+        =link_to(friend) do
+          %h4.media-heading= friend.name
         = succeed "." do
           %em{class: "friendship-#{friendship.id}"}
             Friendship is #{friendship.state_to_name}
