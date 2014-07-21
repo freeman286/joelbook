@@ -2,41 +2,65 @@
 .col-md-4
   %h2
     Edit profile
-  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "well" }) do |f|
-    %div
-      = f.label :email
-      %br/
-      = f.email_field :email, :autofocus => true, :class => "input-sm form-control"
-    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+    .well
       %div
-        Currently waiting confirmation for: #{resource.unconfirmed_email}
-    %div
-      = f.label :name
-      %br/
-      = f.text_field :name, :class => "input-sm form-control"
-    %div.row.mv-1
-      .col-md-12.file_upload
-        = image_tag f.object.avatar.present? ? avatar_url(current_user) : '', :id => "form_img", :style => "#{f.object.avatar.present? ? '' : 'display: none;'}", :width => "100%"
-      .col-md-12
-        %span.btn.btn-default.btn-file
-          Upload avatar
-          = f.file_field :avatar, :id => "form_img_input"
-        -if f.object.avatar.present?
-          =link_to('Crop avatar', crop_user_registration_path, :id => 'crop_link', :class => 'btn btn-default mv-1')    
-    %div
-      = f.label :password
-      %i (leave blank if you don't want to change it)
-      %br/
-      = f.password_field :password, :autocomplete => "off", :class => "input-sm form-control pr-1"
-    %div
-      = f.label :password_confirmation
-      %br/
-      = f.password_field :password_confirmation, :class => "input-sm form-control"
-    %div= f.submit "Update", class: 'btn btn-block btn-primary mt-1'
-  %h3 Cancel my account
+        = f.label :email
+        %br/
+        = f.email_field :email, :autofocus => true, :class => "input-sm form-control"
+      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+        %div
+          Currently waiting confirmation for: #{resource.unconfirmed_email}
+      %div
+        = f.label :name
+        %br/
+        = f.text_field :name, :class => "input-sm form-control"
+      %div.row.mv-1
+        .col-md-12.file_upload
+          = image_tag f.object.avatar.present? ? avatar_url(current_user) : '', :id => "form_img", :style => "#{f.object.avatar.present? ? '' : 'display: none;'}", :width => "100%"
+        .col-md-12
+          %span.btn.btn-default.btn-file
+            Upload avatar
+            = f.file_field :avatar, :id => "form_img_input"
+          -if f.object.avatar.present?
+            =link_to('Crop avatar', crop_user_registration_path, :id => 'crop_link', :class => 'btn btn-default mv-1')    
+      %div
+        = f.label :password
+        %i (leave blank if you don't want to change it)
+        %br/
+        = f.password_field :password, :autocomplete => "off", :class => "input-sm form-control pr-1"
+      %div
+        = f.label :password_confirmation
+        %br/
+        = f.password_field :password_confirmation, :class => "input-sm form-control"
+      %div= f.submit "Update", class: 'btn btn-block btn-primary mt-1'
+  
+    .col-md-12
+      ="&nbsp;".html_safe
+
+    %h3 Privacy
+    .well
+      %div
+        %label{for: "user_privacy"} Others can...
+      %div
+        = f.check_box :images_visable
+        see my photos
+      %div
+        = f.check_box :email_visable
+        see my email
+      %div
+        = f.check_box :friends_visable
+        see my friends   
+      %div
+        = f.check_box :friends_visable
+        message me
+      %div= f.submit "Save chaneges", class: 'btn btn-block btn-primary mt-1'  
+         
   
 .col-md-12
   ="&nbsp;".html_safe
+  
+  %h3 Cancel my account
   
 .col-md-4
   .well
@@ -57,7 +81,7 @@
       .modal-body
         If you do you will not be able to access your account again
       .modal-footer
-        = link_to "Yes, cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger"
+        = link_to "Yes, cancel my account", registration_path(resource_name), :method => :delete, :class => "btn btn-danger"
         %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Close
         
 :javascript
