@@ -54,4 +54,10 @@ class RegistrationsController < Devise::RegistrationsController
   def update_resource(resource, params)
     resource.update_with_password(params)
   end
+  
+  protected
+
+  def after_sign_up_path_for(resource)
+    '/channels'
+  end
 end 
