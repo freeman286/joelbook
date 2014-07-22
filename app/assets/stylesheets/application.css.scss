@@ -531,9 +531,14 @@ li.notification {
   }
 }
 
-@media (max-width: 991px) {
-  .friendship-action-btn {
+
+.friendship-action-btn {
+  @media (max-width: 991px) and (min-width: 600px) {
     width:50% !important;
+    margin-top:10px;
+  }
+  @media (max-width: 599px) {
+    width:150px !important;
     margin-top:10px;
   }
 }
@@ -541,6 +546,9 @@ li.notification {
 .img-centered {
   @media (max-width: 991px) and (min-width: 600px) {
     margin-left: 17.5%;
+  }
+  @media (max-width: 599px) {
+    margin-left: 37.5px;
   }
 }
 
@@ -730,4 +738,11 @@ li.notification {
 	  bottom: 60px;
 	  left: 90px;
 	}
+}
+
+.media-heading {
+  @media (max-width: 991px) {
+   text-align:center;
+   width:147px;
+  }
 }
