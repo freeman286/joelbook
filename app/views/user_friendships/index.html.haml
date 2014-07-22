@@ -13,21 +13,45 @@
         %a{"data-toggle" => "tab", href: "#ignored"} Ignored  
 .tab-content
   #all.tab-pane
-    - @user_friendships.reverse.each do |friendship|
-      = render 'card', :friendship => friendship
+    -if @user_friendships.present?
+      - @user_friendships.reverse.each do |friendship|
+        = render 'card', :friendship => friendship
+    -else
+      .col-md-12
+        .col-md-12
+          %h4 You have no friends
   #accepted.tab-pane
-    - @accepted.reverse.each do |friendship|
-      = render 'card', :friendship => friendship
+    -if @accepted.present?
+      - @accepted.reverse.each do |friendship|
+        = render 'card', :friendship => friendship
+    -else
+      .col-md-12
+        .col-md-12
+          %h4 You have no accepted friends
   #pending.tab-pane
-    - @pending.reverse.each do |friendship|
-      = render 'card', :friendship => friendship
+    -if @pending.present?
+      - @pending.reverse.each do |friendship|
+        = render 'card', :friendship => friendship
+    -else
+      .col-md-12
+        .col-md-12
+          %h4 You have no pending friends
   #blocked.tab-pane
-    - @blocked.reverse.each do |friendship|
-      = render 'card', :friendship => friendship
+    -if @blocked.present?
+      - @blocked.reverse.each do |friendship|
+        = render 'card', :friendship => friendship
+    -else
+      .col-md-12
+        .col-md-12
+          %h4 You have no blocked friends 
   #ignored.tab-pane
-    - @ignored.reverse.each do |friendship|
-      = render 'card', :friendship => friendship    
-      
+    -if @blocked.present?
+      - @ignored.reverse.each do |friendship|
+        = render 'card', :friendship => friendship    
+    -else
+      .col-md-12
+        .col-md-12
+          %h4 You have no ignored friends  
       
       
                 
