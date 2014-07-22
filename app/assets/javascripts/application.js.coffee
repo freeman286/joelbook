@@ -96,18 +96,23 @@ $(document).ready ->
       success: (e) ->
         if parseInt(e.user_friendships_count) isnt 0
           $('#all').hide().html(e.user_friendships).fadeIn()
+          $('#all').css('display', '')
           return
         if parseInt(e.accepted_count) isnt 0
           $('#accepted').hide().html(e.accepted).fadeIn()
+          $('#accepted').css('display', '')
           return
         if parseInt(e.pending_count) isnt 0
           $('#pending').hide().html(e.pending).fadeIn()
+          $('#pending').css('display', '')
           return
         if parseInt(e.blocked_count) isnt 0
           $('#blocked').hide().html(e.blocked).fadeIn()
+          $('#blocked').css('display', '')
           return
         if parseInt(e.ignored_count) isnt 0
           $('#ignored').hide().html(e.ignored).fadeIn()
+          $('#ignored').css('display', '')
           return      
           
         return
