@@ -1,9 +1,6 @@
 window.notificationsCount = parseInt($.trim($('.notifications-count').html()) / 2);
 var num = window.notificationsCount
-if (num - $('.unread').length < 1) {
-  $('.notifications-count').hide();
-} else {
-  $('.notifications-count').html(num - $('.unread').length);
-}
+$('.notifications-count').fadeOut();
+
 
 $('.unread').addClass('read').removeClass('.unread')

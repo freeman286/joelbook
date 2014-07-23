@@ -18,7 +18,7 @@ class NotificationsController < ApplicationController
   end
   
   def read
-    current_user.notifications.pop(5).each do |notification|
+    current_user.notifications.each do |notification|
       notification.read = true
       notification.save
     end
