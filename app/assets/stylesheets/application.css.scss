@@ -641,7 +641,7 @@ li.notification {
 }
 
 #new-post-container {
-  @media (min-width: 990px) {
+  @media (min-width: 991px) {
     width: 48.25%;
   }
   @media (min-width: 1199px) {
@@ -667,13 +667,13 @@ li.notification {
 
 .crud-icon {
   @media (min-width: 1199px) {
-    margin-left: 28.5%;
+    margin-left: 41%;
   }
   @media (min-width: 990px) and (max-width: 1200px){
-    margin-left: 24%;
+    margin-left: 38.5%;
   }
   @media (min-width: 754px) and (max-width: 991px) {
-   margin-left: 67%;
+   margin-left: 87%;
   }
 }
 

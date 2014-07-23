@@ -26,15 +26,15 @@
         = render 'card', :friendship => friendship
     -else
       .col-md-12
-        .col-md-12
+        .col-md-12.accepted
           %h4 You have no accepted friends
   #pending.tab-pane
-    -if @pending.present?
-      - @pending.reverse.each do |friendship|
+    -if (@requested + @pending).present?
+      - (@requested + @pending).reverse.each do |friendship|
         = render 'card', :friendship => friendship
     -else
       .col-md-12
-        .col-md-12
+        .col-md-12.pending
           %h4 You have no pending friends
   #blocked.tab-pane
     -if @blocked.present?
@@ -42,15 +42,15 @@
         = render 'card', :friendship => friendship
     -else
       .col-md-12
-        .col-md-12
+        .col-md-12.blocked
           %h4 You have no blocked friends 
   #ignored.tab-pane
-    -if @blocked.present?
+    -if @ignored.present?
       - @ignored.reverse.each do |friendship|
         = render 'card', :friendship => friendship    
     -else
       .col-md-12
-        .col-md-12
+        .col-md-12.ignored
           %h4 You have no ignored friends  
       
       

@@ -80,8 +80,15 @@ $(document).ready ->
       dataType: "json"
       type: "POST"
       success: (e) ->
-        $('.friendship-' + FriendshipBtn.data("friendshipId")).hide().html("Friendship is accepted ").fadeIn();
-        $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).hide().html("<div class='col-xs-12 col-md-4'><a href='/user_friendships/" + FriendshipBtn.data("friendshipId") + "' class='friendship-action-btn btn btn-block btn-danger index-delete-friendship' data-friendship-id='" + FriendshipBtn.data("friendshipId") + "'>Delete Friendship</a></div>").fadeIn();
+        $('.friendship-' + FriendshipBtn.data("friendshipId")).hide().html("Friendship is accepted ").fadeIn()
+        $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).hide().html("<div class='col-xs-12 col-md-4'><a href='/user_friendships/" + FriendshipBtn.data("friendshipId") + "' class='friendship-action-btn btn btn-block btn-danger index-delete-friendship' data-friendship-id='" + FriendshipBtn.data("friendshipId") + "'>Delete Friendship</a></div>").fadeIn()
+        $('.user-friendship-' + FriendshipBtn.data("friendshipId") + ':first').clone().prependTo('#accepted').hide().fadeIn(->
+          $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).attr("style", "")
+          $('.friendship-' + FriendshipBtn.data("friendshipId")).attr("style", "")
+          return
+        )
+        $('#ignored').find('.user-friendship-' + FriendshipBtn.data("friendshipId")).first().remove()
+        $('.accepted').hide()
         
   $(document.body).on 'click', ".index-delete-friendship", (event) ->
     event.preventDefault()    
@@ -91,7 +98,7 @@ $(document).ready ->
       dataType: "json"
       type: "POST"
       success: (e) ->
-        $('.user-friendship-' + FriendshipBtn.data("friendshipId")).fadeOut();
+        $('.user-friendship-' + FriendshipBtn.data("friendshipId")).fadeOut()
   
   $(document.body).on 'click', ".index-decline-friendship", (event) ->
     event.preventDefault()    
@@ -101,8 +108,14 @@ $(document).ready ->
       dataType: "json"
       type: "POST"
       success: (e) ->
-        $('.friendship-' + FriendshipBtn.data("friendshipId")).hide().html("Friendship is ignored ").fadeIn();
-        $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).hide().html("<div class='col-xs-12 col-md-4'><a href='/user_friendships/" + FriendshipBtn.data("friendshipId") + "' class='friendship-action-btn btn btn-block btn-success index-accept-friendship' data-friendship-id='" + FriendshipBtn.data("friendshipId") + "'>Accept Friendship</a></div>").fadeIn();
+        $('.friendship-' + FriendshipBtn.data("friendshipId")).hide().html("Friendship is ignored ").fadeIn()
+        $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).hide().html("<div class='col-xs-12 col-md-4'><a href='/user_friendships/" + FriendshipBtn.data("friendshipId") + "' class='friendship-action-btn btn btn-block btn-success index-accept-friendship' data-friendship-id='" + FriendshipBtn.data("friendshipId") + "'>Accept Friendship</a></div>").fadeIn()
+        $('.user-friendship-' + FriendshipBtn.data("friendshipId") + ':first').clone().prependTo('#ignored').hide().fadeIn(->
+          $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).attr("style", "")
+          $('.friendship-' + FriendshipBtn.data("friendshipId")).attr("style", "")
+          return
+        )
+        $('.ignored').hide()
           
   $(document.body).on 'click', ".index-block-friendship", (event) ->
     event.preventDefault()    
@@ -112,8 +125,14 @@ $(document).ready ->
       dataType: "json"
       type: "POST"
       success: (e) ->
-        $('.friendship-' + FriendshipBtn.data("friendshipId")).hide().html("Friendship is blocked ").fadeIn();
-        $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).hide().html("<div class='col-xs-12 col-md-4'><a href='/user_friendships/" + FriendshipBtn.data("friendshipId") + "' class='friendship-action-btn btn btn-block btn-success index-unblock-friendship' data-friendship-id='" + FriendshipBtn.data("friendshipId") + "'>Unblock User</a></div>").fadeIn();
+        $('.friendship-' + FriendshipBtn.data("friendshipId")).hide().html("Friendship is blocked ").fadeIn()
+        $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).hide().html("<div class='col-xs-12 col-md-4'><a href='/user_friendships/" + FriendshipBtn.data("friendshipId") + "' class='friendship-action-btn btn btn-block btn-success index-unblock-friendship' data-friendship-id='" + FriendshipBtn.data("friendshipId") + "'>Unblock User</a></div>").fadeIn()
+        $('.user-friendship-' + FriendshipBtn.data("friendshipId") + ':first').clone().prependTo('#blocked').hide().fadeIn(->
+          $('.friendship-actions-' + FriendshipBtn.data("friendshipId")).attr("style", "")
+          $('.friendship-' + FriendshipBtn.data("friendshipId")).attr("style", "")
+          return
+        )
+        $('.blocked').hide()
   
   $(document.body).on 'click', ".index-unblock-friendship", (event) ->
     event.preventDefault()    
@@ -123,5 +142,5 @@ $(document).ready ->
       dataType: "json"
       type: "POST"
       success: (e) ->
-        $('.user-friendship-' + FriendshipBtn.data("friendshipId")).fadeOut();                      
+        $('.user-friendship-' + FriendshipBtn.data("friendshipId")).fadeOut()                      
   return
