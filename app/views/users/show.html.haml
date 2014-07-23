@@ -58,36 +58,34 @@
   :javascript
     $("#block-user").hide();
 
--if @user_friendship
+:javascript
 
-  :javascript
-  
-    var getUserFriendship;
+  var getUserFriendship;
 
-    getUserFriendship = function() {
-      return $.ajax({
-        url: Routes.user_friendships_path(),
-        dataType: "json",
-        type: "GET",
-        success: function(e) {
-          friendship = _.filter(e.all_user_friendships, function(f) {return f.friend_id == #{@user.id}})[0]
-          if (friendship) {
-            if (friendship.state == "accepted" || friendship.state == "pending")  {
-              $("#friend-status").hide().html('<a href="/user_friendships/#{@user.id}?friend_id=#{@user.id}" class="btn btn-danger" data-friend-id="#{@user.id}" id="unfriend-user">Unfriend User</a>').fadeIn();
-              $("#block-status").html('');
-            } else {
-              $("#friend-status").hide().html('<a href="/user_friendships/new?friend_id=#{@user.id}" class="btn btn-success" data-friend-id="#{@user.id}" id="add-friendship">Add Friend</a>').fadeIn();
-              $("#block-status").hide().html('<a href="/user_friendships/2/block?friend_id=#{@user.id}" class="btn btn-danger" data-friend-id="#{@user.id}" id="block-user">Block User</a>').fadeIn();
-            }
+  getUserFriendship = function() {
+    return $.ajax({
+      url: Routes.user_friendships_path(),
+      dataType: "json",
+      type: "GET",
+      success: function(e) {
+        friendship = _.filter(e.all_user_friendships, function(f) {return f.friend_id == #{@user.id}})[0]
+        if (friendship) {
+          if (friendship.state == "accepted" || friendship.state == "pending")  {
+            $("#friend-status").hide().html('<a href="/user_friendships/#{@user.id}?friend_id=#{@user.id}" class="btn btn-danger" data-friend-id="#{@user.id}" id="unfriend-user">Unfriend User</a>').fadeIn();
+            $("#block-status").html('');
           } else {
             $("#friend-status").hide().html('<a href="/user_friendships/new?friend_id=#{@user.id}" class="btn btn-success" data-friend-id="#{@user.id}" id="add-friendship">Add Friend</a>').fadeIn();
             $("#block-status").hide().html('<a href="/user_friendships/2/block?friend_id=#{@user.id}" class="btn btn-danger" data-friend-id="#{@user.id}" id="block-user">Block User</a>').fadeIn();
-          } 
-        }
-      });
-    };
-  
-    t = setInterval(getUserFriendship, 10000)
+          }
+        } else {
+          $("#friend-status").hide().html('<a href="/user_friendships/new?friend_id=#{@user.id}" class="btn btn-success" data-friend-id="#{@user.id}" id="add-friendship">Add Friend</a>').fadeIn();
+          $("#block-status").hide().html('<a href="/user_friendships/2/block?friend_id=#{@user.id}" class="btn btn-danger" data-friend-id="#{@user.id}" id="block-user">Block User</a>').fadeIn();
+        } 
+      }
+    });
+  };
+
+  t = setInterval(getUserFriendship, 10000)
 
 -#
   :javascript

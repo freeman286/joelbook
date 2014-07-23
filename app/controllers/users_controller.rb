@@ -22,7 +22,6 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @user_friendship = UserFriendship.where(:user_id => current_user.id, :friend_id => @user.id).first
     @channel = Channel.find_private_channel(@user, current_user)
     @posts = @user.posts
   end
