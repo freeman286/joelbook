@@ -17,7 +17,7 @@
         = f.text_field :name, :class => "input-sm form-control"
       %div.row.mv-1
         .col-md-12.file_upload
-          = image_tag f.object.avatar.present? ? avatar_url(current_user) : '', :id => "form_img", :style => "#{f.object.avatar.present? ? '' : 'display: none;'}", :width => "100%"
+          = image_tag f.object.avatar.present? ? avatar_url(current_user) : '', :id => "form_img", :class => "mb-1 rounded_corners",:style => "#{f.object.avatar.present? ? '' : 'display: none;'}", :width => "100%"
         .col-md-12
           %span.btn.btn-default.btn-file
             Upload avatar
