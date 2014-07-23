@@ -125,7 +125,7 @@ $(document).ready ->
     if window.youtube_url isnt "" && window.youtube_url.toString() isnt "[object HTMLInputElement]" && !window.youtube_url_present
       $("#iframe-container").show()
       $("#form_vid").animate({height: 0}, 0).show().animate({height: $("#form_vid").width()}, 500)
-      $("#form_vid").attr "src", window.youtube_url
+      $("#form_vid").attr "src", window.youtube_url.slice(0, - 1)
       window.youtube_url_present = true
     return
     
