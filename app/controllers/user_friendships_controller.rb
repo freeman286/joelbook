@@ -12,6 +12,7 @@ class UserFriendshipsController < ApplicationController
       @ignored = current_user.user_friendships.where(:state => 'ignored')
       format.html {}
       response_hash = {
+        :all_user_friendships => @user_friendships,
         :user_friendships => "",
         :user_friendships_count => @user_friendships.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + conditional_to_i(current_user.last_destroyed_user_friendship_at > 10.seconds.ago),
         :accepted => "",
@@ -163,7 +164,15 @@ class UserFriendshipsController < ApplicationController
   end
   
   def show
-    redirect_to user_friendships_path
+    @user_friendship = UserFriendship.find(params[:id])
+    respond_to do |format|
+    format.html {
+      redirect_to user_friendships_path
+    }
+    format.json {
+      render json: @user_friendship.to_json
+    }
+    end
   end
   
   private
