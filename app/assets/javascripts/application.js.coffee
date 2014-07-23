@@ -121,15 +121,15 @@ $(document).ready ->
     
   b = setInterval(getUserFriendships, 10000)
   
-  #getYoutubeUrl = ->
-  #  if window.youtube_url isnt "" && window.youtube_url.toString() isnt "[object HTMLInputElement]" && !window.youtube_url_present
-  #    $("#iframe-container").show()
-  #    $("#form_vid").animate({height: 0}, 0).show().animate({height: $("#form_vid").width()}, 500)
-  #    $("#form_vid").attr "src", window.youtube_url
-  #    window.youtube_url_present = true
-  #  return
-  #  
-  #c = setInterval(getYoutubeUrl, 250)  
+  getYoutubeUrl = ->
+    if window.youtube_url isnt "" && window.youtube_url.toString() isnt "[object HTMLInputElement]" && !window.youtube_url_present
+      $("#iframe-container").show()
+      $("#form_vid").animate({height: 0}, 0).show().animate({height: $("#form_vid").width()}, 500)
+      $("#form_vid").attr "src", window.youtube_url
+      window.youtube_url_present = true
+    return
+    
+  c = setInterval(getYoutubeUrl, 250)  
   
   $(document.body).on 'change', "#form_img_input", (e) ->
     $("#img_url").val('')
@@ -151,6 +151,10 @@ $(document).ready ->
     $(".container").find('input[type=text]').val('')
     $("#form_img").hide()
     $("#form_img").attr "src", ''
+    $('#iframe-container').hide()
+    $("#form_vid").attr("src", '')
+    $("#img_url").attr("placeholder", 'Paste image url here')
+    $("#youtube_url").attr("placeholder", 'Paste video url here')
     
   
   $(document.body).on 'click', ".navbar-notification", (e) ->

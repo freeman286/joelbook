@@ -43,7 +43,7 @@
                 <% if (img_url.indexOf("media") == 1) { %>
                   <input type="text" id="img_url" name="image_url" class="input-sm form-control" placeholder="Paste image url here">
                 <% } else { %>
-                  <input type="text" id="img_url" name="image_url" value="<%= img_url %>" class="input-sm form-control">
+                  <input type="text" id="img_url" name="image_url" value="<%= img_url %>" class="input-sm form-control" placeholder="Paste image url here">
                 <% } %>  
               </div>
             </form>
@@ -52,7 +52,7 @@
         <div class="tab-pane active" id="videos">
           <form accept-charset="UTF-8" action="/videos" class="new_video" data-remote="true" enctype="multipart/form-data" id="new_video" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
             <% if (youtube_url) { %>
-              <input type="text" id="youtube_url" name="youtube_url" value="<%= youtube_url %>" class="input-sm form-control mt-1">
+              <input type="text" id="youtube_url" name="youtube_url" value="<%= youtube_url %>" class="input-sm form-control mt-1" placeholder="Paste video url here">
             <% } else { %>
               <input type="text" id="youtube_url" name="youtube_url" class="input-sm form-control mt-1" placeholder="Paste video url here">
             <% } %> 
