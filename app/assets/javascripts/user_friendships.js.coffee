@@ -88,6 +88,7 @@ $(document).ready ->
           return
         )
         $('#ignored').find('.user-friendship-' + FriendshipBtn.data("friendshipId")).first().remove()
+        $('#pending').find('.user-friendship-' + FriendshipBtn.data("friendshipId")).first().remove()
         $('.accepted').hide()
         
   $(document.body).on 'click', ".index-delete-friendship", (event) ->
@@ -115,6 +116,7 @@ $(document).ready ->
           $('.friendship-' + FriendshipBtn.data("friendshipId")).attr("style", "")
           return
         )
+        $('#pending').find('.user-friendship-' + FriendshipBtn.data("friendshipId")).first().remove()
         $('.ignored').hide()
           
   $(document.body).on 'click', ".index-block-friendship", (event) ->
@@ -132,6 +134,7 @@ $(document).ready ->
           $('.friendship-' + FriendshipBtn.data("friendshipId")).attr("style", "")
           return
         )
+        $('#pending').find('.user-friendship-' + FriendshipBtn.data("friendshipId")).first().remove()
         $('.blocked').hide()
   
   $(document.body).on 'click', ".index-unblock-friendship", (event) ->
