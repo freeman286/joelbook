@@ -3,7 +3,7 @@
     %h4 Notifications
     =link_to("Show all", notifications_path, :class => "label-show-all")
   -if notifications.present?
-    -notifications.each do |notification|
+    -notifications.reverse.each do |notification|
       =render('notifications/dropdown_notification', :notification => notification)
   -else
     %li.center.p-1 You have no notifications yet.
