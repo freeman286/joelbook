@@ -8,25 +8,27 @@
       =@user.name
   
   -if @user.email_visable
-    %br
     
     %i.fa.fa-envelope-o
     =link_to(@user.email, "mailto:#{@user.email}")
-  
-  -if @user.images_visable
+    
     %br
+    
+  -if @user.images_visable
   
     %i.fa.fa-file-image-o
     =link_to('pictures', images_user_path(@user))
+    
+    %br
   
   -if @user.friends_visable
-    %br
   
     %i.fa.fa-users
     =link_to('friends', friends_user_path(@user))
-  
-  - if signed_in? && @user != current_user && @user.can_be_messaged
+    
     %br
+    
+  - if signed_in? && @user != current_user && @user.can_be_messaged
     
     %i.fa.fa-comment-o
       -if @channel
