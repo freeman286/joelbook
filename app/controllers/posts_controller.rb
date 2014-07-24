@@ -84,7 +84,7 @@ class PostsController < ApplicationController
     end
     
     if params[:youtube_url].present?
-      @video = Video.select{|v| v.body == params[:youtube_url]}.first
+      @video = Video.find(:all, :conditions => ["body_html LIKE ?", "%#{params[:youtube_url]}%"]).first
       @video.post = @post
       @video.save
     end

@@ -6,6 +6,8 @@ class Image < ActiveRecord::Base
   
   dragonfly_accessor :image
   validates_property :format, of: :image, in: ['jpeg', 'png', 'gif']  
+  
+  validates :original_image_url, presence: true
 
   def url
     self.original_image_url && !self.original_image_url.empty? ? self.original_image_url : self.image.url 
