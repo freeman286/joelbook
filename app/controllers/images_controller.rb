@@ -6,8 +6,6 @@ class ImagesController < ApplicationController
     respond_to do |format|
       if @image.save
         format.js { render :js => "window.image_url = '#{@image.url}'" }
-      else
-        format.js { render :js => "alert('that image could not be uploaded')"}
       end
     end
   end
