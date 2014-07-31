@@ -39,11 +39,11 @@
     #friend-status
       - if current_user.friends.include?(@user) || current_user.pending_friends.include?(@user)
         = link_to "Unfriend User", user_friendship_path(friend_id: @user), class: 'btn btn-danger', id: 'unfriend-user', data: { friend_id: @user.to_param }
-      - else
+      - elsif !current_user.blocked_friends.include?(@user)
         = link_to "Add Friend", new_user_friendship_path(friend_id: @user), class: 'btn btn-success', id: 'add-friendship', data: { friend_id: @user.to_param }
     #block-status
       - if current_user.blocked_friends.include?(@user)
-        = link_to "Unblock User", unblock_user_friendship_path(friend_id: @user), class: 'btn', id: 'unblock-user', data: { friend_id: @user.id.to_param }
+        = link_to "Unblock User", unblock_user_friendship_path(friend_id: @user), class: 'btn btn-success', id: 'unblock-user', data: { friend_id: @user.id.to_param }
       - else
         = link_to "Block User", block_user_friendship_path(friend_id: @user), class: 'btn btn-danger', id: 'block-user', data: { friend_id: @user.id.to_param }
   
