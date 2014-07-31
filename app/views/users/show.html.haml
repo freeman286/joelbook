@@ -84,8 +84,10 @@
             }
           }
         } else {
-          $("#friend-status").hide().html('<a href="/user_friendships/new?friend_id=#{@user.id}" class="btn btn-success" data-friend-id="#{@user.id}" id="add-friendship">Add Friend</a>').fadeIn();
-          $("#block-status").hide().html('<a href="/user_friendships/2/block?friend_id=#{@user.id}" class="btn btn-danger" data-friend-id="#{@user.id}" id="block-user">Block User</a>').fadeIn();
+          if ($("#friend-status").text() != "Add Friend") {
+            $("#friend-status").hide().html('<a href="/user_friendships/new?friend_id=#{@user.id}" class="btn btn-success" data-friend-id="#{@user.id}" id="add-friendship">Add Friend</a>').fadeIn();
+            $("#block-status").hide().html('<a href="/user_friendships/2/block?friend_id=#{@user.id}" class="btn btn-danger" data-friend-id="#{@user.id}" id="block-user">Block User</a>').fadeIn();
+          }
         } 
       }
     });
