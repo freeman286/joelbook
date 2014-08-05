@@ -68,6 +68,7 @@ $(document).ready ->
       success: (e) ->
         BlockBtn.fadeOut()
         $("#add-friendship").fadeIn()
+        $("#friend-status").height(0).html('<a href="/user_friendships/new?friend_id=' + BlockBtn.data("friendId") + '" class="btn btn-success" data-friend-id="' + BlockBtn.data("friendId") + '" id="add-friendship">Add Friend</a>')
         $("#friend-status").animate({height:'34px'}, 500)
         $("#block-status").html "<a href='/user_friendships/" + BlockBtn.data("friendId") + "/block?friend_id=" + BlockBtn.data("friendId") + "' class='btn btn-danger' data-friend-id='" + BlockBtn.data("friendId") + "' id='block-user'>Block User</a>"
         return

@@ -64,21 +64,24 @@ class UserFriendshipsController < ApplicationController
   end
   
   def block
-    if current_user.user_friendships.where(:friend_id => params[:id]).present?
-      @user_friendship = current_user.user_friendships.where(:friend_id => params[:id]).first
-      @user_friendship.delete_mutual_friendship!
-      friendship = UserFriendship.create!(user: current_user, friend: @user_friendship.friend, state: 'pending')
-      friendship.update_attribute(:state, 'blocked')
-      redirect_to user_friendships_path
-      if @user_friendship.destroy
-        flash[:notice] = "You have blocked #{@user_friendship.friend.name}"
+    respond_to do |format|
+      if current_user.user_friendships.where(:friend_id => params[:id]).present?
+        @user_friendship = current_user.user_friendships.where(:friend_id => params[:id]).first
+        @user_friendship.delete_mutual_friendship!
+        friendship = UserFriendship.create!(user: current_user, friend: @user_friendship.friend, state: 'pending')
+        friendship.update_attribute(:state, 'blocked')
+        redirect_to user_friendships_path
+        if @user_friendship.destroy
+          flash[:notice] = "You have blocked #{@user_friendship.friend.name}"
+        else
+          flash[:alert] = "That friendship could not be blocked"
+        end
       else
-        flash[:alert] = "That friendship could not be blocked"
+        @user_friendship = UserFriendship.create!(user: current_user, friend: User.find(params[:id]), state: 'pending')
+        @user_friendship.update_attribute(:state, 'blocked')
+        @user_friendship.delete_mutual_friendship!
       end
-    else
-      @user_friendship = UserFriendship.create!(user: current_user, friend: User.find(params[:id]), state: 'pending')
-      @user_friendship.update_attribute(:state, 'blocked')
-      @user_friendship.delete_mutual_friendship!
+      format.json { render json: @user_friendship.to_json }
     end
   end
   
