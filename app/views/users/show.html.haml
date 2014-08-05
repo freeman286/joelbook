@@ -75,7 +75,7 @@
           if (friendship.state == "accepted" || friendship.state == "pending")  {
             if ($("#friend-status").text() != "Unfriend User") {
               $("#friend-status").hide().html('<a href="/user_friendships/#{@user.id}?friend_id=#{@user.id}" class="btn btn-danger" data-friend-id="#{@user.id}" id="unfriend-user">Unfriend User</a>').fadeIn();
-              $("#block-status").html('');
+              $("#block-status").hide();
             }
           } else {
             if ($("#friend-status").text() != "Add Friend") {
