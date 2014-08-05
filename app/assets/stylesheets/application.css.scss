@@ -746,3 +746,12 @@ li.notification {
    width:147px;
   }
 }
+
+.notification-btns {
+  @media (min-width: 990px) {
+    margin-left: 5px;
+  }
+  @media (max-width: 991px) {
+   margin-left: 25px;
+  }
+}

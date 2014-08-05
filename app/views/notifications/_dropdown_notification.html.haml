@@ -3,5 +3,11 @@
     .row.pv-1.pl-1
       =image_for_notification(notification, "25x25#", :class => "img-circle notification-thumbnail")  
       .notification-info
-        %p.notification-message-summary
+        .notification-message-summary
           =notification.content
+        -if notification.content.include?('wants to be friends') || notification.resource_type == "Channel"
+          .col-md-12.notification-btns
+            .col-md-5.btn.btn-primary.btn-small.mr-1
+              %i.fa.fa-check
+            .col-md-5.btn.btn-danger.btn-small
+              %i.fa.fa-times
