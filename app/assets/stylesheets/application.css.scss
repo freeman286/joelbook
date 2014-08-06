@@ -377,7 +377,7 @@
   border-radius: 4px;
 }
 .dropdown-menu > li:hover .notification-btns {
-  background: #F4F6F6;
+  background: #E9E9E9;
 }
 .notification-show-all {
   padding: 10px 5px;
@@ -762,4 +762,30 @@ li.notification {
   @media (max-width: 991px) {
    margin-left: 80px;
   }
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  @media (max-width: 768px) {
+    font-size: 13px !important;
+  }
+  @media (min-width: 767px) {
+    font-size: 14px !important;
+  }
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  background-clip: padding-box;
 }
