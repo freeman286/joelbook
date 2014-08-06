@@ -5,13 +5,13 @@
       .notification-info
         .notification-message-summary
           =notification.content
-  -if notification.content.include?('wants to be friends') || notification.resource_type == "Channel"
-    .row
+  -if (notification.content.include?('wants to be friends') || notification.resource_type == "Channel") && !notification.acted_on && notification.resource && !notification.content.include?("has removed")
+    .row{:class => "notification_#{notification.id}"}
       .col-md-12.mb-1.notification-btns-container
         .notification-btns
-          =link_to("#", :style => "text-decoration: none;") do
+          =link_to(accept_path(notification.id), :remote => true, :style => "text-decoration: none;") do
             .col-md-5.btn.btn-primary.btn-small.mr-1
               %i.fa.fa-check
-          =link_to("#", :style => "text-decoration: none;") do
+          =link_to(deny_path(notification.id), :remote => true, :style => "text-decoration: none;") do
             .col-md-5.btn.btn-danger.btn-small
               %i.fa.fa-times

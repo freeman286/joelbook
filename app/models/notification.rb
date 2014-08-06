@@ -3,7 +3,7 @@ class Notification < ActiveRecord::Base
   belongs_to :secondary_owner_user, class_name: 'User', foreign_key: 'secondary_owner_user_id'
   belongs_to :resource, :polymorphic => true
 
-  attr_accessible :owner_user_id, :secondary_owner_user_id, :resource_type, :resource_id, :content, :read
+  attr_accessible :owner_user_id, :secondary_owner_user_id, :resource_type, :resource_id, :content, :read, :acted_on
 
   validates :owner_user_id, presence: true
   validates :content, presence: true

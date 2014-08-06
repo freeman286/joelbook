@@ -23,4 +23,26 @@ class NotificationsController < ApplicationController
       notification.save
     end
   end
+  
+  def accept
+    @notification = Notification.find(params[:id])
+    @notification.update_attribute(:acted_on, true)
+    if @notification.resource_type == "UserFriendship"
+      @user_friendship = @notification.resource
+      @user_friendship.update_attribute(:state, 'accepted') && @user_friendship.accept_mutual_friendship!
+    end
+  end
+  
+  def deny
+    @notification = Notification.find(params[:id])
+    @notification.update_attribute(:acted_on, true)
+    if @notification.resource_type == "UserFriendship"
+      @user_friendship = @notification.resource
+      @user_friendship.update_attribute(:state, 'ignored')
+      @user_friendship.decline_mutual_friendship!
+    elsif @notification.resource_type == "Channel"
+      @channel = @notification.resource
+      @channel.users.delete(current_user)
+    end
+  end
 end

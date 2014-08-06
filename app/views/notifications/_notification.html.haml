@@ -1,9 +1,19 @@
 %li.notification.pb-1{:class => "#{notification.read? ? '' : 'unread'} #{no_border ? 'no-border' : ''}"}
-  .notification-wrapper
+  .notification-wrapper.col-md-9
     .notification-inner
       =link_to(image_for_notification(notification, "25x25#", :class => "img-circle notification-thumbnail"), polymorphic_path(notification.resource ? notification.resource : notification.class_path))
       =notification.content
       %br
       =link_to_notification_resource(notification)
-    %span.notification-time
-      ="#{time_ago_in_words(notification.created_at)} ago"
+  -if (notification.content.include?('wants to be friends') || notification.resource_type == "Channel") && !notification.acted_on && notification.resource && !notification.content.include?("has removed")
+    .col-md-3{:class => "notification_#{notification.id}"}
+      .col-md-12.mt-1.notification-btns-container.index{:style => "float: right;"}
+        .notification-btns
+          =link_to(accept_path(notification.id), :remote => true, :style => "text-decoration: none;") do
+            .col-md-3.btn.btn-primary.mr-1
+              %i.fa.fa-check
+          =link_to(deny_path(notification.id), :remote => true, :style => "text-decoration: none;") do
+            .col-md-3.btn.btn-danger
+              %i.fa.fa-times    
+  %span.notification-time
+    ="#{time_ago_in_words(notification.created_at)} ago"

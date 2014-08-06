@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140721101138) do
+ActiveRecord::Schema.define(:version => 20140806111751) do
 
   create_table "channels", :force => true do |t|
     t.string   "name"
@@ -52,8 +52,9 @@ ActiveRecord::Schema.define(:version => 20140721101138) do
     t.integer  "resource_id"
     t.string   "content"
     t.boolean  "read"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+    t.boolean  "acted_on",                :default => false
   end
 
   create_table "posts", :force => true do |t|

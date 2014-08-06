@@ -8,6 +8,9 @@ RailsRealtime::Application.routes.draw do
   
   match '/read' => 'notifications#read'
   
+  match '/accept/:id' => 'notifications#accept', as: "accept"
+  match '/deny/:id' => 'notifications#deny', as: "deny"
+  
   match '/upload' => 'posts#upload'
     
   devise_for :users, :controllers => {:registrations => "registrations"}
