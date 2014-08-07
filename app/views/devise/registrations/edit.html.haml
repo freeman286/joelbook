@@ -52,10 +52,24 @@
         = f.check_box :friends_visable
         see my friends   
       %div
-        = f.check_box :friends_visable
+        = f.check_box :can_be_messaged
         message me
-      %div= f.submit "Save chaneges", class: 'btn btn-block btn-primary mt-1'  
-         
+      
+      %div
+        %label{for: "user_privacy"} Friends can...
+      %div
+        = f.check_box :images_visable_to_friends
+        see my photos
+      %div
+        = f.check_box :email_visable_to_friends
+        see my email
+      %div
+        = f.check_box :friends_visable_to_friends
+        see my friends   
+      %div
+        = f.check_box :can_be_messaged_by_friends
+        message me
+      %div= f.submit "Save chaneges", class: 'btn btn-block btn-primary mt-1'     
   
 .col-md-12
   ="&nbsp;".html_safe

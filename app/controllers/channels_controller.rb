@@ -136,14 +136,15 @@ class ChannelsController < ApplicationController
   end
   
   def add_private
-    if !User.find(params[:user_id]).can_be_messaged
-      redirect_to root_path, alert: 'That user does not want to be messaged.'
-    else
+    @user = User.find(params[:user_id])
+    if (!current_user.accepted_friends.include?(@user) && @user.can_be_messaged) || (current_user.accepted_friends.include?(@user) && @user.can_be_messaged_by_friends)
       @channel = Channel.new(:owner_user_id => params[:id], :secondary_owner_user_id => params[:user_id], :private => true, :name => "Private conversation between #{User.find(params[:id]).name} and #{User.find(params[:user_id]).name}")
       @channel.users << User.find(params[:id])
       @channel.users << User.find(params[:user_id])
       @channel.save
       redirect_to channel_posts_path(@channel)
+    else
+      redirect_to root_path, alert: 'That user does not want to be messaged.'
     end
   end
   

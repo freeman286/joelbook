@@ -28,19 +28,19 @@ class UsersController < ApplicationController
   
   def images
     @user = User.find(params[:id])
-    if !@user.images_visable
-      redirect_to root_path, alert: 'That user does not want to share their photos.'
-    else
+    if (!current_user.accepted_friends.include?(@user) && @user.images_visable) || (current_user.accepted_friends.include?(@user) && @user.images_visable_to_friends) || current_user == @user
       @images = @user.images.select{|i| !i.private? || i.post.channel.includes_user?(current_user) }
+    else
+      redirect_to root_path, alert: 'That user does not want to share their photos.'
     end
   end
   
   def friends
     @user = User.find(params[:id])
-    if !@user.friends_visable
-      redirect_to root_path, alert: 'That user does not want to share their friends.'
-    else
+    if (!current_user.accepted_friends.include?(@user) && @user.friends_visable) || (current_user.accepted_friends.include?(@user) && @user.friends_visable_to_friends) || current_user == @user
       @friends = @user.accepted_friends
+    else
+      redirect_to root_path, alert: 'That user does not want to share their friends.'
     end
   end
 end

@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   after_save :update_posts
+  before_save :update_channels
   before_create :set_user_friendship_times
     # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -27,7 +28,11 @@ class User < ActiveRecord::Base
                   :images_visable,
                   :email_visable, 
                   :friends_visable,
-                  :can_be_messaged
+                  :can_be_messaged,
+                  :images_visable_to_friends,
+                  :email_visable_to_friends, 
+                  :friends_visable_to_friends,
+                  :can_be_messaged_by_friends
                   
   # attr_accessible :title, :body
   attr_accessor :current_password
@@ -112,6 +117,13 @@ class User < ActiveRecord::Base
     Post.where(:user_name => self.name).each do |post|
       post.user_img_url = self.avatar_url
       post.save
+    end
+  end
+  
+  def update_channels
+    self.channels.each do |channel|
+      channel.name = channel.name.gsub("#{self.name_was} ", "#{self.name} ")
+      channel.save
     end
   end
   

@@ -7,45 +7,89 @@
     %h3{id: 'user'}
       =@user.name
   
-  -if @user.email_visable
+  -if (current_user && current_user.accepted_friends.include?(@user)) || current_user == @user
+    %span.friend-crud
+      -if @user.email_visable_to_friends || current_user == @user
     
-    %i.fa.fa-envelope-o
-    =link_to(@user.email, "mailto:#{@user.email}")
+        %i.fa.fa-envelope-o
+        =link_to(@user.email, "mailto:#{@user.email}")
     
-    %br
+        %br
     
-  -if @user.images_visable
+      -if @user.images_visable_to_friends || current_user == @user
   
-    %i.fa.fa-file-image-o
-    =link_to('pictures', images_user_path(@user))
+        %i.fa.fa-file-image-o
+        =link_to('pictures', images_user_path(@user))
     
-    %br
+        %br
   
-  -if @user.friends_visable
+      -if @user.friends_visable_to_friends || current_user == @user
   
-    %i.fa.fa-users
-    =link_to('friends', friends_user_path(@user))
+        %i.fa.fa-users
+        =link_to('friends', friends_user_path(@user))
     
-    %br
+        %br
     
-  - if signed_in? && @user != current_user && @user.can_be_messaged
+      - if signed_in? && @user != current_user && @user.can_be_messaged_by_friends
+        %i.fa.fa-comment-o
+          -if @channel
+            =link_to("send a message", channel_posts_path(@channel))
+          -else
+            =link_to("send a message", add_private_channel_path(current_user, @user))
+          
+    - if signed_in? && @user != current_user
+      #friend-status
+        - if current_user.friends.include?(@user) || current_user.pending_friends.include?(@user)
+          = link_to "Unfriend User", user_friendship_path(friend_id: @user), class: 'btn btn-danger', id: 'unfriend-user', data: { friend_id: @user.to_param }
+        - elsif !current_user.blocked_friends.include?(@user)
+          = link_to "Add Friend", new_user_friendship_path(friend_id: @user), class: 'btn btn-success', id: 'add-friendship', data: { friend_id: @user.to_param }
+      #block-status
+        - if current_user.blocked_friends.include?(@user)
+          = link_to "Unblock User", unblock_user_friendship_path(friend_id: @user), class: 'btn btn-success', id: 'unblock-user', data: { friend_id: @user.id.to_param }
+        - else
+          = link_to "Block User", block_user_friendship_path(friend_id: @user), class: 'btn btn-danger', id: 'block-user', data: { friend_id: @user.id.to_param }    
+  -else
+    %span.friend-crud
+      -if @user.email_visable
     
-    %i.fa.fa-comment-o
-      -if @channel
-        =link_to("send a message", channel_posts_path(@channel))
-      -else
-        =link_to("send a message", add_private_channel_path(current_user, @user))
+        %i.fa.fa-envelope-o
+        =link_to(@user.email, "mailto:#{@user.email}")
+    
+        %br
+    
+      -if @user.images_visable
   
-    #friend-status
-      - if current_user.friends.include?(@user) || current_user.pending_friends.include?(@user)
-        = link_to "Unfriend User", user_friendship_path(friend_id: @user), class: 'btn btn-danger', id: 'unfriend-user', data: { friend_id: @user.to_param }
-      - elsif !current_user.blocked_friends.include?(@user)
-        = link_to "Add Friend", new_user_friendship_path(friend_id: @user), class: 'btn btn-success', id: 'add-friendship', data: { friend_id: @user.to_param }
-    #block-status
-      - if current_user.blocked_friends.include?(@user)
-        = link_to "Unblock User", unblock_user_friendship_path(friend_id: @user), class: 'btn btn-success', id: 'unblock-user', data: { friend_id: @user.id.to_param }
-      - else
-        = link_to "Block User", block_user_friendship_path(friend_id: @user), class: 'btn btn-danger', id: 'block-user', data: { friend_id: @user.id.to_param }
+        %i.fa.fa-file-image-o
+        =link_to('pictures', images_user_path(@user))
+    
+        %br
+  
+      -if @user.friends_visable
+  
+        %i.fa.fa-users
+        =link_to('friends', friends_user_path(@user))
+    
+        %br
+    
+      - if signed_in? && @user != current_user && @user.can_be_messaged
+    
+        %i.fa.fa-comment-o
+          -if @channel
+            =link_to("send a message", channel_posts_path(@channel))
+          -else
+            =link_to("send a message", add_private_channel_path(current_user, @user))
+  
+    - if signed_in? && @user != current_user
+      #friend-status
+        - if current_user.friends.include?(@user) || current_user.pending_friends.include?(@user)
+          = link_to "Unfriend User", user_friendship_path(friend_id: @user), class: 'btn btn-danger', id: 'unfriend-user', data: { friend_id: @user.to_param }
+        - elsif !current_user.blocked_friends.include?(@user)
+          = link_to "Add Friend", new_user_friendship_path(friend_id: @user), class: 'btn btn-success', id: 'add-friendship', data: { friend_id: @user.to_param }
+      #block-status
+        - if current_user.blocked_friends.include?(@user)
+          = link_to "Unblock User", unblock_user_friendship_path(friend_id: @user), class: 'btn btn-success', id: 'unblock-user', data: { friend_id: @user.id.to_param }
+        - else
+          = link_to "Block User", block_user_friendship_path(friend_id: @user), class: 'btn btn-danger', id: 'block-user', data: { friend_id: @user.id.to_param }
   
 .col-md-9
   %h3
@@ -80,18 +124,31 @@
           } else {
             if ($("#friend-status").text() != "Add Friend") {
               $("#friend-status").hide().html('<a href="/user_friendships/new?friend_id=#{@user.id}" class="btn btn-success" data-friend-id="#{@user.id}" id="add-friendship">Add Friend</a>').fadeIn();
-              $("#block-status").hide().html('<a href="/user_friendships/2/block?friend_id=#{@user.id}" class="btn btn-danger" data-friend-id="#{@user.id}" id="block-user">Block User</a>').fadeIn();
+              $("#block-status").hide().html('<a href="/user_friendships/#{@user.id}/block?friend_id=#{@user.id}" class="btn btn-danger" data-friend-id="#{@user.id}" id="block-user">Block User</a>').fadeIn();
             }
           }
         } else {
           if ($("#friend-status").text() != "Add Friend") {
             $("#friend-status").hide().html('<a href="/user_friendships/new?friend_id=#{@user.id}" class="btn btn-success" data-friend-id="#{@user.id}" id="add-friendship">Add Friend</a>').fadeIn();
-            $("#block-status").hide().html('<a href="/user_friendships/2/block?friend_id=#{@user.id}" class="btn btn-danger" data-friend-id="#{@user.id}" id="block-user">Block User</a>').fadeIn();
+            $("#block-status").hide().html('<a href="/user_friendships/#{@user.id}/block?friend_id=#{@user.id}" class="btn btn-danger" data-friend-id="#{@user.id}" id="block-user">Block User</a>').fadeIn();
           }
         } 
       }
     });
   };
+  
+  $( document ).ready(function() {
+    $(document.body).on( "click", ".btn", function() {
+      $('.friend-crud').css('visibility','hidden')
+      $('.friend-crud').animate({height: 20}, 100, function(){
+        i = 0;
+        setInterval(function() {
+          i = ++i % 4;
+          $(".friend-crud").css('visibility','visible').html("Loading, please revisit this page later"+Array(i+1).join("."));
+        }, 500);
+      })
+    });
+  });
 
   t = setInterval(getUserFriendship, 10000)
 

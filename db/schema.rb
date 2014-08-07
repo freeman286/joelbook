@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140806111751) do
+ActiveRecord::Schema.define(:version => 20140807084634) do
 
   create_table "channels", :force => true do |t|
     t.string   "name"
@@ -109,6 +109,10 @@ ActiveRecord::Schema.define(:version => 20140806111751) do
     t.boolean  "email_visable",                              :default => true
     t.boolean  "friends_visable",                            :default => true
     t.boolean  "can_be_messaged",                            :default => true
+    t.boolean  "images_visable_to_friends",                  :default => true
+    t.boolean  "email_visable_to_friends",                   :default => true
+    t.boolean  "friends_visable_to_friends",                 :default => true
+    t.boolean  "can_be_messaged_by_friends",                 :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
