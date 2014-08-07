@@ -56,7 +56,7 @@ $(document).ready ->
     if input.files and input.files[0]
       reader = new FileReader()
       reader.onload = (e) ->
-        $("#form_img").animate({height: 0}, 0).show().animate({height: $("#form_img").width()}, 500);
+        $("#form_img").animate({height: 0}, 0).show().animate({height: "100%"}, 500);
         $("#form_img").attr "src", e.target.result
         return
 
@@ -122,7 +122,7 @@ $(document).ready ->
   b = setInterval(getUserFriendships, 10000)
   
   getYoutubeUrl = ->
-    if window.youtube_url isnt "" && window.youtube_url.toString() isnt "[object HTMLInputElement]" && !window.youtube_url_present
+    if window.youtube_url isnt "" && window.youtube_url.toString() isnt "[object HTMLInputElement]" && !window.youtube_url_present && window.profile is false
       $("#iframe-container").show()
       $("#form_vid").animate({height: 0}, 0).show().animate({height: $("#form_vid").width()}, 500)
       $("#form_vid").attr "src", window.youtube_url.slice(0, - 1)
@@ -138,7 +138,7 @@ $(document).ready ->
     return
     
   $(document.body).on 'change', "#img_url", (e) ->
-    $("#form_img").animate({height: 0}, 0).show().animate({height: $("#form_img").height()}, 500)
+    $("#form_img").animate({height: 0}, 0).show().animate({height: "100%"}, 500)
     $("#form_img").attr "src", $('#img_url').val()
     $("#new_image").submit()
     
