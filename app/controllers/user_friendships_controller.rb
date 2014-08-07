@@ -46,6 +46,7 @@ class UserFriendshipsController < ApplicationController
   def accept
     @user_friendship = current_user.user_friendships.find(params[:id])
     if @user_friendship.update_attribute(:state, 'accepted') && @user_friendship.accept_mutual_friendship!
+      @user_friendship.delete_notification
       flash[:notice] = "You are now friends with #{@user_friendship.friend.name}"
     else
       flash[:alert] = "That friendship was not accepted"
@@ -56,6 +57,7 @@ class UserFriendshipsController < ApplicationController
   def decline
     @user_friendship = current_user.user_friendships.find(params[:id])
     if @user_friendship.update_attribute(:state, 'ignored') && @user_friendship.decline_mutual_friendship!
+      @user_friendship.delete_notification
       flash[:notice] = "You have declined #{@user_friendship.friend.name}"
     else
       flash[:alert] = "That friendship was not declined"
@@ -81,6 +83,7 @@ class UserFriendshipsController < ApplicationController
         @user_friendship.update_attribute(:state, 'blocked')
         @user_friendship.delete_mutual_friendship!
       end
+      @user_friendship.delete_notification
       format.json { render json: @user_friendship.to_json }
     end
   end

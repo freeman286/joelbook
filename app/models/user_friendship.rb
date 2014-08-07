@@ -6,6 +6,7 @@ class UserFriendship < ActiveRecord::Base
   
   after_destroy :update_last_destroy
   after_destroy :delete_mutual_friendship!
+  after_destroy :delete_notification
   
   validate :not_blocked
   
@@ -131,5 +132,9 @@ class UserFriendship < ActiveRecord::Base
     end
     user.save
     friend.save
+  end
+  
+  def delete_notification
+    Notification.where(:owner_user_id => self.user_id).first.destroy
   end
 end
