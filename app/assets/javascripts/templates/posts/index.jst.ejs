@@ -8,7 +8,7 @@
 
 <div class="col-md-6">
   <% posts.each(function(post){ %>
-    <% if (post.get('channel_id') == window.channel_id){ %> 
+    <% if (post.get('channel_id') == window.channel_id || window.profile != false){ %> 
       <div class="well">
         <div class="row">
           <div class="col-md-12">
