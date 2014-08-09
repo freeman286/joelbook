@@ -1,7 +1,7 @@
 .col-md-12
   .col-md-12
     %ul.nav.nav-tabs
-      %li
+      %li.active
         %a{"data-toggle" => "tab", href: "#all"} All
       %li
         %a{"data-toggle" => "tab", href: "#accepted"} Accepted
@@ -12,7 +12,7 @@
       %li
         %a{"data-toggle" => "tab", href: "#ignored"} Ignored  
 .tab-content
-  #all.tab-pane
+  #all.tab-pane.active
     -if @user_friendships.present?
       - @user_friendships.reverse.each do |friendship|
         = render 'card', :friendship => friendship

@@ -62,6 +62,19 @@ module RailsRealtime
     config.autoload_paths += %W(#{config.root}/lib)
     
     config.assets.initialize_on_precompile = true
+    
+    # How the JavaScript object will be named
+    config.js_routes.global  = "Routes"
+
+    # Should the JS file be minified?
+    config.js_routes.minify  = Rails.env.production?
+
+    # Where should the file be stored / be accessed at.
+    config.js_routes.path    = 'javascripts/router.js'
+
+    # Should JsRoutes be mounted as a **middleware** (development, Heroku) or write the file once at boot-time (production)?
+    # There is also a :write option which can cause issues if more instances are booted (cluster/mod_passenger).
+    config.js_routes.mode    = Rails.env.production? ? :write_once : :mount
 
   end
 end
