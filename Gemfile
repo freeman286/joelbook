@@ -21,6 +21,11 @@ gem "auto_html", '~> 1.5.2'
 
 # Gems used only for assets and not required
 # in production environments by default.
+group :production do
+  gem 'rails_12factor'
+end
+
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
