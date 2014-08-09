@@ -6,9 +6,9 @@
   </div>
 <% } %>
 
-<div class="col-md-6">
+<div class="<% if (window.home || window.show ) {  %>col-md-12<% } else { %>col-md-6<% } %>">
   <% posts.each(function(post){ %>
-    <% if (post.get('channel_id') == window.channel_id || window.profile != false){ %> 
+    <% if (post.get('channel_id') == window.channel_id || (window.show && post.get('user_name') == window.user_name) || window.home){ %> 
       <div class="well">
         <div class="row">
           <div class="col-md-12">

@@ -1,6 +1,6 @@
 - content_for :before_container do
   .jumbotron
-    .container
+    .secondary-container
       .col-md-12
         %h1
           Welcome to Joelbook
@@ -41,3 +41,4 @@
   
 :javascript
   window.posts = #{@posts.to_json.html_safe};
+  window.home = true

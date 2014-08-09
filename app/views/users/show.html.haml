@@ -1,4 +1,4 @@
-.col-md-3
+.col-md-3.ml-2
   =image_tag avatar_url(@user, "200"), class: "rounded_corners"
   -if current_user
     %h3{id: 'user', data: { user_id: current_user.id.to_param }}
@@ -91,7 +91,7 @@
         - else
           = link_to "Block User", block_user_friendship_path(friend_id: @user), class: 'btn btn-danger', id: 'block-user', data: { friend_id: @user.id.to_param }
   
-.col-md-9
+.col-md-6
   %h3.col-md-12
     Recent Activity
   .backbone  
@@ -154,4 +154,6 @@
 
 :javascript
   window.posts = #{@posts.to_json.html_safe};
+  window.user_name = "#{@user.name}"
+  window.show = true
     
