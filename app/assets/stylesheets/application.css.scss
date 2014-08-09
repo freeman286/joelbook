@@ -689,7 +689,7 @@ li.notification {
 
 .imac {
   &.logged-in {
-    @media (min-width: 1199px) {
+    @media (min-width: 1201px) {
       margin-top:-20%;
     }
     @media (min-width: 990px) and (max-width: 1200px) {
@@ -706,7 +706,7 @@ li.notification {
     }
   }
   &.logged-out {
-    @media (min-width: 1199px) {
+    @media (min-width: 1201px) {
       margin-top:-17.5%;
     }
     @media (min-width: 990px) and (max-width: 1200px) {
@@ -807,4 +807,20 @@ li.notification {
   -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
   box-shadow: 0 6px 12px rgba(0,0,0,.175);
   background-clip: padding-box;
+}
+
+.home-pull-left {
+  position: relative;
+  @media (min-width: 1200px) {
+    right:250px;
+  }
+  @media (min-width: 990px) and (max-width: 1200px) {
+   right:180px;
+  }
+  @media (min-width: 620px) and (max-width: 991px) {
+   right:60px;
+  }
+  @media (min-width: 424px) and (max-width: 621px) {
+    right:10px;
+  }
 }

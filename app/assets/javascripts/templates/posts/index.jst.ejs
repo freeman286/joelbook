@@ -13,9 +13,9 @@
         <div class="row">
           <div class="col-md-12">
             <div class="header-sections"><a href="/users/<%= post.get('user_id') %>"><img src="<%= post.get('user_img_url') %>" class="rounded_corners"></a></div>
-            <div class="header-sections"><h3><%= post.get('user_name') %></h3></div>
+            <div class="header-sections <% if (window.home ) {  %>home-pull-left<% } %>"><h3><%= post.get('user_name') %></h3></div>
             <div class="header-sections">
-              <% if (post.get('user_name') == window.user.name){ %> 
+              <% if (post.get('user_name') == window.user.name && !(window.show || window.home)){ %> 
               	<div><a href="/channels/<%= window.channel_id %>/posts/<%= post.id %>/edit#modal" data-toggle="modal" data-static="true" id="show_modal" class="btn btn-block btn-primary mb-1" onclick="app.navigate('channels/<%= window.channel_id %>/posts/<%= post.id %>/edit', true); $('.nav-tabs a:first').tab('show');">Edit</a></div>
               	<div><a href="#delete_<%= post.get('id')%>" data-toggle="modal" class="btn btn-block btn-danger">Destroy</a></div>
         	     <% } %>
