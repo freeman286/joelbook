@@ -15,7 +15,6 @@ gem 'haml'
 gem "rails-backbone"
 gem 'underscore-rails'
 gem 'dragonfly', '~> 1.0.4'
-gem 'js-routes'
 gem "remotipart", "~> 1.0"
 gem "auto_html", '~> 1.5.2'
 
