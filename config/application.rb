@@ -61,7 +61,7 @@ module RailsRealtime
     
     config.autoload_paths += %W(#{config.root}/lib)
     
-    config.assets.initialize_on_precompile = true
+    config.assets.initialize_on_precompile = false
     
     # How the JavaScript object will be named
     config.js_routes.global  = "Routes"
