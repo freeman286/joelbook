@@ -16,8 +16,8 @@
             <div class="header-sections <% if (window.home ) {  %>home-pull-left<% } %>"><h3><%= post.get('user_name') %></h3></div>
             <div class="header-sections">
               <% if (post.get('user_name') == window.user.name && !(window.show || window.home)){ %> 
-              	<div><a href="/channels/<%= window.channel_id %>/posts/<%= post.id %>/edit#modal" data-toggle="modal" data-static="true" id="show_modal" class="btn btn-block btn-primary mb-1" onclick="app.navigate('channels/<%= window.channel_id %>/posts/<%= post.id %>/edit', true); $('.nav-tabs a:first').tab('show');">Edit</a></div>
-              	<div><a href="#delete_<%= post.get('id')%>" data-toggle="modal" class="btn btn-block btn-danger">Destroy</a></div>
+              	<div class="pull-right"><a href="/channels/<%= window.channel_id %>/posts/<%= post.id %>/edit#modal" data-toggle="modal" data-static="true" id="show_modal" onclick="app.navigate('channels/<%= window.channel_id %>/posts/<%= post.id %>/edit', true); $('.nav-tabs a:first').tab('show');"><i class='fa fa-pencil crud-icon'></i></a></div>
+              	<div class="pull-right" style="position: relative;right: 5px;"><a href="#delete_<%= post.get('id')%>" data-toggle="modal"><i class='fa fa-times'></i></a></div>
         	     <% } %>
             </div>
           </div>
@@ -37,7 +37,15 @@
               </div>
             </div>  
           <% } %>
-          
+          <span class="post-time">
+            <% var date = new Date(parseInt(post.get('time'))*1000);
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds(); 
+
+            var formattedTime = 'Posted at ' + hours + ':' + minutes;  %>
+            <%= formattedTime %>
+          <span>
         </div>
       </div>
       

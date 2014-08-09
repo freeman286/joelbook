@@ -4,11 +4,12 @@
       =@channel.name if @channel
     
     
-    -if @channel && @channel.owner_user == current_user && !@channel.private? && !@channel.public?
+    -if @channel && @channel.owner_user == current_user && !@channel.private?
     
-      =link_to "<i class='fa fa-pencil crud-icon'></i>".html_safe, "##{@channel.id}_edit_channel", :'data-toggle' => "modal"
-
       =link_to "<i class='fa fa-times'></i>".html_safe, "##{@channel.id}_delete_channel", :'data-toggle' => "modal"  
+      
+      =link_to "<i class='fa fa-pencil crud-icon'></i>".html_safe, "##{@channel.id}_edit_channel", :'data-toggle' => "modal"
+  
 
   -if @channel && @channel.owner_user == current_user && !@channel.private? && !@channel.public?
     .col-md-6

@@ -675,18 +675,6 @@ li.notification {
   font-size: 12px;
 }
 
-.crud-icon {
-  @media (min-width: 1199px) {
-    margin-left: 41%;
-  }
-  @media (min-width: 990px) and (max-width: 1200px){
-    margin-left: 38.5%;
-  }
-  @media (min-width: 754px) and (max-width: 991px) {
-   margin-left: 87%;
-  }
-}
-
 .imac {
   &.logged-in {
     @media (min-width: 1201px) {
@@ -823,4 +811,17 @@ li.notification {
   @media (min-width: 424px) and (max-width: 621px) {
     right:10px;
   }
+}
+
+.post-time {
+  position: relative;
+  bottom: 2px;
+  @media (min-width: 499px) {
+    left: 80%;
+  }
+  @media (max-width: 500px) {
+    left: 70%;
+  }
+  color: #999;
+  font-size: 12px;
 }
