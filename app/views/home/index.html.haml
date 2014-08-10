@@ -33,11 +33,12 @@
     
 
   
-.col-md-12
+-if user_signed_in?
   .col-md-12
-    %h1
-      Latest posts
-  .backbone
+    .col-md-12
+      %h1
+        Latest posts
+    .backbone
   
 :javascript
   window.posts = #{@posts.to_json.html_safe};
