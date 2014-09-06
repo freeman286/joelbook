@@ -16,3 +16,7 @@
 
 # ignore node modules
 /realtime/node_modules
+
+# ignore assets
+public/assets/**
+public/system/**
