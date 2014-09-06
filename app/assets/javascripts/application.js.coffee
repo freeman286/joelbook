@@ -1,6 +1,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require bootstrap
+#= require js-routes
 #= require underscore
 #= require backbone
 #= require auth
