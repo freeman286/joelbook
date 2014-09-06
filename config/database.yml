@@ -52,10 +52,8 @@ test:
 
 production:
   adapter: postgresql
-  database: rails_realtime_production
-  encoding: latin1
+  database: rails_realtime
+  encoding: unicode
   template: template0
-  collate: en_US.UTF8 
-  ctype: en_US.UTF8
   pool: 5
   password:
