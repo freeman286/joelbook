@@ -1,4 +1,4 @@
-<% if (window.profile == false){ %> 
+<% if (window.profile == false){ %>
   <div class="col-md-12 mb-1">
     <div id="new-post-container">
       <a href="channels/<%= window.channel_id %>/posts/new#modal" data-toggle="modal" id="new_post" class="btn btn-primary btn-block" data-static="true">New Post</a>
@@ -8,14 +8,14 @@
 
 <div class="<% if (window.home || window.show ) {  %>col-md-12<% } else { %>col-md-6<% } %>">
   <% posts.each(function(post){ %>
-    <% if (post.get('channel_id') == window.channel_id || (window.show && post.get('user_name') == window.user_name) || window.home){ %> 
+    <% if (post.get('channel_id') == window.channel_id || (window.show && post.get('user_name') == window.user_name) || window.home){ %>
       <div class="well">
         <div class="row">
           <div class="col-md-12">
             <div class="header-sections"><a href="/users/<%= post.get('user_id') %>"><img src="<%= post.get('user_img_url') %>" class="rounded_corners"></a></div>
             <div class="header-sections <% if (window.home ) {  %>home-pull-left<% } %>"><h3><%= post.get('user_name') %></h3></div>
             <div class="header-sections">
-              <% if (post.get('user_name') == window.user.name && !(window.show || window.home)){ %> 
+              <% if (post.get('user_name') == window.user.name && !(window.show || window.home)){ %>
               	<div class="pull-right"><a href="/channels/<%= window.channel_id %>/posts/<%= post.id %>/edit#modal" data-toggle="modal" data-static="true" id="show_modal" onclick="app.navigate('channels/<%= window.channel_id %>/posts/<%= post.id %>/edit', true); $('.nav-tabs a:first').tab('show');"><i class='fa fa-pencil crud-icon'></i></a></div>
               	<div class="pull-right" style="position: relative;right: 5px;"><a href="#delete_<%= post.get('id')%>" data-toggle="modal"><i class='fa fa-times'></i></a></div>
         	     <% } %>
@@ -25,30 +25,42 @@
         <div class="row mt-2">
           <div class="col-md-12"><%= post.get('name') %></div>
           <div class="col-md-12 mt-1">
-            <% if (post.get('img_url')){ %> 
+            <% if (post.get('img_url')){ %>
               <img src="<%= post.get('img_url') %>" width="100%" class="rounded_corners img img-responsive">
             <% } %>
       	  </div>
-          
+
           <% if (post.get('youtube_url') ) { %>
             <div class="col-md-12">
               <div class="flex-video widescreen mt-1" style="margin: 0 auto;text-align:center;">
                 <p class="mt-1"><iframe width="400" height="250" src="<%= post.get('youtube_url') %>" frameborder="0" allowfullscreen></iframe></p>
               </div>
-            </div>  
+            </div>
           <% } %>
           <span class="post-time">
             <% var date = new Date(parseInt(post.get('time'))*1000);
             var hours = date.getHours();
             var minutes = date.getMinutes();
-            var seconds = date.getSeconds(); 
+            var seconds = date.getSeconds();
+
+            if (hours < 10) {
+              hours = "0" + hours;
+            };
+
+            if (minutes < 10) {
+              minutes = "0" + minutes;
+            };
+
+            if (seconds < 10) {
+              seconds = "0" + seconds;
+            };
 
             var formattedTime = 'Posted at ' + hours + ':' + minutes;  %>
             <%= formattedTime %>
           <span>
         </div>
       </div>
-      
+
       <div class="modal fade" id="delete_<%= post.get('id') %>">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -60,7 +72,7 @@
               <p>If you do it will not longer exist</p>
             </div>
             <div class="modal-footer">
-              <a href="" data-method="delete"  class="btn btn-danger" data-id="<%= post.id %>" data-static="true" >Destroy</a>
+              <a href="" data-method="delete"  class="btn btn-danger" data-id="<%= post.id %>" data-static="true" >Delete</a>
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>
