@@ -2,10 +2,12 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :channel
 
-  attr_accessible :user_name, :name, :img_url, :youtube_url, :user_img_url, :user_id, :channel_id, :time
-  
+  attr_accessible :user_name, :name, :img_url, :youtube_url, :user_img_url, :user_id, :channel_id, :time, :can_be_viewed
+
   has_one :image
   has_one :video
+
+  before_create :check_can_be_viewed
 
   after_create {|post| post.message 'create' }
   after_update {|post| post.message 'update' }
@@ -16,8 +18,8 @@ class Post < ActiveRecord::Base
             action: action,
             id: self.id,
             obj: self,
-           }   
-    
+           }
+
     if can_be_published?
       $redis.publish 'rt-change', msg.to_json
       self.channel.update_attribute(:updated_at, Time.now)
@@ -38,8 +40,16 @@ class Post < ActiveRecord::Base
   validates :channel_id, presence: true
   validates :name, presence: true
   validate :can_be_published?
-  
+
   def can_be_published?
     User.current && User.current.name == self.user_name && (self.channel && (self.channel.public == true || self.channel.includes_user?(User.current)))
+  end
+
+  def check_can_be_viewed
+    if self.channel.public?
+      self.can_be_viewed = true
+    else
+      self.can_be_viewed = false
+    end
   end
 end

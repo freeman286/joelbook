@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140807084634) do
+ActiveRecord::Schema.define(:version => 20140907140237) do
 
   create_table "channels", :force => true do |t|
     t.string   "name"
@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(:version => 20140807084634) do
   end
 
   create_table "posts", :force => true do |t|
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "name"
     t.integer  "user_id"
     t.string   "img_url"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20140807084634) do
     t.string   "user_img_url"
     t.integer  "channel_id"
     t.integer  "time"
+    t.boolean  "can_be_viewed", :default => false
   end
 
   create_table "user_friendships", :force => true do |t|
