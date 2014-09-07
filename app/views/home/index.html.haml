@@ -26,20 +26,19 @@
     .col-md-12.pv-1
       %p
         %strong=event.name
-      %p 
-        =event.content  
+      %p
+        =event.content
       %span.event-time
-        ="#{time_ago_in_words(event.created_at)} ago"    
-    
+        ="#{time_ago_in_words(event.created_at)} ago"
 
-  
+
+
 -if user_signed_in?
   .col-md-12
     .col-md-12
       %h1
         Latest posts
-    .backbone
-  
+
 :javascript
   window.posts = #{@posts.to_json.html_safe};
   window.home = true
