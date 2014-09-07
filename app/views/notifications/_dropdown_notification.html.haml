@@ -5,10 +5,7 @@
       .notification-info
         .notification-message-summary
           =notification.content
-  -if ((notification.resource_type == "UserFriendship" && notification.content.include?('wants to be friends')) || notification.resource_type == "Channel") &&
-      !notification.acted_on && notification.resource &&
-      !(notification.resource_type == "Channel" && notification.content.include?("has removed")) &&
-      !(notification.resource_type == "Channel" && notification.content.include?("says '"))
+  -if ((notification.resource_type == "UserFriendship" && notification.content.include?('wants to be friends')) || notification.resource_type == "Channel") && !notification.acted_on && notification.resource && !(notification.resource_type == "Channel" && notification.content.include?("has removed")) && !(notification.resource_type == "Channel" && notification.content.include?("says '"))
 
     .row{:class => "notification_#{notification.id}"}
       .col-md-12.mb-1.notification-btns-container
