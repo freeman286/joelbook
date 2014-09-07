@@ -1,11 +1,15 @@
 %li
   =link_to(polymorphic_path(notification.resource ? notification.resource : notification.class_path), :id => "notification_#{notification.id}",:class => "notification-list-item #{notification.read? ? 'read' : 'unread'}") do
     .row.pv-1.pl-1.notification-list-item
-      =image_for_notification(notification, "25x25#", :class => "img-circle notification-thumbnail")  
+      =image_for_notification(notification, "25x25#", :class => "img-circle notification-thumbnail")
       .notification-info
         .notification-message-summary
           =notification.content
-  -if (notification.content.include?('wants to be friends') || notification.resource_type == "Channel") && !notification.acted_on && notification.resource && !notification.content.include?("has removed")
+  -if ((notification.resource_type == "UserFriendship" && notification.content.include?('wants to be friends')) || notification.resource_type == "Channel") &&
+      !notification.acted_on && notification.resource &&
+      !(notification.resource_type == "Channel" && notification.content.include?("has removed")) &&
+      !(notification.resource_type == "Channel" && notification.content.include?("says '"))
+
     .row{:class => "notification_#{notification.id}"}
       .col-md-12.mb-1.notification-btns-container
         .notification-btns
