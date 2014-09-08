@@ -42,7 +42,12 @@ class Post < ActiveRecord::Base
   validate :can_be_published?
 
   def can_be_published?
-    User.current && User.current.name == self.user_name && (self.channel && (self.channel.public == true || self.channel.includes_user?(User.current)))
+    if !(User.current && User.current.name == self.user_name)
+      errors.add(:user_name, "does not match current user")
+    end
+    if !(self.channel && (self.channel.public == true || self.channel.includes_user?(User.current)))
+      errors.add(:channel, "user is not member of channel")
+    end
   end
 
   def check_can_be_viewed
