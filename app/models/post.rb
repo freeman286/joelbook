@@ -56,5 +56,6 @@ class Post < ActiveRecord::Base
     else
       self.can_be_viewed = false
     end
+    true
   end
 end
