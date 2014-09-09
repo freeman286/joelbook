@@ -1,5 +1,5 @@
 class ChannelsController < ApplicationController
-  
+
   def new
     @channel = Channel.new
   end
@@ -18,11 +18,11 @@ class ChannelsController < ApplicationController
 
   def update
     @channel = Channel.find(params[:id])
-    
+
     page =  params[:channel][:page]
-    
+
     params[:channel].delete :page
-  
+
     if @channel.owner_user == current_user && @channel.update_attributes(params[:channel])
       redirect_to url_from_params(page, @channel), notice: 'Channel was successfully updated.'
     else
@@ -42,13 +42,13 @@ class ChannelsController < ApplicationController
     @channel = Channel.find(params[:id])
     if @channel.destroy
       redirect_to channels_path, notice: 'Channel was successfully deleted.'
-    else                         
+    else
       redirect_to channels_path, alert: 'Channel was not deleted.'
     end
   end
 
   def index
-    @channels = current_user.channels
+    @channels = (current_user.channels + Channel.where(:public => true)).uniq
     @channel = Channel.new
     @alert_align = true
   end
@@ -61,7 +61,7 @@ class ChannelsController < ApplicationController
       redirect_to channels_path
     end
   end
-  
+
   def search
     @channel = Channel.find(params[:user][:channel_id])
     if params[:user][:name]
@@ -72,7 +72,7 @@ class ChannelsController < ApplicationController
       format.html
     end
   end
-  
+
   def search_all
     @channels = Channel.search(params[:channel][:name])
     respond_to do |format|
@@ -80,7 +80,7 @@ class ChannelsController < ApplicationController
       format.html
     end
   end
-  
+
   def add
     @channel = Channel.find(params[:channel_id])
     @user = User.find(params[:id])
@@ -89,7 +89,7 @@ class ChannelsController < ApplicationController
         @valid = false
         format.js
       else
-        @valid = true  
+        @valid = true
         if @channel.users << @user
           Notification.create(
             :owner_user_id => @user.id,
@@ -107,7 +107,7 @@ class ChannelsController < ApplicationController
       end
     end
   end
-  
+
   def remove
     @channel = Channel.find(params[:channel_id])
     @user = User.find(params[:id])
@@ -115,7 +115,7 @@ class ChannelsController < ApplicationController
       if !@channel.users.include?(@user) || !@channel.current_user_valid
         @valid = false
         format.js
-      else  
+      else
         @valid = true
         if @channel.users.delete(@user)
           Notification.create(
@@ -134,7 +134,7 @@ class ChannelsController < ApplicationController
       end
     end
   end
-  
+
   def add_private
     @user = User.find(params[:user_id])
     if (!current_user.accepted_friends.include?(@user) && @user.can_be_messaged) || (current_user.accepted_friends.include?(@user) && @user.can_be_messaged_by_friends)
@@ -147,9 +147,9 @@ class ChannelsController < ApplicationController
       redirect_to root_path, alert: 'That user does not want to be messaged.'
     end
   end
-  
+
   private
-  
+
   def template_from_params(params, channel)
     if params == "posts"
       "posts/index"
@@ -157,7 +157,7 @@ class ChannelsController < ApplicationController
       "channels/index"
     end
   end
-  
+
   def url_from_params(params, channel)
     if params == "posts"
       channel_posts_path(channel)

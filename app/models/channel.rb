@@ -32,9 +32,9 @@ class Channel < ActiveRecord::Base
 
     if words.present?
       words.split(" ").each do |keyword|
-        channels << User.current.channels.where(['lower(name) LIKE ?', "%#{keyword.downcase}%"])
+        channels << User.current.channels.where(['lower(name) LIKE ?', "%#{keyword.downcase}%"]) + Channel.where(['lower(name) LIKE ?', "%#{keyword.downcase}%"]).select {|c| c.public?}
       end
-      channels.first - channels.first.where(:private => true)
+      (channels.first - channels.first.select {|c| c.private?}).uniq
     else
       channels << User.current.channels.where(:private => nil) + Channel.where(:public => true)
       channels.first.uniq
