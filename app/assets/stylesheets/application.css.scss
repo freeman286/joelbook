@@ -444,7 +444,7 @@
 .notification-table {
   font-size: 14px;
   td {
-   vertical-align: middle !important; 
+   vertical-align: middle !important;
   }
 }
 .notification-table-control {
@@ -479,7 +479,7 @@ li.notification {
   position: relative;
   float: left;
   width: 100%;
-  border-bottom: 1px solid #ccc;    
+  border-bottom: 1px solid #ccc;
 }
 .notifications-list li.no-border {
   border: none;
@@ -530,7 +530,7 @@ li.notification {
 }
 
 .date-divider {
-  list-style-type: none;  
+  list-style-type: none;
 }
 
 .message-date {
@@ -601,7 +601,7 @@ li.notification {
   }
   @media (min-width: 990px) {
    margin-left: 25%;
-  } 
+  }
 }
 
 .section-title {
@@ -635,10 +635,10 @@ li.notification {
   margin-bottom: 16px;
   overflow: hidden;
 }
- 
+
 .flex-video.widescreen { padding-bottom: 57.25%; }
 .flex-video.vimeo { padding-top: 0; }
- 
+
 .flex-video iframe,
 .flex-video object,
 .flex-video embed {
@@ -826,4 +826,18 @@ li.notification {
   }
   color: #999;
   font-size: 12px;
+}
+
+@media (max-width: 767px) {
+  .navbar-form {
+    border-color:#fff !important;
+    margin-top: -2px !important;
+  }
+  .navbar-collapse {
+    border-color:#fff !important;
+  }
+}
+
+.grey-text {
+  color:#888;
 }

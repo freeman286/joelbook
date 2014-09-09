@@ -2,14 +2,15 @@
 %html
   %head
     %title Joelbook
-    = favicon_link_tag('/assets/favicon.ico') 
+    = favicon_link_tag('/assets/favicon.ico')
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     = stylesheet_link_tag    "application", :media => "all"
     %link{href: "//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css", rel: "stylesheet"}/
     = javascript_include_tag "http://#{request.host}:5001/socket.io/socket.io.js"
     = javascript_include_tag "application"
     = csrf_meta_tags
     = yield :head
-  %body         
+  %body
     .navbar.navbar-default{role: "navigation"}
       .container-fluid
         %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
@@ -17,28 +18,28 @@
           %span.icon-bar
           %span.icon-bar
           %span.icon-bar
-      
+
         =link_to("<i class='fa fa-book'></i> Joelbook".html_safe, root_path, :class => "navbar-brand")
-        
-        .navbar-collapse.collapse  
+
+        .navbar-collapse.collapse
           -if current_user
             =form_for (@user || User.new), remote: true, :url => search_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
               .form-group
                 .dropdown
                   = f.text_field :name, placeholder: "Search for user", autocomplete: "off", :class => "input-sm form-control"
                   %ul.dropdown-menu.user-dropdown-menu.search-users{"aria-labelledby" => "dLabel", role: "menu"}
-          
+
             %ul.nav.navbar-nav.navbar-left
               %li
-              
-              %li  
+
+              %li
                 =link_to("Channels", channels_path)
               %li
-                =link_to("Friends", user_friendships_path)  
+                =link_to("Friends", user_friendships_path)
               -if current_user.admin?
                 %li
                   =link_to("Events", events_path)
-                    
+
           %ul.nav.navbar-nav.navbar-right#navbar-right
             -if !current_user
               %li
@@ -55,7 +56,7 @@
                 =render :partial => 'notifications/dropdown_header', locals: { :notifications => current_user.notifications.pop(5).reverse }
               %li
                 =link_to(current_user.name, edit_user_registration_path)
-              %li  
+              %li
                 =link_to("Sign out", destroy_user_session_path, :method => :delete)
 
     .secondary-container
@@ -69,20 +70,20 @@
     = yield :before_container
     .container
       = yield
-      
-      
-	  
+
+
+
     -if current_user && !@user
       :javascript
         window.user = #{current_user.as_json(:only => :name, :methods => [:encrypted_password, :id, :auth, :avatar_url]).to_json};
         if (window.posts != undefined) {
           $( ".container" ).append( "<div class='col-md-12'><div class='backbone'></div></div>" );
         }
-    
+
     -if @channel
       :javascript
         window.channel_id = #{@channel.id}
-      
+
     :javascript
       if ($(window).width() < 768) {
         $('#notifications-li').appendTo(".navbar-right");
@@ -96,10 +97,16 @@
           $('#notifications-li').prependTo(".navbar-right");
         }
       });
-      
-    :javascript  
+
+    :javascript
       $(document.body).on('click', ".navbar-notification", function(e) {
         $(".navbar-collapse").animate({
           scrollTop: $("#notifications-li").offset().top
         }, 2000);
+      });
+
+      $( document ).ready(function() {
+        if ($('#index-view .col-md-12').html().trim() == "") {
+          $('#index-view .col-md-12').html('<h4 class="grey-text">Nothing to show</h4>');
+        };
       });
