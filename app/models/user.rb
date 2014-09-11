@@ -119,6 +119,7 @@ class User < ActiveRecord::Base
 
   def update_posts
     Post.where(:user_name => self.name).each do |post|
+      post.user_name = self.name
       post.user_img_url = self.avatar_url
       post.save
     end
