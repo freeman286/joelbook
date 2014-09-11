@@ -21,7 +21,7 @@
 
         =link_to("<i class='fa fa-book'></i> Joelbook".html_safe, root_path, :class => "navbar-brand")
 
-        .navbar-collapse.collapse
+        .navbar-collapse.collapse#nav
           -if current_user
             =form_for (@user || User.new), remote: true, :url => search_path, :method => 'get', :html => {class: "nav navbar-form navbar-left"} do |f|
               .form-group

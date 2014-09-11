@@ -44,10 +44,10 @@
                   <input type="text" id="img_url" name="image_url" class="input-sm form-control" placeholder="Paste image url here">
                 <% } else { %>
                   <input type="text" id="img_url" name="image_url" value="<%= img_url %>" class="input-sm form-control" placeholder="Paste image url here">
-                <% } %>  
+                <% } %>
               </div>
             </form>
-          </div>  
+          </div>
         </div>
         <div class="tab-pane active" id="videos">
           <form accept-charset="UTF-8" action="/videos" class="new_video" data-remote="true" enctype="multipart/form-data" id="new_video" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
@@ -55,29 +55,28 @@
               <input type="text" id="youtube_url" name="youtube_url" value="<%= youtube_url %>" class="input-sm form-control mt-1" placeholder="Paste video url here">
             <% } else { %>
               <input type="text" id="youtube_url" name="youtube_url" class="input-sm form-control mt-1" placeholder="Paste video url here">
-            <% } %> 
+            <% } %>
           </form>
-        </div>  
-        <% if (img_url) { %> 
+        </div>
+        <% if (img_url) { %>
           <img alt="Assets" id="form_img" src="<%= img_url %>" class="rounded_corners mt-1" width="100%" heigth="100%" style="display: inline"/>
         <% } else { %>
           <img alt="Assets" id="form_img" src="<%= img_url %>" class="rounded_corners mt-1" width="100%" heigth="100%" style="display: none"/>
         <% } %>
-        
-        <% if (youtube_url) { %> 
+
+        <% if (youtube_url) { %>
           <div id="iframe-container" class="flex-video widescreen col-md-12 mv-1" style="margin: 0 auto;text-align:center;">
             <p class="mt-1"><iframe id="form_vid" width="400" height="250" src="<%= youtube_url %>" frameborder="0" allowfullscreen></iframe></p>
           </div>
         <% } else { %>
           <div id="iframe-container" class="flex-video widescreen col-md-12 mv-1" style="margin: 0 auto;text-align:center; display: none">
             <p class="mt-1"><iframe id="form_vid" width="400" height="250" src="<%= youtube_url %>" frameborder="0" style="display: none" allowfullscreen></iframe></p>
-          </div>  
+          </div>
         <% } %>
         <div class="actions">
-          <input id="save" type="submit" value="Save" data-dismiss="modal" data-static="true" class="btn btn-block btn-primary mt-1">
+          <input id="save" type="submit" value="Post" data-dismiss="modal" data-static="true" class="btn btn-block btn-primary mt-1">
         </div>
       </div>
     </div>
   </div>
 </div>
-

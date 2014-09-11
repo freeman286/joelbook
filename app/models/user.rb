@@ -153,7 +153,7 @@ class User < ActiveRecord::Base
       users << where(['email LIKE ?', "%#{keyword}%"])
     end
     if users.first
-      users.first - exceptions
+      (users.first - exceptions).first(3)
     else
       nil
     end

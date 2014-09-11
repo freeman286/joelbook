@@ -238,6 +238,9 @@
   -moz-border-radius: 4px;
   -khtml-border-radius: 4px;
   -webkit-border-radius: 4px;
+  @media only screen and (max-width : 320px) {
+    width:50px !important;
+  }
 }
 
 .search-item {
@@ -663,12 +666,15 @@ li.notification {
 
 .channel-time {
   position: absolute;
-  bottom: 2px;
+  bottom: -7px;
   right: 12.5px;
   color: #999;
   font-size: 12px;
 }
 
+.channel-crud {
+  margin-top:10px;
+}
 .event-time {
   position: absolute;
   bottom: 2px;
@@ -824,6 +830,9 @@ li.notification {
   @media (max-width: 500px) {
     left: 70%;
   }
+  @media only screen and (max-width : 320px) {
+    left: 60%;
+  }
   color: #999;
   font-size: 12px;
 }
@@ -835,6 +844,9 @@ li.notification {
   }
   .navbar-collapse {
     border-color:#fff !important;
+  }
+  #nav{
+    width:384px !important;
   }
 }
 

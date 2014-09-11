@@ -159,7 +159,7 @@ $(document).ready ->
 
   $(document.body).on 'click', ".navbar-notification", (e) ->
     $(".navbar-collapse").animate
-      scrollTop: $("#notifications-li").offset().top
+      scrollTop: $("#notifications-li").offset().top + 20
     , 2000
     return
 
