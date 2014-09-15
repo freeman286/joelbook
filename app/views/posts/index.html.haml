@@ -2,14 +2,14 @@
   .col-md-12
     %strong{:style => "font-size:25px;"}
       =@channel.name if @channel
-    
-    
+
+
     -if @channel && @channel.owner_user == current_user && !@channel.private?
-    
-      =link_to "<i class='fa fa-times'></i>".html_safe, "##{@channel.id}_delete_channel", :'data-toggle' => "modal"  
-      
+
+      =link_to "<i class='fa fa-times'></i>".html_safe, "##{@channel.id}_delete_channel", :'data-toggle' => "modal"
+
       =link_to "<i class='fa fa-pencil crud-icon'></i>".html_safe, "##{@channel.id}_edit_channel", :'data-toggle' => "modal"
-  
+
 
   -if @channel && @channel.owner_user == current_user && !@channel.private? && !@channel.public?
     .col-md-6
@@ -29,7 +29,7 @@
                 = f.text_field :name, placeholder: "Add user to channel", autocomplete: "off", :id => "channel_user_name", :class => "input-sm form-control"
                 %ul.channel-dropdown-menu.dropdown-menu.search{"aria-labelledby" => "dLabel", role: "menu"}
                 = f.hidden_field :channel_id, :value => @channel.id
-              
+
   -elsif @channel && !@channel.private? && !@channel.public?
     .col-md-6
       #accordion.panel-group.dropdown
@@ -58,14 +58,14 @@
       .modal-body
         =render "channels/form", :@channel => @channel, :name => "posts"
 
-:javascript    
+:javascript
   $( document ).ready(function() {
     $( ".#{@channel.id}_dismiss" ).click(function() {
       $("##{@channel.id}_edit_channel").modal('hide');
     });
   });
-    
-    
+
+
 
 .modal.fade{id: "#{@channel.id}_delete_channel"}
   .modal-dialog
@@ -77,10 +77,10 @@
       .modal-body
         If you do it will no longer exist!
       .modal-footer
-        %div=link_to("<i class='fa fa-times'></i> Delete".html_safe, channel_path(@channel.id), :method => :delete, :'data-toggle' => "modal", :class => 'btn btn-block btn-danger')    
+        %div=link_to("<i class='fa fa-times'></i> Delete".html_safe, channel_path(@channel.id), :method => :delete, :'data-toggle' => "modal", :class => 'btn btn-block btn-danger')
 
 -if @channel.errors.present?
-  :javascript    
+  :javascript
     $( document ).ready(function() {
       $("##{@channel.id}_edit_channel").modal('show');
       $( ".click" ).click(function() {

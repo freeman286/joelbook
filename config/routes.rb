@@ -1,18 +1,18 @@
 RailsRealtime::Application.routes.draw do
 
   root :to => 'home#index'
-  
+
   match '/search' => 'users#search'
   match '/channel_search' => 'channels#search'
   match '/channel_search_all' => 'channels#search_all'
-  
+
   match '/read' => 'notifications#read'
-  
+
   match '/accept/:id' => 'notifications#accept', as: "accept"
   match '/deny/:id' => 'notifications#deny', as: "deny"
-  
+
   match '/upload' => 'posts#upload'
-    
+
   devise_for :users, :controllers => {:registrations => "registrations"}
   devise_scope :user do
     get "/registrations/crop" => "registrations#crop", as: 'crop_user_registration'
@@ -23,7 +23,7 @@ RailsRealtime::Application.routes.draw do
       get :friends
     end
   end
-  
+
   resources :user_friendships do
     member do
       put :accept
@@ -37,21 +37,21 @@ RailsRealtime::Application.routes.draw do
       post :destroy, as: 'destroy'
     end
   end
-  
-  resources :channels do
-    resources :posts
+
+  resources :channels, except: :new do
+    resources :posts, except: [:new, :show]
   end
-  match "/channels/:channel_id/posts" => "posts#index"
+  match "/channels/:channel_id/posts/new" => "posts#index"
   match "/channels/:channel_id/add/:id" => "channels#add", as: 'add_channel'
   match "/channels/:channel_id/remove/:id" => "channels#remove", as: 'remove_channel'
   match "/channels/:id/add_private/:user_id" => "channels#add_private", as: 'add_private_channel'
-  resources :posts
-  
+  resources :posts, except: :new
+
   resources :images
   resources :videos
 
   resources :notifications
-  
+
   resources :events
 
 
