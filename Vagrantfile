@@ -8,7 +8,7 @@ echo ">>>>> Udpating..."
 sudo apt-get -y update
 sudo apt-get -q -y install libxslt-dev libxml2-dev imagemagick libmagickwand-dev nodejs
 echo ">>>>> Installing postgresql..."
-export DEBIAN_FRONTEND=noninteractive 
+export DEBIAN_FRONTEND=noninteractive
 sudo apt-get -q -y install postgresql-9.1
 sudo apt-get -q -y install libpq-dev
 sudo su postgres -c psql <<< "CREATE ROLE vagrant SUPERUSER LOGIN;"
@@ -18,12 +18,12 @@ sudo apt-get install redis-server
 
 echo ">>>>> Installing RVM..."
 sudo apt-get -q -y install git-core curl
-curl -L https://get.rvm.io | bash -s stable
+command curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+curl -L https://get.rvm.io | bash -s stable --autolibs=enabled
 source /home/vagrant/.rvm/scripts/rvm
 echo ">>>>> Installing RUBY..."
-source /usr/local/rvm/scripts/rvm
 rvm requirements
-rvm install ruby-1.9.3
+rvm install ruby-1.9.2
 
 echo ">>>>> Bundling..."
 cd /vagrant
