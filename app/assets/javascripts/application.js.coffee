@@ -135,6 +135,11 @@ $(document).ready ->
     $("#img_url").val('')
     readURL this
     $("#new_image").submit()
+    if $('input[name="name"]').first().val() == ""
+      $('a[href="#post"]').first().addClass("error-tab")
+      $('input[name="name"]').first().addClass("has-error")
+      $('input[name="name"]').first().attr('placeholder', 'This must be filled in')
+
     return
 
   $(document.body).on 'change', "#img_url", (e) ->
@@ -153,8 +158,11 @@ $(document).ready ->
     $("#form_img").attr "src", ''
     $('#iframe-container').hide()
     $("#form_vid").attr("src", '')
+    $('input[name="name"]').first().attr('placeholder', 'What do you have to say?')
     $("#img_url").attr("placeholder", 'Paste image url here')
     $("#youtube_url").attr("placeholder", 'Paste video url here')
+    $('a[href="#post"]').first().removeClass("error-tab")
+    $('input[name="name"]').first().removeClass("has-error")
 
 
   $(document.body).on 'click', ".navbar-notification", (e) ->

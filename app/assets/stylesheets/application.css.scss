@@ -859,3 +859,16 @@ li.notification {
     margin-top:8px;
   }
 }
+
+.error-tab, .active .error-tab {
+  border-color-left: #f2dede !important;
+  border-color-top: #f2dede !important;
+  border-color-right: #f2dede !important;
+  color:#a94442 !important;
+  &:hover {
+    border-color-left: #f2dede !important;
+    border-color-top: #f2dede !important;
+    border-color-right: #f2dede !important;
+    color:#a94442 !important;
+  }
+}
