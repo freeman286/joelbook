@@ -52,6 +52,7 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
+      #execute "cd current; bundle install --without development test"
       execute "cd current; thin stop; true"
       execute "cd current; thin start -d -e production"
       execute "cd current; rake node:stop; true"
