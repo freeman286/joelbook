@@ -83,3 +83,21 @@ debug: set heartbeat timeout for client Irhfes0OihrfaajKv9-A
 debug: got heartbeat packet
 debug: cleared heartbeat timeout for client Irhfes0OihrfaajKv9-A
 debug: set heartbeat interval for client Irhfes0OihrfaajKv9-A
+debug: emitting heartbeat for client Irhfes0OihrfaajKv9-A
+debug: websocket writing 2::
+debug: set heartbeat timeout for client Irhfes0OihrfaajKv9-A
+debug: got heartbeat packet
+debug: cleared heartbeat timeout for client Irhfes0OihrfaajKv9-A
+debug: set heartbeat interval for client Irhfes0OihrfaajKv9-A
+debug: emitting heartbeat for client Irhfes0OihrfaajKv9-A
+debug: websocket writing 2::
+debug: set heartbeat timeout for client Irhfes0OihrfaajKv9-A
+debug: got heartbeat packet
+debug: cleared heartbeat timeout for client Irhfes0OihrfaajKv9-A
+debug: set heartbeat interval for client Irhfes0OihrfaajKv9-A
+debug: emitting heartbeat for client Irhfes0OihrfaajKv9-A
+debug: websocket writing 2::
+debug: set heartbeat timeout for client Irhfes0OihrfaajKv9-A
+debug: got heartbeat packet
+debug: cleared heartbeat timeout for client Irhfes0OihrfaajKv9-A
+debug: set heartbeat interval for client Irhfes0OihrfaajKv9-A
