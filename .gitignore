@@ -20,3 +20,5 @@
 # ignore assets
 public/assets/**
 public/system/**
+
+realtime/nohup.out
