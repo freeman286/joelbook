@@ -18,8 +18,11 @@ gem 'dragonfly', '~> 1.0.4'
 gem 'js-routes'
 gem "remotipart", "~> 1.0"
 gem "auto_html", '~> 1.5.2'
-gem 'debugger'
 gem 'capistrano', '~> 3.2.0'
+
+group :development do
+  gem 'debugger'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
