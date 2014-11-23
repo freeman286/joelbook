@@ -52,7 +52,7 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "cd current; thin stop"
+      execute "cd current; thin stop > /dev/null 2> /dev/null"
       execute "cd current; thin start -d -e production"
       execute "cd current/realtime; kill -9 pid"
       execute "cd current/realtime; nohup node realtime-server.js"
