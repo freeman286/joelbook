@@ -52,10 +52,10 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "cd joelbook; thin stop"
-      execute "cd joelbook; thin start -d -e production"
-      execute "cd joelbook/realtime; kill -9 pid"
-      execute "cd joelbook/realtime; nohup node realtime-server.js"
+      execute "cd current; thin stop"
+      execute "cd current; thin start -d -e production"
+      execute "cd current/realtime; kill -9 pid"
+      execute "cd current/realtime; nohup node realtime-server.js"
     end
   end
 
