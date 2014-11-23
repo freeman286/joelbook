@@ -15,15 +15,13 @@ RAILS_ENV=production rake assets:precompile:primary
 ###Start server
 ```
 thin start -d -e production
-cd realtime/
-nohup node realtime-server.js
+rake node:start
 ```
 
 ###Stop server
 ```
 thin stop
-cd realtime/
-kill -9 pid
+rake node:stop
 ```
 
 ###Check logs
