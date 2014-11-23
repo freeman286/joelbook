@@ -131,16 +131,21 @@ $(document).ready ->
 
   c = setInterval(getYoutubeUrl, 250)
 
-  $(document.body).on 'change', "#form_img_input", (e) ->
-    $("#img_url").val('')
-    readURL this
-    $("#new_image").submit()
+  validatePost = ->
     if $('input[name="name"]').first().val() == ""
       $('a[href="#post"]').first().addClass("error-tab")
       $('input[name="name"]').first().addClass("has-error")
       $('input[name="name"]').first().attr('placeholder', 'This must be filled in')
 
     return
+
+  $(document.body).on 'change', "#form_img_input", (e) ->
+    $("#img_url").val('')
+    readURL this
+    $("#new_image").submit()
+    validatePost()
+    return
+
 
   $(document.body).on 'change', "#img_url", (e) ->
     $("#form_img").animate({height: 0}, 0).show().animate({height: "100%"}, 500)
@@ -149,6 +154,9 @@ $(document).ready ->
 
   $(document.body).on 'change', "#youtube_url", (e) ->
     $("#new_video").submit()
+    validatePost()
+    return
+
 
   $(document.body).on 'click', "#new_post", (e) ->
     window.image_url = ''
