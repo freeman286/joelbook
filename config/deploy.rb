@@ -52,7 +52,7 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "cd current; bundle install --without development test"
+      execute "cd current && RAILS_ENV=production bundle install --without development test /home/joelmayer/shared/gems/cache"
       execute "cd current; thin stop"
       execute "cd current; thin start -d -e production"
       execute "cd current/realtime; kill -9 pid"
