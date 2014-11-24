@@ -55,6 +55,8 @@ namespace :deploy do
       #execute "cd current; bundle install --without development test"
       execute "cd current; thin stop; true"
       execute "cd current; thin start -d -e production"
+      execute "cd current/realtime; npm install socket.io"
+      execute "cd current/realtime; npm install redis"
       execute "cd current; rake node:stop; true"
       execute "cd current; rake node:start; true"
     end
