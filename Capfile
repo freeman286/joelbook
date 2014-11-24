@@ -23,7 +23,7 @@ require 'capistrano/deploy'
 
 require 'capistrano/rails'
 require 'capistrano/rvm'
-require "whenever/capistrano"
+#require "whenever/capistrano"
 
 set :rvm_type, :user
 set :rvm_ruby_version, '1.9.2'
