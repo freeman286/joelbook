@@ -22,7 +22,7 @@ require 'capistrano/deploy'
 # require 'capistrano/rails/migrations'
 
 require 'capistrano/rails'
-require 'rvm1/capistrano3'
+require 'capistrano/rvm'
 require "whenever/capistrano"
 
 set :rvm_type, :user
