@@ -1,14 +1,8 @@
 info: socket.io started
 debug: served static content /socket.io.js
 debug: client authorized
-info: handshake authorized 7dre_19M3HxvaDepPKYg
-debug: setting request GET /socket.io/1/websocket/7dre_19M3HxvaDepPKYg
-debug: set heartbeat interval for client 7dre_19M3HxvaDepPKYg
+info: handshake authorized 1ltIlNwwY3zpGJY8R9kl
+debug: setting request GET /socket.io/1/websocket/1ltIlNwwY3zpGJY8R9kl
+debug: set heartbeat interval for client 1ltIlNwwY3zpGJY8R9kl
 debug: client authorized for 
 debug: websocket writing 1::
-debug: emitting heartbeat for client 7dre_19M3HxvaDepPKYg
-debug: websocket writing 2::
-debug: set heartbeat timeout for client 7dre_19M3HxvaDepPKYg
-debug: got heartbeat packet
-debug: cleared heartbeat timeout for client 7dre_19M3HxvaDepPKYg
-debug: set heartbeat interval for client 7dre_19M3HxvaDepPKYg
