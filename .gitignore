@@ -22,3 +22,5 @@ public/assets/**
 public/system/**
 
 realtime/nohup.out
+
+realtime/node.log

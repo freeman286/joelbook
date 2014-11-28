@@ -1,8 +1,0 @@
-info: socket.io started
-debug: served static content /socket.io.js
-debug: client authorized
-info: handshake authorized 1ltIlNwwY3zpGJY8R9kl
-debug: setting request GET /socket.io/1/websocket/1ltIlNwwY3zpGJY8R9kl
-debug: set heartbeat interval for client 1ltIlNwwY3zpGJY8R9kl
-debug: client authorized for 
-debug: websocket writing 1::
