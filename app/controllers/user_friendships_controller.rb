@@ -1,7 +1,7 @@
 class UserFriendshipsController < ApplicationController
 	before_filter :authenticate_user!
 	respond_to :html, :json
-  
+
   def index
     respond_to do |format|
       @user_friendships = current_user.user_friendships
@@ -42,7 +42,7 @@ class UserFriendshipsController < ApplicationController
       format.json { render json: response_hash}
     end
   end
-  
+
   def accept
     @user_friendship = current_user.user_friendships.find(params[:id])
     if @user_friendship.update_attribute(:state, 'accepted') && @user_friendship.accept_mutual_friendship!
@@ -53,7 +53,7 @@ class UserFriendshipsController < ApplicationController
     end
     redirect_to user_friendships_path
   end
-  
+
   def decline
     @user_friendship = current_user.user_friendships.find(params[:id])
     if @user_friendship.update_attribute(:state, 'ignored') && @user_friendship.decline_mutual_friendship!
@@ -64,7 +64,7 @@ class UserFriendshipsController < ApplicationController
     end
     redirect_to user_friendships_path
   end
-  
+
   def block
     respond_to do |format|
       if current_user.user_friendships.where(:friend_id => params[:id]).present?
@@ -87,7 +87,7 @@ class UserFriendshipsController < ApplicationController
       format.json { render json: @user_friendship.to_json }
     end
   end
-  
+
   def unblock
     @user_friendship = UserFriendship.where(user_id: current_user.id, friend_id: User.find(params[:id]).id, state: 'blocked').first
     respond_to do |format|
@@ -98,7 +98,7 @@ class UserFriendshipsController < ApplicationController
       end
     end
   end
-  
+
   def new
     if params[:friend_id]
       @friend = User.find(params[:friend_id])
@@ -135,18 +135,18 @@ class UserFriendshipsController < ApplicationController
       redirect_to root_path
     end
   end
-  
+
   def edit
     @user_friendship = UserFriendship.where(id: params[:id]).first
     @friend = @user_friendship.friend
   end
-  
+
   def destroy
-    @user_friendship = current_user.user_friendships.find(params[:id])
+    @user_friendship = current_user.user_friendships.where(:friend_id => params[:id]).first
     respond_to do |format|
       format.html do
         if @user_friendship.blocked?
-          if @user_friendship.destroy 
+          if @user_friendship.destroy
             flash[:notice] = "User unblocked"
           else
             flash[:alert] = "User is still blocked"
@@ -168,7 +168,7 @@ class UserFriendshipsController < ApplicationController
       }
     end
   end
-  
+
   def show
     @user_friendship = UserFriendship.find(params[:id])
     respond_to do |format|
@@ -180,7 +180,7 @@ class UserFriendshipsController < ApplicationController
     }
     end
   end
-  
+
   private
   def friendship_association
     case params[:list]
@@ -193,10 +193,10 @@ class UserFriendshipsController < ApplicationController
     when 'accepted'
       current_user.accepted_user_friendships
     when 'requested'
-      current_user.requested_user_friendships  
+      current_user.requested_user_friendships
     end
   end
-  
+
   def conditional_to_i(c)
     if c
       1

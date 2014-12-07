@@ -12,14 +12,13 @@ $(document).ready ->
       dataType: "json"
       type: "POST"
       success: (e) ->
-        window.friendId = e.id
         addFriendshipBtn.fadeOut()
         BlockBtn.fadeOut()
         $("#friend-status").html "<a href='/user_friendships/" + addFriendshipBtn.data("friendId") + "' class='btn btn-danger' data-friend-id='" + addFriendshipBtn.data("friendId") + "' id='unfriend-user'>Unfriend User</a>"
         return
 
     return
-    
+
   $(document.body).on 'click', "#unfriend-user", (event) ->
     event.preventDefault()
     addFriendshipBtn = $(this)
@@ -57,7 +56,7 @@ $(document).ready ->
         return
 
     return
-    
+
   $(document.body).on 'click', "#unblock-user", (event) ->
     event.preventDefault()
     BlockBtn = $(this)
@@ -72,9 +71,9 @@ $(document).ready ->
         $("#friend-status").animate({height:'34px'}, 500)
         $("#block-status").html "<a href='/user_friendships/" + BlockBtn.data("friendId") + "/block?friend_id=" + BlockBtn.data("friendId") + "' class='btn btn-danger' data-friend-id='" + BlockBtn.data("friendId") + "' id='block-user'>Block User</a>"
         return
-  
+
   $(document.body).on 'click', ".index-accept-friendship", (event) ->
-    event.preventDefault()    
+    event.preventDefault()
     FriendshipBtn = $(this)
     $.ajax
       url: Routes.accept_user_friendship_path(FriendshipBtn.data("friendshipId"))
@@ -91,9 +90,9 @@ $(document).ready ->
         $('#ignored').find('.user-friendship-' + FriendshipBtn.data("friendshipId")).first().remove()
         $('#pending').find('.user-friendship-' + FriendshipBtn.data("friendshipId")).first().remove()
         $('.accepted').hide()
-        
+
   $(document.body).on 'click', ".index-delete-friendship", (event) ->
-    event.preventDefault()    
+    event.preventDefault()
     FriendshipBtn = $(this)
     $.ajax
       url: Routes.destroy_user_friendship_path(FriendshipBtn.data("friendshipId"))
@@ -101,9 +100,9 @@ $(document).ready ->
       type: "POST"
       success: (e) ->
         $('.user-friendship-' + FriendshipBtn.data("friendshipId")).fadeOut()
-  
+
   $(document.body).on 'click', ".index-decline-friendship", (event) ->
-    event.preventDefault()    
+    event.preventDefault()
     FriendshipBtn = $(this)
     $.ajax
       url: Routes.decline_user_friendship_path(FriendshipBtn.data("friendshipId"))
@@ -119,9 +118,9 @@ $(document).ready ->
         )
         $('#pending').find('.user-friendship-' + FriendshipBtn.data("friendshipId")).first().remove()
         $('.ignored').hide()
-          
+
   $(document.body).on 'click', ".index-block-friendship", (event) ->
-    event.preventDefault()    
+    event.preventDefault()
     FriendshipBtn = $(this)
     $.ajax
       url: Routes.block_user_friendship_path(FriendshipBtn.data("friendId"))
@@ -137,14 +136,14 @@ $(document).ready ->
         )
         $('#pending').find('.user-friendship-' + FriendshipBtn.data("friendshipId")).first().remove()
         $('.blocked').hide()
-  
+
   $(document.body).on 'click', ".index-unblock-friendship", (event) ->
-    event.preventDefault()    
+    event.preventDefault()
     FriendshipBtn = $(this)
     $.ajax
       url: Routes.unblock_user_friendship_path(FriendshipBtn.data("friendId"))
       dataType: "json"
       type: "POST"
       success: (e) ->
-        $('.user-friendship-' + FriendshipBtn.data("friendshipId")).fadeOut()                      
+        $('.user-friendship-' + FriendshipBtn.data("friendshipId")).fadeOut()
   return

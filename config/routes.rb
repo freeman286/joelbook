@@ -24,6 +24,8 @@ RailsRealtime::Application.routes.draw do
     end
   end
 
+  match "/users/:id/visable_links" => "users#visible_links"
+
   resources :user_friendships do
     member do
       put :accept
