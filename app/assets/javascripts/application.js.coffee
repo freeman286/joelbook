@@ -166,9 +166,9 @@ $(document).ready ->
     $("#form_img").attr "src", ''
     $('#iframe-container').hide()
     $("#form_vid").attr("src", '')
-    $('input[name="name"]').first().attr('placeholder', 'What do you have to say?')
-    $("#img_url").attr("placeholder", 'Paste image url here')
-    $("#youtube_url").attr("placeholder", 'Paste video url here')
+    $('input[name="name"]').first().attr('placeholder', 'What do you have to say?').attr('maxlength','250')
+    $("#img_url").attr("placeholder", 'Paste image url here').attr('maxlength','250')
+    $("#youtube_url").attr("placeholder", 'Paste video url here').attr('maxlength','250')
     $('a[href="#post"]').first().removeClass("error-tab")
     $('input[name="name"]').first().removeClass("has-error")
 
