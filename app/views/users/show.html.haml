@@ -85,7 +85,12 @@
   $( document ).ready(function() {
     $(document.body).on( "click", ".btn", function() {
       $.get( "/users/" + window.friendId +"/visable_links", function( data ) {
-        $(".friend-crud").css('visibility','visible').html(data);
+        $(".friend-crud").html(data)
+        var height = 0;
+        $.each($(".friend-crud").children(), function(i,v) {
+            height += $(v).outerHeight(true);
+        });
+        $(".friend-crud").animate({height: height - 30}, 500)
       });
     });
   });
