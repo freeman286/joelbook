@@ -29,11 +29,11 @@
             - else
               -if friendship.pending?
                 .col-xs-12.col-md-4
-                  = link_to "Delete Request", destroy_user_friendship_path(id: friendship), class: 'friendship-action-btn btn btn-block btn-danger index-delete-friendship', data: { friendship_id: friendship.to_param }
+                  = link_to "Delete Request", destroy_user_friendship_path(id: friend), class: 'friendship-action-btn btn btn-block btn-danger index-delete-friendship', data: { friendship_id: friend.to_param }
               -if friendship.accepted?
                 .col-xs-12.col-md-4
-                  = link_to "Delete Friendship", destroy_user_friendship_path(id: friendship), class: 'friendship-action-btn btn btn-block btn-danger index-delete-friendship', data: { friendship_id: friendship.to_param }
-                  
+                  = link_to "Delete Friendship", destroy_user_friendship_path(id: friend), class: 'friendship-action-btn btn btn-block btn-danger index-delete-friendship', data: { friendship_id: friend.to_param }
+
           - if friendship.requested?
             .col-xs-12.col-md-4
               = link_to "Block Friendship", block_user_friendship_path(id: friend), class: 'friendship-action-btn btn btn-block btn-danger index-block-friendship', data: { friend_id: friend.to_param, friendship_id: friendship.to_param }

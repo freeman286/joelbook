@@ -18,7 +18,7 @@ class UserFriendshipsController < ApplicationController
         :accepted => "",
         :accepted_count => @accepted.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + conditional_to_i(current_user.last_destroyed_accepted_user_friendship_at > 10.seconds.ago),
         :pending => "",
-        :pending_count => @pending.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + @requested.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + conditional_to_i(current_user.last_destroyed_pending_user_friendship_at > 10.seconds.ago),
+        :pending_count => 1,
         :blocked => "",
         :blocked_count => @blocked.find(:all,:conditions => ["updated_at > ?", 10.seconds.ago] ).count + conditional_to_i(current_user.last_destroyed_blocked_user_friendship_at > 10.seconds.ago),
         :ignored => "",
