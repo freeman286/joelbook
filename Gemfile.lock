@@ -6,11 +6,6 @@ GIT
       capistrano (~> 3.0)
       sshkit (~> 1.2)
 
-GIT
-  remote: git://github.com/rails/rails.git
-  revision: ae3e3624c2dc037f6a17226f265eef59243c181a
-  specs:
-
 GEM
   remote: https://yoomee:wLjuGMTu30AvxVyIrq3datc73LVUkvo@gems.yoomee.com/
   remote: https://rubygems.org/
@@ -206,7 +201,6 @@ DEPENDENCIES
   rails (= 3.2.13)
   rails-backbone
   rails_12factor
-  rake!
   redis
   remotipart (~> 1.0)
   sass-rails (~> 3.2.3)
