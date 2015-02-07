@@ -3,7 +3,7 @@ lock '3.2.1'
 
 set :rails_env, "production"
 set :application, 'joelbook'
-set :repo_url, 'https://github.com/freeman286/joelbook.git'
+set :repo_url, 'https://freeman286:tintin12@github.com/freeman286/joelbook.git'
 
 set :deploy_to, '/home/joelmayer'
 
