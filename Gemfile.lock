@@ -201,6 +201,7 @@ DEPENDENCIES
   rails (= 3.2.13)
   rails-backbone
   rails_12factor
+  rake!
   redis
   remotipart (~> 1.0)
   sass-rails (~> 3.2.3)
